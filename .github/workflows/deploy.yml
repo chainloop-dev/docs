@@ -32,6 +32,10 @@ jobs:
         run: npm install
       - name: Build
         run: netlify build
+      - name: Record material
+        run: |
+          tar -czf ${GITHUB_SHA}-build.tar.gz build
+          chainloop att add --name built-site --value ${GITHUB_SHA}-build.tar.gz
       - name: Deploy
         run: netlify deploy --prod
       - name: Finish and Record Attestation
