@@ -14,7 +14,7 @@ Your name is Dyson, you work on the security and operations team at Cyberdyne so
 
 You feel pretty good about the current state of things. Your development teams are already signing their commits, scanning their first and third-party components, generating Software Build of Materials (SBOMs), signing container images and even blocking releases based on vulnerability scanning or signature verification. Life is good!
 
-The next day you receive an email from our CISO saying that all the progress in application security is great but an additional effort needs to be done to make sure we can trust all that metadata.
+The next day you receive an email from your CISO saying that all the progress in application security is great but an additional effort needs to be done to make sure we can trust all that metadata.
 
 He seems to be **concerned** about all that **information** being **scattered around, not being trustworthy or easily available for auditing**. He sends a link to [slsa.dev](https://slsa.dev/) and says we need to be at least level 3 at that, whatever that means.
 
@@ -32,7 +32,7 @@ Now to the easy part, to make developer teams adopt it (or that's what you thoug
 
 ## Day one integration 
 
-Let's introduce the team Skynet, they are building in their words, a revolutionary AI.
+Let's introduce the Skynet team, they are building in their words, a revolutionary AI.
 
 They leverage a pretty standard CI/CD setup using GitHub Actions. Build/Test a couple of GoLang/Java services, package them into signed container images, craft and store SBOMs in S3 and then deploy them to Kubernetes.
 
@@ -56,7 +56,7 @@ D - I understand, but all this work is required to meet new compliance requireme
 
 S - I'll see what I can do
 
-After weeks (or months, I can't remember?) of back and forth, the team Skynet integration is done and the SecOps teams now have access to the workflow build information via signed attestations and their associated artifacts (sBOM, logs, ...) in a centralized OCI registry. We tell our boss that the **Skynet team reached SLSA level 3 provenance compliance**, and life is good, again.
+After weeks (or months, I can't remember?) of back and forth, the Skynet team integration is done and the SecOps teams now have access to the workflow build information via signed attestations and their associated artifacts (sBOM, logs, ...) in a centralized OCI registry. We tell our boss that the **Skynet team reached SLSA level 3 provenance compliance**, and life is good, again.
 
 ## Day two challenges
 
