@@ -26,10 +26,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: npm install docs
-        run: cd docs && npm install
-      - name: Build Docs
-        run: cd docs && netlify build
+      - name: npm install
+        run: npm install
+      - name: Build
+        run: netlify build
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
