@@ -28,12 +28,12 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: npm install docs
-        run: cd docs && npm install
-      - name: Build Docs
-        run: cd docs && netlify build
-      - name: Deploy Docs
-        run: cd docs && netlify deploy --prod
+      - name: npm install
+        run: npm install
+      - name: Build
+        run: netlify build
+      - name: Deploy
+        run: netlify deploy --prod
       - name: Finish and Record Attestation
         if: ${{ success() }}
         run: |
