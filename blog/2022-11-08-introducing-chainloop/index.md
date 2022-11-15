@@ -25,7 +25,7 @@ This is a specially problematic scenario for SecOps teams now that it's clear th
 
 But that's easier said than done.
 
-A problem we've seen over the years is how poorly defined, and clashing, development and SecOps team dynamics can be due to priorities mismatch. We've been on both sides of the aisle and we know how hard it is to standardize best practices and security requirements in an organization, especially in the current fragmented landscape. We also know from the developer's point of view how time-consuming and frustrating is to pollute your CI/CD systems with convoluted, error-prone and complex processes to comply with the SecOps team.
+A problem we've seen over the years is how [poorly defined, and clashing, development and SecOps team dynamics can be](/blog/a-tale-of-supply-chain-attestation) due to priorities mismatch. We've been on both sides of the aisle and we know how hard it is to standardize best practices and security requirements in an organization, especially in the current fragmented landscape. We also know from the developer's point of view how time-consuming and frustrating is to pollute your CI/CD systems with convoluted, error-prone and complex processes to comply with the SecOps team.
 
 So there has to be a better way that satisfies both sides...
 
