@@ -1,4 +1,4 @@
-name: Build and Test Landing
+name: Build and Test
 
 on:
   pull_request:
@@ -26,13 +26,13 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: npm install
-        run: npm install
-      - name: Build Landing
-        run: netlify build
+      - name: npm install docs
+        run: cd docs && npm install
+      - name: Build Docs
+        run: cd docs && netlify build
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.LANDING_NETLIFY_SITE_ID }}
+          NETLIFY_SITE_ID: ${{ secrets.DOCS_NETLIFY_SITE_ID }}
       - name: Finish and Record Attestation
         if: ${{ success() }}
         run: |
@@ -50,4 +50,4 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       CL_VERSION: 0.8.16
-      CHAINLOOP_ROBOT_ACCOUNT: ${{ secrets.CHAINLOOP_WF_BUILD_AND_TEST_LANDING }}
+      CHAINLOOP_ROBOT_ACCOUNT: ${{ secrets.CHAINLOOP_WF_BUILD_AND_TEST }}
