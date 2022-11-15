@@ -1,13 +1,11 @@
-name: Deploy Docs
+name: Build and Test
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
 
 jobs:
   build_and_test:
-    name: Deploy docs
+    name: Build and Test
     runs-on: ubuntu-latest
     steps:
       - name: Install Cosign
@@ -32,8 +30,9 @@ jobs:
         run: cd docs && npm install
       - name: Build Docs
         run: cd docs && netlify build
-      - name: Deploy Docs
-        run: cd docs && netlify deploy --prod
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       - name: Finish and Record Attestation
         if: ${{ success() }}
         run: |
@@ -51,6 +50,4 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       CL_VERSION: 0.8.16
-      CHAINLOOP_ROBOT_ACCOUNT: ${{ secrets.CHAINLOOP_WF_RELEASE_DOCS }}
-      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      NETLIFY_SITE_ID: ${{ secrets.DOCS_NETLIFY_SITE_ID }}
+      CHAINLOOP_ROBOT_ACCOUNT: ${{ secrets.CHAINLOOP_WF_BUILD_AND_TEST }}

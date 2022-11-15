@@ -1,1 +1,1 @@
-### Source code for [docs.chainloop.dev](https://docs.chainloop.dev) built using [Docusaurus 2](https://docusaurus.io/)
+### Source code for [docs.chainloop.dev](https://docs.chainloop.dev) built using [Docusaurus](https://docusaurus.io/)

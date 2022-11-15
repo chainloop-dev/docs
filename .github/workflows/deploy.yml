@@ -1,11 +1,13 @@
-name: Build and Test Landing
+name: Deploy
 
 on:
-  pull_request:
+  push:
+    branches:
+      - main
 
 jobs:
-  build_and_test:
-    name: Build and Test
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Install Cosign
@@ -26,13 +28,12 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: npm install
-        run: npm install
-      - name: Build Landing
-        run: netlify build
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.LANDING_NETLIFY_SITE_ID }}
+      - name: npm install docs
+        run: cd docs && npm install
+      - name: Build Docs
+        run: cd docs && netlify build
+      - name: Deploy Docs
+        run: cd docs && netlify deploy --prod
       - name: Finish and Record Attestation
         if: ${{ success() }}
         run: |
@@ -50,4 +51,6 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       CL_VERSION: 0.8.16
-      CHAINLOOP_ROBOT_ACCOUNT: ${{ secrets.CHAINLOOP_WF_BUILD_AND_TEST_LANDING }}
+      CHAINLOOP_ROBOT_ACCOUNT: ${{ secrets.CHAINLOOP_WF_RELEASE }}
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
