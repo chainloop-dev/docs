@@ -1,0 +1,11 @@
+{
+   "schemaVersion": "v1",
+   "materials": [
+      { "type": "CONTAINER_IMAGE", "name": "skynet-control-plane", "output": true },
+      { "type": "ARTIFACT", "name": "rootfs" },
+      { "type": "ARTIFACT", "name": "dockerfile", "optional": true },
+      { "type": "STRING", "name": "commit" }
+   ],
+   "envAllowList": [ "CUSTOM_VAR" ],
+   "runner": { "type": "GITHUB_ACTION" }
+}

@@ -98,24 +98,22 @@ runner:
 
 ```cue title=chainloop-contract-example.cue showLineNumbers
 // Workflow Contract Example
-{
-  schemaVersion: "v1",
-  // Three required materials of three different kinds
-  // The output flag indicates that the material will be part of the attestation subject
-  materials: [
-    // String kind materials will be injected as simple keypairs
-    { type: "STRING", name: "commit" },
-    // Artifact kinds will first get uploaded to the built-in Content Addressable Storage (CAS)
-    { type: "ARTIFACT", name: "control-plane-linux-amd64", output: true },
-    // Container image kinds will get resolved to retrieve their repository digest
-    { type: "CONTAINER_IMAGE", name: "control-plane-image", output: true }
-  ],
-  // Env vars we want the system to resolve and inject during attestation initialization
-  envAllowList: [ "CUSTOM_VAR" ]
-  // Enforce the runner context the attestation must happen
-  // If not specified, the attestation crafting process is allowed to run anywhere
-  runner: type: "GITHUB_ACTION"
-}
+schemaVersion: "v1",
+// Three required materials of three different kinds
+// The output flag indicates that the material will be part of the attestation subject
+materials: [
+   // String kind materials will be injected as simple keypairs
+   { type: "STRING", name: "commit" },
+   // Artifact kinds will first get uploaded to the built-in Content Addressable Storage (CAS)
+   { type: "ARTIFACT", name: "control-plane-linux-amd64", output: true },
+   // Container image kinds will get resolved to retrieve their repository digest
+   { type: "CONTAINER_IMAGE", name: "control-plane-image", output: true }
+],
+// Env vars we want the system to resolve and inject during attestation initialization
+envAllowList: [ "CUSTOM_VAR" ]
+// Enforce the runner context the attestation must happen
+// If not specified, the attestation crafting process is allowed to run anywhere
+runner: type: "GITHUB_ACTION"
 ```
 
 </TabItem>
