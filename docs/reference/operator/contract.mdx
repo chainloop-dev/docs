@@ -1,0 +1,115 @@
+---
+sidebar_position: 1
+title: Workflow Contract
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+import WorkflowContractIntro from '../../partials/_workflow-contract-intro.md';
+import ContractYAML from '!!raw-loader!./contract-examples/advanced/contract.yaml';
+import ContractCUE from '!!raw-loader!./contract-examples/advanced/contract.cue';
+// See https://github.com/webpack-contrib/raw-loader/issues/91#issuecomment-648830498
+import ContractJSON from "./contract-examples/advanced/contract.json.raw!=!raw-loader!./contract-examples/advanced/contract.json"
+
+<WorkflowContractIntro />
+
+A full example of a Workflow Contract looks like
+
+<Tabs>
+   <TabItem value="yaml" label="yaml" default>
+      <CodeBlock language="yaml" title="skynet.contract.yaml" showLineNumbers>{ContractYAML}</CodeBlock>
+   </TabItem>
+   <TabItem value="cue" label="cue">
+      <CodeBlock language="cue" title="skynet.contract.cue" showLineNumbers>{ContractCUE}</CodeBlock>
+   </TabItem>
+   <TabItem value="json" label="json">
+      <CodeBlock language="json" title="skynet.contract.json" showLineNumbers>{ContractJSON}</CodeBlock>
+   </TabItem>
+</Tabs>
+
+## Contract Schema
+
+| Name | Required | Description |
+| --- | --- | --- |
+|`schemaVersion`|yes|Version of the schema, it needs to be `v1`|
+|[`materials`](#material-schema)|no|List of [materials](#material-schema) to be added to the attestation|
+|`envAllowList`|no|List of environment variables that will be resolved and injected in the attestation|
+|[`runner`](#runner-context)|no|Specific runner type associated with this contract. If not set, this contract will be valid to be run `anywhere` but you'll miss out some of [its benefits](#runner-context)|
+
+## Material Schema
+
+:::tip
+You can expect in the future additional artifact types such as `SPDX_JSON` for sBOM or `SARIF` files for Static Analysis. For now, treat them as regular `ARTIFACT` types.
+:::
+
+| Name | Required |Default| Description |
+| --- | --- | --- | --- |
+|`name`|yes||unique identifier of the artifact|
+|`type`|yes||<ul><li>`STRING` values will be injected in the attestation verbatim</li><li>`ARTIFACT` kinds will get uploaded to the built-in Content Addressable Storage (CAS) and then referenced by their **content digest**</li><li>`CONTAINER_IMAGE` kinds will get resolved and referenced by **repository digest**</li></ul>
+|`output`|no|`false`|If set to `true` the artifact will get injected in the `subject` section of the [in-toto statement](https://github.com/slsa-framework/slsa/blob/main/docs/attestation-model.md#overview).|
+|`optional`|no|`false`|if set to `true`, providing this artifact during attestation will be optional. This is **useful for soft rollouts of new requirements**|
+
+## Runner Context
+
+:::info
+New runner contexts will be added over time. If yours is not implemented yet, please [contact us](https://us21.list-manage.com/contact-form?u=801f42b3abafc40b1a17c5f25&form_id=3f3bbfe15e6fcd4a60be9b966652cfd5)
+:::
+
+An **optional** runner type can be provided in a workflow contract.
+
+```yaml title=skynet.contract.yaml showLineNumbers
+schemaVersion: v1
+materials:
+   - type: CONTAINER_IMAGE
+     name: skynet-control-plane
+envAllowList:
+   - CUSTOM_VAR
+# highlight-start
+runner: 
+   type: "GITHUB_ACTION"
+# highlight-end
+```
+
+It has the following effect on the attestation process.
+
+* **Require** the attestation process to be executed in the target runner type unless the `--dry-run` flag is set during initialization.
+* **A link to the workload** (i.e Github Action Run link) **will be recorded** both in the attestation and in the control plane during initialization.
+* An additional set of environment variables will be resolved in addition to the ones defined in the contract [`envAllowList`](/getting-started/workflow-definition#add-materials-to-the-contract).
+
+Currently, we support the following runner types
+
+### `GITHUB_ACTION`
+
+The following environment variables will be automatically added to the attestation. For more information on what they do refer to [this link](https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables).
+
+* `GITHUB_ACTOR`
+* `GITHUB_REF`
+* `GITHUB_REPOSITORY`
+* `GITHUB_REPOSITORY_OWNER`
+* `GITHUB_RUN_ID`
+* `GITHUB_SHA`
+* `RUNNER_NAME`
+* `RUNNER_OS`
+
+A link to the Github Action will be recorded in the control plane too during initialization.
+
+### `GITLAB_PIPELINE`
+
+The following environment variables will be automatically added to the attestation. More information about what they mean in [Gitlab's official documentation](https://docs.gitlab.com/ee/ci/variables/predefined_variables.html)
+
+* `GITLAB_USER_EMAIL`
+* `GITLAB_USER_LOGIN`
+* `CI_PROJECT_URL`
+* `CI_COMMIT_SHA`
+* `CI_JOB_URL`
+* `CI_PIPELINE_URL`
+* `CI_RUNNER_VERSION`
+* `CI_RUNNER_DESCRIPTION`
+* `CI_COMMIT_REF_NAME`
+
+A link to the Gitlab CI job will be recorded in the control plane too during initialization.
+
+:::tip
+Remember, if all the **env variables** that you need are not defined in the context, you can extend such list via the `envAllowList` option.
+:::
