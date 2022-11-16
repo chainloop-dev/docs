@@ -14,11 +14,6 @@ const config = {
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/logo-clear.svg',
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'chainloo-dev', // Usually your GitHub org/user name.
-  projectName: 'ChainLoop', // Usually your repo name.
-
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
   // to replace "en" with "zh-Hans".
@@ -40,6 +35,8 @@ const config = {
           sidebarCollapsed: false,
           // Docs only mode
           routeBasePath: "/",
+          editUrl:
+            'https://github.com/chainloop-dev/docs/tree/main',
         },
         blog: {
           showReadingTime: true,
