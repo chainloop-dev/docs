@@ -20,7 +20,10 @@ Got it! It seems that what we need to do is to **implement an attestation and pr
 * put together a place where the provenance information and their associated artifacts (SBOMs, static analysis, vulnerability scanner output) can be stored.
 * ensure authenticity and integrity via some sort of signing process.
 
-Choosing solutions for each of those areas was surprisingly straightforward since there are great building blocks for attestation crafting (e.g [in-toto](https://in-toto.io/)), signing/verification ([Sigstore](https://www.sigstore.dev/)), and storing ([CAS/OCI](https://github.com/opencontainers/image-spec/blob/main/spec.md)), but figuring out an end-to-end wasn't easy. 
+![slsa](slsa.png#gh-light-mode-only)
+![slsa](slsa-dark.png#gh-dark-mode-only)
+
+Choosing a solution for each of those areas was surprisingly straightforward since there are great building blocks for attestation crafting (e.g [in-toto](https://in-toto.io/)), signing/verification ([Sigstore](https://www.sigstore.dev/)), and storing ([CAS/OCI](https://github.com/opencontainers/image-spec/blob/main/spec.md)), but figuring out an end-to-end wasn't easy. 
 
 In any case, your team spends the next couple of months deploying an OCI artifact storage, defining the expected attestation specification, building some tooling to glue it all together, and writing a lot of documentation to share with the development teams for their integration.
 
@@ -30,7 +33,10 @@ Now to the easy part (or what you think), to make developer teams adopt it.
 
 Let's introduce team Skynet, they are building (in their words) a revolutionary AI.
 
-They leverage a pretty standard CI/CD setup using GitHub Actions. Build/Test a couple of GoLang/Java services, package them into signed container images, craft and store SBOMs in S3 and then deploy them to Kubernetes.
+They leverage a pretty standard CI/CD setup using GitHub Actions.
+
+![skynet-workflow](pipeline.png#gh-light-mode-only)
+![skynet-workflow](pipeline-dark.png#gh-dark-mode-only)
 
 You open a chat with Sarah, one of their lead developers and it goes like this (pleasantries skipped):
 
@@ -38,7 +44,7 @@ D - Hi Sarah, I have some security requirements that I'll need you to put in pla
 
 S - Hi Dyson, but we already did a ton of work on that!
 
-D - Yes I know, but this is different. What you did was implement application security. What we need now is for us to understand more about the CI/CD setup and collect all the additional information that you are already creating, the SBOM remember? 
+D - Yes I know, but this is different. What you did was to implement application security. What we need now is for us to understand more about the CI/CD setup and collect all the additional information that you are already creating, the SBOM remember? 
 
 S - Oh, I see. how much work is that? We are quite constrained already, we have to launch soon.
 
