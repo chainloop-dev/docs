@@ -6,6 +6,11 @@ toc_max_heading_level: 4
 
 # Introduction
 
+:::tip
+[Read this post](/blog/a-tale-of-supply-chain-attestation) for an introduction of the problem we are solving
+
+:::
+
 One of the key areas of Software Supply Chain Security is to make sure your automation is generating **authenticated, tamper-resistant, artifact, and attestation meta-data** that can be used later on for auditing and policy enforcement. 
 
 To achieve that goal, there are great building blocks for attestation crafting (e.g [in-toto](https://in-toto.io/)), signing/verification ([Sigstore](https://www.sigstore.dev/)), and storing ([CAS/OCI](https://github.com/opencontainers/image-spec/blob/main/spec.md)) but putting these together cohesively, securely in an end-to-end solution that's easy to use is not trivial. 
