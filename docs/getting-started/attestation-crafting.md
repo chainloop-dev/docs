@@ -72,6 +72,7 @@ $ export CHAINLOOP_ROBOT_ACCOUNT=deadbeef
 
 `chainloop attestation init` supports the following options
 
+* `--token` robot account provided by the SecOps team. Alternatively, you can set the `CHAINLOOP_ROBOT_ACCOUNT` environment variable.
 * `--revision` of the contract (default: `latest`)
 * `--dry-run`; do not store the attestation in the Control plane, and do not fail if the runner context or required env variables can not be resolved. Useful for development (default: `false`)
 
