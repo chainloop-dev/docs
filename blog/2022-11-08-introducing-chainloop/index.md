@@ -44,11 +44,11 @@ Enough marketing speak! How does it work?
 
 Glad you asked! The gist of it is that ChainLoop is a Software as a Service (SaaS) that consists of **a SLSA level 3 provenance-compliant control-plane/single source of truth for artifacts and attestation** as well as a dead-simple, **contract-based attestation crafting process**. All of that built on Open Source standards such as [Sigstore](https://www.sigstore.dev/), [in-toto](https://in-toto.io/), [SLSA](https://slsa.dev) and [OCI](https://github.com/opencontainers/image-spec/blob/main/spec.md). 
 
-But to get an in-depth understanding of the system we recommend taking a look at [this overview](/#how-does-it-work) or jumping directly at our [getting started guide](/category/getting-started).
+But to get an in-depth understanding of the system we recommend taking a look at [this overview](/how-does-it-work) or jumping directly at our [getting started guide](/category/getting-started).
 
 ### Give it a try
 
-You might not be sure if [ChainLoop is for you](https://docs.chainloop.dev/#who-is-it-for), but if you know already, I have good news, ChainLoop is on [early access](/category/getting-started) so why don't you give it a try and send feedback our way :)
+You might not be sure if [ChainLoop is for you](https://docs.chainloop.dev/who-is-it-for), but if you know already, I have good news, ChainLoop is on [early access](/category/getting-started) so why don't you give it a try and send feedback our way :)
 
 We are very excited about the possibilities that having this foundation can enable on your Software Supply Chain, from improving communication between teams to the implementation of Service Level Agreements (SLOs), policy enforcement or visibility in general. 
 
