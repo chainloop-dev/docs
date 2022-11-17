@@ -103,10 +103,10 @@ Sarah from the Skynet team
 * Will just need the ChainLoop attestation tool plus some credentials provided by Dyson to do the integration following some [simple steps](/getting-started/attestation-crafting). No additional security expertise is required.
 * When new requirements are set by Dyson, Sarah will get notified and can follow the same procedure as before. No manual communication channel is required.
 
-In the next blog post, I'll get into details on how this scenario looks like using ChainLoop but for now you can follow our [getting started guide](http://localhost:3000/category/getting-started) for more details.
+In the next blog post, I'll get into details on how this scenario looks like using ChainLoop but for now you can follow our [getting started guide](/category/getting-started) for more details.
 
 And remember, send feedback [our way](https://us21.list-manage.com/contact-form?u=801f42b3abafc40b1a17c5f25&form_id=3f3bbfe15e6fcd4a60be9b966652cfd5)! 
 
 Thanks!
 
-[1] This refers to the use of Sigstore's [Rekor](https://docs.sigstore.dev/rekor/overview/) and [Fulcio](https://docs.sigstore.dev/fulcio/overview) not be covered in this post. The point in mentioning them is to illustrate that requirements and practices evolve.
+[1] This refers to the use of Sigstore's [Rekor](https://docs.sigstore.dev/rekor/overview/) and [Fulcio](https://docs.sigstore.dev/fulcio/overview) not being covered in this post. The point of mentioning them is to illustrate that requirements and practices evolve.
