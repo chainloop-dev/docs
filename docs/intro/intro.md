@@ -6,13 +6,15 @@ toc_max_heading_level: 4
 
 # Introduction
 
-Your name is Dyson, **you work on the Security and Operations (SecOps) team** at Cyberdyne solutions. You are in charge of making sure that the organization's Software Supply Chain Security is improved end-to-end, from source code to packaging and distribution.
+Your name is Dyson, **you work on the Security and Operations (SecOps) team** at Cyberdyne solutions. You are in charge of making sure that the organization's Software Supply Chain (SSC) Security is improved end-to-end, from source code to packaging and distribution.
 
 You feel pretty good about the current state of things. Your development teams are already signing their commits, scanning their first and third-party components, generating Software Build of Materials (SBOMs), signing container images and even blocking releases based on vulnerability scanning or signature verification. Life is good!
 
 The next day you receive an email from your CISO saying that all the progress in application security is great but an additional effort needs to be done to make sure we can trust all that metadata.
 
-He seems to be **concerned** about all that **information** being **scattered around, not being trustworthy or easily available for auditing**. He sends a link to [slsa.dev](https://slsa.dev/) and says we need to be at least level 3 at that, whatever that means.
+He seems to be **concerned** about all that **information** being **scattered around, not being trustworthy or easily available for auditing**. He sends a link to [slsa.dev](https://slsa.dev/) and says we need to be at least level 3, whatever that means!
+
+## The Technical Problem
 
 Got it! It seems that what we need to do is to **implement an attestation and provenance layer in our SSC**, we "just" need to
 
@@ -29,7 +31,7 @@ In any case, your team spends the next couple of months deploying an OCI artifac
 
 Now to the easy part (or what you think), to make developer teams adopt it.
 
-## Day one integration
+## The Integration Problem
 
 Let's introduce team Skynet, they are building (in their words) a revolutionary AI.
 
@@ -58,9 +60,9 @@ D - Sigh... but all this work is required to meet new compliance requirements so
 
 S - I'll see what I can do
 
-After weeks of back and forth, the Skynet team integration is done and the SecOps teams now have access to the workflow build information via signed attestations and their associated artifacts (sBOM, logs, ...) in a centralized OCI registry. You will tell our boss that the **Skynet team reached SLSA level 3 provenance compliance**! Life is good, again.
+After weeks of back and forth, the Skynet team integration is done and the SecOps teams now have access to the workflow build information via signed attestations and their associated artifacts (SBOM, logs, ...) in a centralized OCI registry. You will tell our boss that the **Skynet team reached SLSA level 3 provenance compliance**! Life is good, again.
 
-## Day two challenges
+## The Day Two Problem
 
 You quickly realized that applying this process to all teams doesn't scale. It's time-consuming, requires manual work and frustrates both sides.
 
@@ -78,7 +80,7 @@ You realize that it's hard to make sure all the teams are following the document
 
 Now you have to inspect each attestation to make sure they are compliant with your requirements.
 
-### Prevent configuration drift or regressions
+### Prevent configuration drift and regressions
 
 You also notice it's very hard to keep track of the state of the attestation integration each team is in. Some might have fallen behind the latest requirements. In fact, It's very hard to detect if a regression has been added or an integration has been removed altogether.
 
@@ -92,7 +94,7 @@ Even worse, if you detect an issue during auditing or because of a new security 
 
 ChainLoop is built on the promise of providing a similar state-of-the-art attestation/provenance compliance but through a mechanism that has **lower friction, removes manual steps and makes day-two operations first-class citizens**.
 
-A Software as a Service (SaaS) that consists of a [SLSA level 3](https://slsa.dev/spec/v0.1/requirements#summary-table) provenance-compliant **control-plane/single source of truth** for artifacts and attestation as well as a dead-simple, [contract-based](/getting-started/workflow-definition#workflow-contracts) attestation crafting process.
+A Software as a Service (Open Source soon), that consists of a [SLSA level 3](https://slsa.dev/spec/v0.1/requirements#summary-table) provenance-compliant **control-plane/single source of truth** for artifacts and attestation as well as a dead-simple, [contract-based](/getting-started/workflow-definition#workflow-contracts) attestation crafting process.
 
 ![overview](/img/v2/chainloop-dev-overview.png#gh-light-mode-only)
 ![overview](/img/v2/chainloop-dev-overview-dark.png#gh-dark-mode-only)
@@ -107,5 +109,3 @@ Dev/Apps teams on the other hand
 
 - Will get compliance with minimum effort since ChainLoop plugs into their existing CI/CD pipelines.
 - They will not need to become security experts. The [crafting tool](/getting-started/attestation-crafting) will guide them with guardrails and a familiar DevExp to make sure they comply with the Workflow Contract defined by the SecOps team.
-
-Although ChainLoop runs as a service, it is **designed to be a multi-tenant control plane, not a data plane**. The uploaded artifacts and attestations are stored in an [OCI registry of your choice](/getting-started/setup#add-oci-repository). 

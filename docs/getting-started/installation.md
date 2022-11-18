@@ -3,6 +3,12 @@ sidebar_position: 2
 title: Installation
 ---
 
+:::info
+ChainLoop's control plane runs as Software as a Service (SaaS) but we are **committed to making it open source so you can run your own instance**. Stay tuned!
+:::
+
+## CLI
+
 First, you need to have the Chainloop CLI installed on your computer. Use the command below to **install the latest version and verify its signature**.
 
 ```bash
