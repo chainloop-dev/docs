@@ -80,7 +80,7 @@ You realize that it's hard to make sure all the teams are following the document
 
 Now you have to inspect each attestation to make sure they are compliant with your requirements.
 
-### Prevent configuration drift and regressions
+### Preventing configuration drift
 
 You also notice it's very hard to keep track of the state of the attestation integration each team is in. Some might have fallen behind the latest requirements. In fact, It's very hard to detect if a regression has been added or an integration has been removed altogether.
 
@@ -94,18 +94,19 @@ Even worse, if you detect an issue during auditing or because of a new security 
 
 ChainLoop is built on the promise of providing a similar state-of-the-art attestation/provenance compliance but through a mechanism that has **lower friction, removes manual steps and makes day-two operations first-class citizens**.
 
-A Software as a Service (Open Source soon), that consists of a [SLSA level 3](https://slsa.dev/spec/v0.1/requirements#summary-table) provenance-compliant **control-plane/single source of truth** for artifacts and attestation as well as a dead-simple, [contract-based](/getting-started/workflow-definition#workflow-contracts) attestation crafting process.
+If instead, you, Dyson, choose ChainLoop
 
-![overview](/img/v2/chainloop-dev-overview.png#gh-light-mode-only)
-![overview](/img/v2/chainloop-dev-overview-dark.png#gh-dark-mode-only)
+* You will save months implementing a custom end-to-end solution for attestation, artifact storage, specification or documentation.
+* You can [onboard](/getting-started/workflow-definition#workflow-and-contract-creation) and [keep track](/getting-started/operator-view) of the teams and workloads that are being integrated with the system.
+* You can [declaratively define contracts](/getting-started/workflow-definition#add-materials-to-the-contract) with the attestation requirements and associate them with such workloads.
+* You can rest assured that on the developer side, best practices are followed and the attestation is following the declared contract.
+* You can detect Supply Chain anomalies since your control plane records workflow runs either successfully or not.  
 
-It provides your Security/Operation teams with
+Sarah from the Skynet team
 
-- SLSA level 3 compliant single Source of truth for artifacts and attestation built on OSS standards such as Sigstore, in-toto, SLSA and OCI.
-- Full control on what kind of data (build info, materials) must be part of the attestation via [**Workflow Contracts**](/getting-started/workflow-definition#workflow-contracts) that can be propagated and enforced downstream to your organization.
-- Org-wide workflow, attestation, and artifacts [visibility and standardization](/getting-started/operator-view).
+* Will just need the ChainLoop attestation tool plus some credentials provided by Dyson to do the integration following some [simple steps](/getting-started/attestation-crafting). No additional security expertise is required.
+* When new requirements are set by Dyson, Sarah will get notified and can follow the same procedure as before. No manual communication channel is required.
 
-Dev/Apps teams on the other hand 
+Enough marketing speak! But how does it work?
 
-- Will get compliance with minimum effort since ChainLoop plugs into their existing CI/CD pipelines.
-- They will not need to become security experts. The [crafting tool](/getting-started/attestation-crafting) will guide them with guardrails and a familiar DevExp to make sure they comply with the Workflow Contract defined by the SecOps team.
+I am [glad you asked](/how-does-it-work) :)
