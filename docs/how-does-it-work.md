@@ -2,6 +2,8 @@
 sidebar_position: 2
 ---
 
+import MailingListForm from './partials/_mailing-list-form.mdx';
+
 # How Does it Work? 
 
 ChainLoop is a Software as a Service (Open Source soon), that consists of a [SLSA level 3](https://slsa.dev/spec/v0.1/requirements#summary-table) provenance-compliant **control plane and single source of truth** for artifacts and attestation **plus a dead-simple, [contract-based](/getting-started/workflow-definition#workflow-contracts) attestation crafting process**.
@@ -20,7 +22,7 @@ Dev/Apps teams on the other hand
 - Will get compliance with minimum effort since ChainLoop plugs into their existing CI/CD pipelines.
 - They will not need to become security experts. The [crafting tool](/getting-started/attestation-crafting) will guide them with guardrails and a familiar DevExp to make sure they comply with the Workflow Contract defined by the SecOps team.
 
-## Overview
+## Integration Overview
 
 The process of connecting an existing workflow to ChainLoop and crafting an attestation looks like this
 
@@ -53,3 +55,5 @@ The process of connecting an existing workflow to ChainLoop and crafting an atte
 At this point, the SecOps team has control of the attestation and artifacts expectations (via Workflow contracts), which can be updated at any time with new requirements.
 
 They also gained visibility, and have all the metadata and artifacts meeting the latest standards and best practices, while developers have been shielded from most of the complexity related to this process.
+
+<MailingListForm />
