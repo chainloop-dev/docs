@@ -12,7 +12,7 @@ Your name is Dyson, you work on the Security and Operations (SecOps) team at Cyb
 <!--truncate-->
 
 
-You feel pretty good about the current state of things. Your development teams are already signing their commits, scanning their first and third-party components, generating Software Build of Materials (SBOMs), signing container images and even blocking releases based on vulnerability scanning or signature verification. Life is good!
+You feel pretty good about the current state of things. Your development teams are already signing their commits, scanning their first and third-party components, generating Software Bill of Materials (SBOMs), signing container images and even blocking releases based on vulnerability scanning or signature verification. Life is good!
 
 The next day you receive an email from your CISO saying that all the progress in application security is great but an additional effort needs to be done to make sure we can trust all that metadata.
 
