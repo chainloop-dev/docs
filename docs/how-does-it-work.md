@@ -4,6 +4,24 @@ sidebar_position: 2
 
 # How Does it Work? 
 
+ChainLoop is a Software as a Service (Open Source soon), that consists of a [SLSA level 3](https://slsa.dev/spec/v0.1/requirements#summary-table) provenance-compliant **control plane and single source of truth** for artifacts and attestation **plus a dead-simple, [contract-based](/getting-started/workflow-definition#workflow-contracts) attestation crafting process**.
+
+![overview](/img/v2/chainloop-dev-overview.png#gh-light-mode-only)
+![overview](/img/v2/chainloop-dev-overview-dark.png#gh-dark-mode-only)
+
+It provides your Security/Operation teams with
+
+- SLSA level 3 compliant single Source of truth for artifacts and attestation built on OSS standards such as [Sigstore](https://www.sigstore.dev/), [in-toto](https://in-toto.io/), [SLSA](https://slsa.dev) and [OCI](https://github.com/opencontainers/image-spec/blob/main/spec.md).
+- Full control on what kind of data (build info, materials) must be part of the attestation via [**Workflow Contracts**](/getting-started/workflow-definition#workflow-contracts) that can be propagated and enforced downstream to your organization.
+- Org-wide workflow, attestation, and artifacts [visibility and standardization](/getting-started/operator-view).
+
+Dev/Apps teams on the other hand
+
+- Will get compliance with minimum effort since ChainLoop plugs into their existing CI/CD pipelines.
+- They will not need to become security experts. The [crafting tool](/getting-started/attestation-crafting) will guide them with guardrails and a familiar DevExp to make sure they comply with the Workflow Contract defined by the SecOps team.
+
+## Overview
+
 The process of connecting an existing workflow to ChainLoop and crafting an attestation looks like this
 
 ![flow](/img/v2/chainloop.dev.png#gh-light-mode-only)
