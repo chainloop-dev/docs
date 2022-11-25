@@ -2,14 +2,16 @@
 sidebar_position: 2
 ---
 
-import MailingListForm from './partials/_mailing-list-form.mdx';
+import MailingListForm from './partials/\_mailing-list-form.mdx';
 
-# How Does it Work? 
+# How Does it Work?
 
 ChainLoop is a Software as a Service (Open Source soon), that consists of a [SLSA level 3](https://slsa.dev/spec/v0.1/requirements#summary-table) provenance-compliant **control plane and single source of truth** for artifacts and attestation **plus a dead-simple, [contract-based](/getting-started/workflow-definition#workflow-contracts) attestation crafting process**.
 
-![overview](/img/v2/chainloop-dev-overview.png#gh-light-mode-only)
-![overview](/img/v2/chainloop-dev-overview-dark.png#gh-dark-mode-only)
+The generated attestation and artifacts will be stored in the user-provided OCI registry.
+
+![overview](/img/v2/chainloop-parts.png#gh-light-mode-only)
+![overview](/img/v2/chainloop-parts-dark.png#gh-dark-mode-only)
 
 It provides your Security/Operation teams with
 
@@ -24,7 +26,13 @@ Dev/Apps teams on the other hand
 
 ## Integration Overview
 
-The process of connecting an existing workflow to ChainLoop and crafting an attestation looks like this
+![overview](/img/v2/chainloop-dev-overview.png#gh-light-mode-only)
+![overview](/img/v2/chainloop-dev-overview-dark.png#gh-dark-mode-only)
+
+In short, the integration process of a new pipeline in ChainLoop consists of
+
+- The Operator registers a contract for that pipeline in the control plane.
+- The developers that own the pipeline use ChainLoop's CLI to craft an attestation to comply with the contract.
 
 ![flow](/img/v2/chainloop.dev.png#gh-light-mode-only)
 ![flow](/img/v2/chainloop.dev-dark.png#gh-dark-mode-only)
@@ -32,7 +40,6 @@ The process of connecting an existing workflow to ChainLoop and crafting an atte
 ### Operator - Setup
 
 1. An operator [creates a Workflow, a Contract (schema), and a service account](/getting-started/workflow-definition#workflow-and-contract-creation)
-
 
 ### Developer - Attestation Crafting
 
