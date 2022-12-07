@@ -1,26 +1,33 @@
 schemaVersion: v1
 # Three required and one optional materials of three different kinds
 materials:
-   # CONTAINER_IMAGE kinds will get resolved to retrieve their repository digest
-   - type: CONTAINER_IMAGE
-     name: skynet-control-plane
+  # CONTAINER_IMAGE kinds will get resolved to retrieve their repository digest
+  - type: CONTAINER_IMAGE
+    name:
+      skynet-control-plane
       # The output flag indicates that the material will be part of the attestation subject
-     output: true 
-   # ARTIFACT kinds will first get uploaded to the built-in Content Addressable Storage (CAS)
-   - type: ARTIFACT
-     name: rootfs
-   # Optional dockerfile
-   - type: ARTIFACT
-     name: dockerfile
-     optional: true
-   # STRING kind materials will be injected as simple keypairs
-   - type: STRING
-     name: commit
+    output: true
+  # ARTIFACT kinds will first get uploaded to the built-in Content Addressable Storage (CAS)
+  - type: ARTIFACT
+    name: rootfs
+  # Optional dockerfile
+  - type: ARTIFACT
+    name: dockerfile
+    optional: true
+  # STRING kind materials will be injected as simple keypairs
+  - type: STRING
+    name: build-ref
+  # SBOMs will be uploaded to the CAS and referenced in the attestation
+  # Both SBOM_CYCLONEDX_JSON and SBOM_SPDX_JSON are supported
+  - type: SBOM_CYCLONEDX_JSON
+    name: skynet-sbom
+
 # Env vars we want the system to resolve and inject during attestation initialization
 # Additional ones can be inherited from the specified runner context below
 envAllowList:
-   - CUSTOM_VAR
+  - CUSTOM_VAR
+
 # Enforce in what runner context the attestation must happen
 # If not specified, the attestation crafting process is allowed to run anywhere
-runner: 
-   type: "GITHUB_ACTION"
+runner:
+  type: "GITHUB_ACTION"
