@@ -13,12 +13,12 @@ A brief description of the different stages
 
 #### attestation init
 
-During this stage, the crafting tool will contact the control plane to 
+During this stage, the crafting tool will contact the control plane to
 
-* Signal the intent of starting an attestation.
-* Retrieve the associated workflow contract.
-* If the contract has a specified runner context type, check that we are compliant with it.
-* Initialize environment variables explicitly stated in the contract.
+- Signal the intent of starting an attestation.
+- Retrieve the associated workflow contract.
+- If the contract has a specified runner context type, check that we are compliant with it.
+- Initialize environment variables explicitly stated in the contract.
 
 :::note
 In the future, during this initialization stage, we will also retrieve ephemeral signing keys for keyless signing/verification
@@ -30,16 +30,16 @@ Add the **materials required by the contract**, i.e artifact, OCI image ref, SBO
 
 The `add` command knows how to handle each kind of material transparently to the user.
 
-* STRING kinds will be injected as is.
-* ARTIFACT kinds will be uploaded to the built-in CAS and referenced by their content digest.
-* CONTAINER_IMAGE kinds will be resolved to obtain their repository digests using the local authentication keychain.
+- STRING kinds will be injected as is.
+- ARTIFACT kinds will be uploaded to the built-in CAS and referenced by their content digest.
+- CONTAINER_IMAGE kinds will be resolved to obtain their repository digests using the local authentication keychain.
 
 #### attestation push
 
 This stage will take the current crafting state, validate that it has all the required materials and
 
-* Create a signed, in-toto attestation envelope.
-* Push it to the control plane for storage
+- Create a signed, in-toto attestation envelope.
+- Push it to the control plane for storage
 
 :::note
 Currently, a `cosign private key` needs to be provided during push for signing. In future releases this will not be needed since we will rely on keyless signing and verification.
@@ -61,7 +61,6 @@ The crafting tool is currently bundled within ChainLoop command line tool. To in
 
 The robot account was created during the [previous step](./workflow-definition#robot-account-creation) and it's required during all the stages of the crafting process. It can be provided via the `--token` flag or the `$CHAINLOOP_ROBOT_ACCOUNT` environment variable.
 
-
 ### Initialization
 
 ```bash
@@ -72,11 +71,11 @@ $ export CHAINLOOP_ROBOT_ACCOUNT=deadbeef
 
 `chainloop attestation init` supports the following options
 
-* `--token` robot account provided by the SecOps team. Alternatively, you can set the `CHAINLOOP_ROBOT_ACCOUNT` environment variable.
-* `--revision` of the contract (default: `latest`)
-* `--dry-run`; do not store the attestation in the Control plane, and do not fail if the runner context or required env variables can not be resolved. Useful for development (default: `false`)
+- `--token` robot account provided by the SecOps team. Alternatively, you can set the `CHAINLOOP_ROBOT_ACCOUNT` environment variable.
+- `--revision` of the contract (default: `latest`)
+- `--dry-run`; do not store the attestation in the Control plane, and do not fail if the runner context or required env variables can not be resolved. Useful for development (default: `false`)
 
-To initialize a new crafting process just run `attestation init` and the system will retrieve the latest version (if no specific revision is set via the `--revision` flag) of the contract. 
+To initialize a new crafting process just run `attestation init` and the system will retrieve the latest version (if no specific revision is set via the `--revision` flag) of the contract.
 
 ```bash
 $ chainloop attestation init --dry-run
@@ -99,7 +98,8 @@ INF Attestation initialized! now you can check its status or add materials to it
 │ skynet-control-plane │ CONTAINER_IMAGE │ No  │ Yes      │ x         │
 │ rootfs               │ ARTIFACT        │ No  │ Yes      │           │
 │ dockerfile           │ ARTIFACT        │ No  │ No       │           │
-│ commit               │ STRING          │ No  │ Yes      │           │
+│ build-ref            │ STRING          │ No  │ Yes      │           │
+│ skynet-sbom          │ SBOM_CYCLONEDX_JSON│No│ Yes      │           │
 └──────────────────────┴─────────────────┴─────┴──────────┴───────────┘
 ┌───────────────────────────────┐
 │ Env Variables                 │
@@ -124,12 +124,15 @@ $ chainloop attestation add --name rootfs --value rootfs.tar.gz
 rootfs.tar.gz@sha256:f8a581d4bce57f792444b2230b5706a6f902fbac19a374e76f6a56f030d35cf2 ... done! [7B in 0s; 34B/s]
 INF material added to attestation
 
-# Add commit sha
-$ chainloop attestation add --name commit --value 80e461e9b385c6986cdb8096c9dc99928943d667
-INF material added to attestation
+# Add build-ref artifact
+$ chainloop attestation add --name build-ref --value 80e461e9b385c6986cdb8096c9dc99928943d667
+
+# Add Software Bill Of Materials
+$ chainloop attestation add --name skynet-sbom --value sbom.cyclonedx.json
 ```
 
 ### Inspecting the crafting status
+
 If we check the status of the attestation we'll see that the three required materials have been added
 
 ```bash
@@ -151,7 +154,8 @@ $ chainloop attestation status --full
 │ skynet-control-plane │ CONTAINER_IMAGE │ Yes │ Yes      │ x         │ **.dkr.ecr.us-east-1.amazonaws.com/skynet-control-plane@sha256:963237021c5fd0d31741a9b873e1e8af08c76459cf30e34332925510e0cb3731              │
 │ rootfs               │ ARTIFACT        │ Yes │ Yes      │           │ rootfs.tar.gz@sha256:f8a581d4bce57f792444b2230b5706a6f902fbac19a374e76f6a56f030d35cf2                                                        │
 │ dockerfile           │ ARTIFACT        │ No  │ No       │           │                                                                                                                                              │
-│ commit               │ STRING          │ Yes │ Yes      │           │ 80e461e9b385c6986cdb8096c9dc99928943d667                                                                                                     │
+│ build-ref            │ STRING          │ Yes │ Yes      │           │ 80e461e9b385c6986cdb8096c9dc99928943d667                                                                                                     │
+│ skynet-sbom          │ SBOM_CYCLONEDX_ │ Yes │ Yes      │           │ deadbeefddaaae-redacted                                                                                                                      │
 └──────────────────────┴─────────────────┴─────┴──────────┴───────────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ┌───────────────────────────────┐
 │ Env Variables                 │
@@ -175,7 +179,7 @@ $ chainloop attestation status --full
 └─────────────────────────┴──────────────────────────────────────────┘
 ```
 
-### Encode, sign and push attestation 
+### Encode, sign and push attestation
 
 :::note
 Currently, a `cosign private key` needs to be provided during push for signing. In future releases this will not be needed since we will rely on keyless signing and verification.
@@ -204,6 +208,7 @@ INF Attestation pushed!
 }
 
 ```
+
 ## CI integration
 
 Native CI/CD runner integrations are under development but the process stated above can be implemented in any CI pipeline.
@@ -244,7 +249,6 @@ jobs:
           sudo install chainloop /usr/local/bin
           chainloop version
       # highlight-end
-
       - name: Checkout
         uses: actions/checkout@v3
         with:
@@ -255,11 +259,10 @@ jobs:
         run: |
           chainloop attestation init --contract-revision 1
       # highlight-end
-
       - name: Set up Go
         uses: actions/setup-go@v3
         with:
-          go-version: '1.19' 
+          go-version: "1.19"
 
       - name: Configure AWS credentials to push container images
         uses: aws-actions/configure-aws-credentials@v1
@@ -286,6 +289,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
 
+      # Generate SBOM using syft in cycloneDX format
+      - uses: anchore/sbom-action@v0
+        with:
+          image: ****.dkr.ecr.us-east-1.amazonaws.com/container-image:${{ github.ref_name }}
+          format: cyclonedx-json
+          output-file: /tmp/skynet.cyclonedx.json
+
       # highlight-start
       - name: Add Attestation Artifacts
         run: |
@@ -297,7 +307,10 @@ jobs:
 
           # This is just an example of adding a key/val material type
           # Alternatively, GITHUB_SHA could have been added to the contract env variables allowList
-          chainloop attestation add --name commit --value ${GITHUB_SHA}
+          chainloop attestation add --name build-ref --value ${GITHUB_SHA}
+
+          # Attach SBOM
+          chainloop attestation add --name skynet-sbom --value /tmp/skynet.cyclonedx.json
 
       - name: Finish and Record Attestation
         if: ${{ success() }}
