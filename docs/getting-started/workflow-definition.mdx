@@ -1,18 +1,16 @@
 ---
-sidebar_position: 4
+sidebar_position: 3
 title: Workflow Creation
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import CodeBlock from '@theme/CodeBlock';
-import ContractYAML from '!!raw-loader!/examples/contracts/skynet.yaml';
-import ContractCUE from '!!raw-loader!/examples/contracts/skynet.cue';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import CodeBlock from "@theme/CodeBlock";
+import ContractYAML from "!!raw-loader!/examples/contracts/skynet.yaml";
+import ContractCUE from "!!raw-loader!/examples/contracts/skynet.cue";
 // See https://github.com/webpack-contrib/raw-loader/issues/91#issuecomment-648830498
-import ContractJSON from "/examples/contracts/skynet.json.raw!=!raw-loader!/examples/contracts/skynet.json"
-import WorkflowContractIntro from '../partials/_workflow-contract-intro.md';
-
-## Introduction
+import ContractJSON from "/examples/contracts/skynet.json.raw!=!raw-loader!/examples/contracts/skynet.json";
+import WorkflowContractIntro from "../partials/_workflow-contract-intro.md";
 
 Next, let's introduce two of the most important entities in ChainLoop's control plane, **workflows** and **workflow contracts**.
 
@@ -29,7 +27,7 @@ A workflow represents the identity of any automation, any CI/CD workflow you wan
 A robot account is a long-lasting, though revokable, **secret token associated with a Workflow**. It's meant to be used in the target CI/CD pipeline during the attestation process. This token along with the crafting CLI are the only two things development/Apps teams need for the integration.
 
 ### Example
- 
+
 In the following example, we can see three CI/CD pipelines associated with their respective ChainLoop workflows. Two of those Workflows are sharing the same Contract (using the same or different revision).
 
 ![flow](/img/v2/workflow-overview.png#gh-light-mode-only)
@@ -41,13 +39,14 @@ Let's say that we have a CI pipeline that we want to **integrate with ChainLoop*
 
 To achieve that, we will need to
 
-* Create a new Workflow Contract (optional)
-* Create a Workflow associated with a new or existing Contract
-* Create a Robot account for that Workflow so the integration can happen in the CI.
+- Create a new Workflow Contract (optional)
+- Create a Workflow associated with a new or existing Contract
+- Create a Robot account for that Workflow so the integration can happen in the CI.
 
 ### Workflow Create
 
 Let's create a Workflow for our `build and test` CI pipeline
+
 ```bash
 $ chainloop workflow create \
     --name "build-and-test" \
@@ -88,27 +87,33 @@ $ chainloop workflow contract describe --id fd489047-67f1-45d4-9f3b-27eba4051929
 
 We are going to update the contract with the materials we expect the attestation for this specific workflow to contain
 
-* built container image as output
-* rootfs directory used during build
-* dockerfile (optional)
-* commit sha
-* A custom env variable to be resolved
-* Github Action as [target runner context](/reference/operator/contract#runner-context). This means that this contract is valid only for that platform.
+- built container image as output
+- rootfs directory used during build
+- dockerfile (optional)
+- commit sha
+- A custom env variable to be resolved
+- Github Action as [target runner context](/reference/operator/contract#runner-context). This means that this contract is valid only for that platform.
 
 :::note
-   Setting the runner context type is optional, see [runner contexts](/reference/operator/contract#runner-context) for more information.
+Setting the runner context type is optional, see [runner contexts](/reference/operator/contract#runner-context) for more information.
 :::
 
 <Tabs>
-   <TabItem value="yaml" label="yaml" default>
-      <CodeBlock language="yaml" title="skynet.contract.yaml" showLineNumbers>{ContractYAML}</CodeBlock>
-   </TabItem>
-   <TabItem value="cue" label="cue">
-      <CodeBlock language="cue" title="skynet.contract.cue" showLineNumbers>{ContractCUE}</CodeBlock>
-   </TabItem>
-   <TabItem value="json" label="json">
-      <CodeBlock language="json" title="skynet.contract.json" showLineNumbers>{ContractJSON}</CodeBlock>
-   </TabItem>
+  <TabItem value="yaml" label="yaml" default>
+    <CodeBlock language="yaml" title="skynet.contract.yaml" showLineNumbers>
+      {ContractYAML}
+    </CodeBlock>
+  </TabItem>
+  <TabItem value="cue" label="cue">
+    <CodeBlock language="cue" title="skynet.contract.cue" showLineNumbers>
+      {ContractCUE}
+    </CodeBlock>
+  </TabItem>
+  <TabItem value="json" label="json">
+    <CodeBlock language="json" title="skynet.contract.json" showLineNumbers>
+      {ContractJSON}
+    </CodeBlock>
+  </TabItem>
 </Tabs>
 
 Update the name and schema, notice the revision increment
@@ -149,13 +154,14 @@ We could have reached the same result by first creating the contract via `chainl
 
 ### Robot Account creation
 
-The final step is to create a robot account that will be shared with the development team so they can start the integration. 
+The final step is to create a robot account that will be shared with the development team so they can start the integration.
 
 :::note
-* Robot accounts are attached to a single workflow. If you create another workflow, another robot account must be created.
-* You can have more than one robot account associated with a workflow.
-* Accounts can be revoked via `chainloop workflow robot-account revoke` command
-:::
+
+- Robot accounts are attached to a single workflow. If you create another workflow, another robot account must be created.
+- You can have more than one robot account associated with a workflow.
+- Accounts can be revoked via `chainloop workflow robot-account revoke` command
+  :::
 
 ```bash
 $ chainloop workflow robot-account create \
@@ -168,7 +174,7 @@ $ chainloop workflow robot-account create \
 │ 4f2376fa-48c8-4e46-a921-977ec44486a9 │ prod-ci │ 2d289d33-8241-47b7-9ea2-8bd8b7c126f8 │ 01 Nov 22 23:43 UTC │            │
 └──────────────────────────────────────┴─────────┴──────────────────────────────────────┴─────────────────────┴────────────┘
 
-Save the following token since it will not printed again: 
+Save the following token since it will not printed again:
 
  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.REDACTED.lXdvZusJgHyeHDl39RGPNxxrmTUZBN0_QAbJU5ZVxR8
 ```
