@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 5
 title: Operator View
 ---
 
@@ -8,7 +8,6 @@ By integrating CI/CD workloads into ChainLoop control plane, the SecOps operator
 ## Workflows overview
 
 You can get the list of Workflow runs and their status, including ones that have not finished yet. This is useful to define SLOs based on build times, or attestation anomalies.
-
 
 ```bash
 $ chainloop workflow run ls
@@ -211,4 +210,3 @@ INF file downloaded! path=/tmp/rootfs.tar.gz
 ## Metrics (coming soon)
 
 Operators will be able to enable a [Prometheus](https://prometheus.io/) endpoint for their organization that will enable downstream integrations with their existing metrics dashboards.
-
