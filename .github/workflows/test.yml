@@ -9,9 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Initialize Attestation
-        run: |
-          chainloop attestation init
       - uses: actions/setup-node@v3
         with:
           node-version: 16
