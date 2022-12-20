@@ -14,7 +14,7 @@ In practice, that means a solution that provides
 
 ### Compliant Single Source of Truth
 
-With ChainLoop, your Software Supply Chain can craft and store attestations and artifacts via a single integration point regardless of your CI/CD provider choice.
+With ChainLoop, your Software Supply Chain can craft and store attestation metadata and artifacts via a single integration point regardless of your CI/CD provider choice.
 
 <Image img={require("./overview-1.png")} />
 
