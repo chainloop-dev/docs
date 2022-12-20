@@ -8,21 +8,7 @@ jobs:
     name: Build and Test
     runs-on: ubuntu-latest
     steps:
-      - name: Install Cosign
-        uses: sigstore/cosign-installer@v2.5.0
-      - name: Install ChainLoop
-        run: |
-          curl -sfL https://chainloop.dev/install.sh | bash -s -- --version v${{ env.CL_VERSION }}
-          sudo install chainloop /usr/local/bin
-          chainloop version
-      - name: Write Cosign key
-        run: echo "$COSIGN_KEY" > /tmp/cosign.key
-        env:
-          COSIGN_KEY: ${{ secrets.COSIGN_KEY }}
       - uses: actions/checkout@v3
-      - name: Initialize Attestation
-        run: |
-          chainloop attestation init
       - uses: actions/setup-node@v3
         with:
           node-version: 16
@@ -33,21 +19,5 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-      - name: Finish and Record Attestation
-        if: ${{ success() }}
-        run: |
-          chainloop attestation push --key /tmp/cosign.key
-        env:
-          CHAINLOOP_SIGNING_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
-      - name: Mark attestation as failed
-        if: ${{ failure() }}
-        run: |
-          chainloop attestation reset
-      - name: Mark attestation as cancelled
-        if: ${{ cancelled() }}
-        run: |
-          chainloop attestation reset --trigger cancellation
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      CL_VERSION: 0.8.16
-      CHAINLOOP_ROBOT_ACCOUNT: ${{ secrets.CHAINLOOP_WF_BUILD_AND_TEST }}

@@ -41,7 +41,7 @@ jobs:
       - name: Finish and Record Attestation
         if: ${{ success() }}
         run: |
-          chainloop attestation push --key /tmp/cosign.key
+          chainloop attestation push --key /tmp/cosign.key --graceful-exit=false
         env:
           CHAINLOOP_SIGNING_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
       - name: Mark attestation as failed
@@ -54,7 +54,7 @@ jobs:
           chainloop attestation reset --trigger cancellation
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      CL_VERSION: 0.8.16
+      CL_VERSION: 0.8.49
       CHAINLOOP_ROBOT_ACCOUNT: ${{ secrets.CHAINLOOP_WF_RELEASE }}
       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
