@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+image: ./overview-2.png
 ---
 
 import MailingListForm from '../partials/\_mailing-list-form.mdx';
