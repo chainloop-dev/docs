@@ -91,6 +91,7 @@ We are going to update the contract with the materials we expect the attestation
 - rootfs directory used during build
 - dockerfile (optional)
 - commit sha
+- Software Bill Of Materials in CycloneDX format
 - A custom env variable to be resolved
 - Github Action as [target runner context](/reference/operator/contract#runner-context). This means that this contract is valid only for that platform.
 
@@ -161,7 +162,8 @@ The final step is to create a robot account that will be shared with the develop
 - Robot accounts are attached to a single workflow. If you create another workflow, another robot account must be created.
 - You can have more than one robot account associated with a workflow.
 - Accounts can be revoked via `chainloop workflow robot-account revoke` command
-  :::
+
+:::
 
 ```bash
 $ chainloop workflow robot-account create \
