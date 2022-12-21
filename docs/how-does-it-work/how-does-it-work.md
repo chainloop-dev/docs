@@ -56,18 +56,32 @@ Development teams on the other hand, just need to integrate ChainLoop's jargon-f
 
 ## Integration Overview
 
-Let's walk through an overview of what a integration looks like:
+Let's walk through an overview of what an integration looks like:
 
-![overview](/img/v2/chainloop-dev-overview.png#gh-light-mode-only)
-![overview](/img/v2/chainloop-dev-overview-dark.png#gh-dark-mode-only)
+<Image
+img={require("/img/v2/chainloop-dev-overview.png")}
+className="light-mode-only"
+/>
+
+<Image
+img={require("/img/v2/chainloop-dev-overview-dark.png")}
+className="dark-mode-only"
+/>
 
 In short, the integration process of a new pipeline in ChainLoop consists of
 
 - The Operator registers a contract for that pipeline in the control plane.
 - The developers that own the pipeline use ChainLoop's CLI to craft an attestation to comply with the contract.
 
-![flow](./chainloop.dev.png#gh-light-mode-only)
-![flow](./chainloop.dev-dark.png#gh-dark-mode-only)
+<Image
+img={require("./chainloop.dev.png")}
+className="light-mode-only"
+/>
+
+<Image
+img={require("./chainloop.dev-dark.png")}
+className="dark-mode-only"
+/>
 
 ### Operator - Setup
 
