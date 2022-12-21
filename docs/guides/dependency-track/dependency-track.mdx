@@ -10,13 +10,13 @@ import ContractYAML from "!!raw-loader!/examples/contracts/sbom/cyclonedx.yaml";
 > [Dependency-Track](https://github.com/DependencyTrack/dependency-track) is an intelligent Component Analysis platform that allows organizations to identify and reduce risk in the software supply chain.
 > Dependency-Track takes a unique and highly beneficial approach by leveraging the capabilities of Software Bill of Materials (SBOM).
 
-ChainLoop can be configured to send any [CycloneDX Software Bill Of Materials](https://cyclonedx.org/) that has been received as part of an attestation to any Dependency-Track instance automatically.
+ChainLoop can be configured to **automatically send any [CycloneDX Software Bill Of Materials](https://cyclonedx.org/)** that has been received as part of an attestation **to a Dependency-Track instance**.
 
 <Image img={require("./overview.png")} className="light-mode-only" />
 
 <Image img={require("./overview-dark.png")} className="dark-mode-only" />
 
-For example, if you have defined in your [Workflow Contract](/reference/operator/contract#material-schema) a material of type `SBOM_CYCLONEDX_JSON`. This SBOM file, **in addition to being stored in your OCI registry, it will be sent to Dependency-Track as well**.
+If you have defined in your [Workflow Contract](/reference/operator/contract) a material of type `SBOM_CYCLONEDX_JSON`. This SBOM file, **in addition to being stored in your OCI registry, will be sent to Dependency-Track**.
 
 <CodeBlock language="yaml" title="skynet.contract.yaml">
   {ContractYAML}
@@ -27,15 +27,15 @@ For example, if you have defined in your [Workflow Contract](/reference/operator
 There are two steps involved to enable this integration:
 
 1. Setup a Dependency-Track integration provider in your ChainLoop account
-2. Attach this integration to your workflow
+2. Attach this integration instance to your workflow
 
 ### Prerequisites
 
 **Dependency-Track API token**
 
-An API token is required for the ChainLoop instance to communicate securely with DependencyTrack. The required permissions are `BOM_UPLOAD` and optionally `PROJECT_CREATION_UPLOAD` if project-auto-creation is enabled, more on that later.
+An API token is required for the ChainLoop instance to communicate securely with DependencyTrack. The required permissions are `BOM_UPLOAD` and optionally `PROJECT_CREATION_UPLOAD` if `project-auto-creation` is enabled, more on that later.
 
-The API Key can be created by clicking Settings -> Access Management -> Teams -> Select (or create) a Team -> Set permissions -> Copy API key
+The API Key can be created by going to Settings -> Access Management -> Teams -> Select (or create) a Team -> Set permissions -> Copy API key
 
 <Image img={require("./api-key.png")} />
 
@@ -76,9 +76,9 @@ Once the integration is live, it can be attached to any workflow. In practice, t
 The same integration can be attached to multiple workflows
 :::
 
-The attachment is done via `chainloop workflow integration attach dependency-track` command, which receives a self-explanatory set of inputs.
+The attachment is done via `chainloop workflow integration attach dependency-track` command.
 
-During the attachment, you can decide whether to send the SBOMs to a specific project (`--project-id`) or create a new one defined by the provided `--project-name`. For the latter to work, you need to make sure that the integration was setup with `--allow-project-auto-create` option.
+During the attachment process, you can decide whether to send the SBOMs to a specific project (`--project-id`) or create a new one defined by the provided `--project-name`. For the latter to work, you need to make sure that the integration was setup with `--allow-project-auto-create` option.
 
 ```bash
 $ chainloop workflow integration attach dependency-track -h
@@ -107,7 +107,7 @@ $ chainloop workflow integration attach dependency-track \
 
 That's all!
 
-Next time ChainLoop receives an attestation, its contained SBOMs will be forwarded to the configured integration!
+Next time ChainLoop receives an attestation, its contained SBOMs will be uploaded to https://dependency-track.chainloop.dev to a project called `example-project`.
 
 ## CI setup example
 

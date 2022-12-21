@@ -1,6 +1,7 @@
 schemaVersion: v1
 materials:
   # SBOMs will be uploaded to the CAS and referenced in the attestation
-  # Both SBOM_CYCLONEDX_JSON and SBOM_SPDX_JSON are supported
+  # Additionally they can be sent to any downstream integration for analysis
+  # i.e https://docs.chainloop.dev/guides/dependency-track/
   - type: SBOM_CYCLONEDX_JSON
     name: skynet-sbom
