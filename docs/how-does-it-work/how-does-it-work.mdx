@@ -3,7 +3,7 @@ sidebar_position: 2
 image: ./overview-2.png
 ---
 
-import MailingListForm from '../partials/\_mailing-list-form.mdx';
+import MailingListForm from "../partials/_mailing-list-form.mdx";
 import Image from "@theme/IdealImage";
 
 # How Does it Work?
@@ -34,7 +34,7 @@ You can think of it as an [**API for your organization's Software Supply Chain**
 
 ### Third-Party Integration fan-out
 
-Operators can set up third-party integrations such as [Dependency-Track](https://dependencytrack.org/) for SBOM analysis or an OCI registry for storage of the received artifacts and attestation metadata.
+Operators can set up third-party integrations such as [Dependency-Track](/guides/dependency-track) for SBOM analysis or an OCI registry for storage of the received artifacts and attestation metadata.
 
 <Image img={require("./overview-2.png")} />
 
@@ -59,13 +59,13 @@ Development teams on the other hand, just need to integrate ChainLoop's jargon-f
 Let's walk through an overview of what an integration looks like:
 
 <Image
-img={require("/img/v2/chainloop-dev-overview.png")}
-className="light-mode-only"
+  img={require("/img/v2/chainloop-dev-overview.png")}
+  className="light-mode-only"
 />
 
 <Image
-img={require("/img/v2/chainloop-dev-overview-dark.png")}
-className="dark-mode-only"
+  img={require("/img/v2/chainloop-dev-overview-dark.png")}
+  className="dark-mode-only"
 />
 
 In short, the integration process of a new pipeline in ChainLoop consists of
@@ -73,15 +73,9 @@ In short, the integration process of a new pipeline in ChainLoop consists of
 - The Operator registers a contract for that pipeline in the control plane.
 - The developers that own the pipeline use ChainLoop's CLI to craft an attestation to comply with the contract.
 
-<Image
-img={require("./chainloop.dev.png")}
-className="light-mode-only"
-/>
+<Image img={require("./chainloop.dev.png")} className="light-mode-only" />
 
-<Image
-img={require("./chainloop.dev-dark.png")}
-className="dark-mode-only"
-/>
+<Image img={require("./chainloop.dev-dark.png")} className="dark-mode-only" />
 
 ### Operator - Setup
 
