@@ -9,21 +9,21 @@ import ContractYAML from "!!raw-loader!/examples/contracts/sbom/cyclonedx.yaml";
 > [Dependency-Track](https://github.com/DependencyTrack/dependency-track) is an intelligent Component Analysis platform that allows organizations to identify and reduce risk in the software supply chain.
 > Dependency-Track takes a unique and highly beneficial approach by leveraging the capabilities of Software Bill of Materials (SBOM).
 
-ChainLoop can be configured to send any [CycloneDX Software Bill Of Materials](https://cyclonedx.org/) that has been received as part of an attestation to any instance of Dependency-Track automatically.
-
-For example, if you have defined in the [Workflow Contract](/reference/operator/contract#material-schema) a material of type `SBOM_CYCLONEDX_JSON`. This SBOM file, in addition to being stored in your OCI registry, could be sent to Dependency-Track as well.
-
-<CodeBlock language="yaml" title="skynet.contract.yaml">
-  {ContractYAML}
-</CodeBlock>
+ChainLoop can be configured to send any [CycloneDX Software Bill Of Materials](https://cyclonedx.org/) that has been received as part of an attestation to any Dependency-Track instance automatically.
 
 <Image img={require("./overview.png")} className="light-mode-only" />
 
 <Image img={require("./overview-dark.png")} className="dark-mode-only" />
 
+For example, if you have defined in your [Workflow Contract](/reference/operator/contract#material-schema) a material of type `SBOM_CYCLONEDX_JSON`. This SBOM file, **in addition to being stored in your OCI registry, it will be sent to Dependency-Track as well**.
+
+<CodeBlock language="yaml" title="skynet.contract.yaml">
+  {ContractYAML}
+</CodeBlock>
+
 ## Configure Integration
 
-There are two steps involved to enable this integration
+There are two steps involved to enable this integration:
 
 1. Setup a Dependency-Track integration provider in your ChainLoop account
 2. Attach this integration to your workflow
@@ -40,7 +40,7 @@ The API Key can be created by clicking Settings -> Access Management -> Teams ->
 
 ### 1 - Setup the integration in your ChainLoop account
 
-Using the [ChainLoop CLI](/getting-started/installation), you can add an instance of Dependency-Track that later on can be attached to any of your workflows. This is done via the `chainloop config integration add dependency-track` command that receives three options.
+Using the [ChainLoop CLI](/getting-started/installation), you can add an instance of Dependency-Track that later on can be attached to any of your workflows. This is done via the `chainloop config integration add dependency-track` command with three inputs.
 
 ```bash
 $ chainloop config integration add dependency-track -h
@@ -69,7 +69,11 @@ $ chainloop config integration add dependency-track add --api-key $API_TOKEN --i
 
 ### 2 - Attach the Integration to a Workflow
 
-Once the integration is live, it can be attached to any workflow. In practice that means that every workflow attestation that is received that contains a `SBOM_CYCLONEDX_JSON` material will be forwarded.
+Once the integration is live, it can be attached to any workflow. In practice, that means that every workflow attestation that is received that contains a `SBOM_CYCLONEDX_JSON` material will be forwarded.
+
+:::note
+The same integration can be attached to multiple workflows
+:::
 
 The attachment is done via `chainloop workflow integration attach dependency-track` command, which receives a self-explanatory set of inputs.
 
@@ -101,6 +105,8 @@ $ chainloop workflow integration attach dependency-track \
 ```
 
 That's all!
+
+Next time ChainLoop receives an attestation, its contained SBOMs will be forwarded to the configured integration!
 
 ## CI setup example
 
