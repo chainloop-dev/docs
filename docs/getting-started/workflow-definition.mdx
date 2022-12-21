@@ -10,7 +10,7 @@ import ContractYAML from "!!raw-loader!/examples/contracts/skynet.yaml";
 import ContractCUE from "!!raw-loader!/examples/contracts/skynet.cue";
 // See https://github.com/webpack-contrib/raw-loader/issues/91#issuecomment-648830498
 import ContractJSON from "/examples/contracts/skynet.json.raw!=!raw-loader!/examples/contracts/skynet.json";
-import WorkflowContractIntro from "../partials/_workflow-contract-intro.mdx";
+import WorkflowContractIntro from "../partials/_workflow-contract-intro.md";
 
 Next, let's introduce two of the most important entities in ChainLoop's control plane, **workflows** and **workflow contracts**.
 
@@ -25,6 +25,13 @@ A workflow represents the identity of any automation, any CI/CD workflow you wan
 ### Robot Accounts
 
 A robot account is a long-lasting, though revokable, **secret token associated with a Workflow**. It's meant to be used in the target CI/CD pipeline during the attestation process. This token along with the crafting CLI are the only two things development/Apps teams need for the integration.
+
+### Example
+
+In the following example, we can see three CI/CD pipelines associated with their respective ChainLoop workflows. Two of those Workflows are sharing the same Contract (using the same or different revision).
+
+![flow](/img/v2/workflow-overview.png#gh-light-mode-only)
+![flow](/img/v2/workflow-overview-dark.png#gh-dark-mode-only)
 
 ## Workflow and Contract creation
 
