@@ -229,7 +229,7 @@ jobs:
   release:
     env:
       # highlight-start
-      CL_VERSION: 0.7.73
+      CL_VERSION: 0.8.49
       CHAINLOOP_ROBOT_ACCOUNT: ${{ secrets.CHAINLOOP_WF_RELEASE }}
       # highlight-end
     name: "Release CLI and container images"
