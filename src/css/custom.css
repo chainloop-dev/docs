@@ -38,8 +38,3 @@
 [data-theme='dark'] img[src$='#gh-light-mode-only'] {
   display: none;
 }
-
-[data-theme='light'] div.dark-mode-only,
-[data-theme='dark'] div.light-mode-only {
-  display: none;
-}
