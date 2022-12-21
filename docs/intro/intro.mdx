@@ -5,6 +5,7 @@ toc_max_heading_level: 4
 ---
 
 import MailingListForm from "../partials/_mailing-list-form.mdx";
+import Image from "@theme/IdealImage";
 
 # Introduction
 
@@ -24,8 +25,8 @@ Got it! It seems that what we need to do is to **implement an attestation and pr
 - put together a place where the provenance information and their associated artifacts (SBOMs, static analysis, vulnerability scanner output) can be stored.
 - ensure authenticity and integrity via some sort of signing process.
 
-![slsa](slsa.png#gh-light-mode-only)
-![slsa](slsa-dark.png#gh-dark-mode-only)
+<Image img={require("./slsa.png")} className="light-mode-only" />
+<Image img={require("./slsa-dark.png")} className="dark-mode-only" />
 
 Choosing a solution for each of those areas was surprisingly straightforward since there are great building blocks for attestation crafting (e.g [in-toto](https://in-toto.io/)), signing/verification ([Sigstore](https://www.sigstore.dev/)), and storing ([CAS/OCI](https://github.com/opencontainers/image-spec/blob/main/spec.md)), but figuring out an end-to-end wasn't easy.
 
@@ -39,8 +40,8 @@ Let's introduce team Skynet, they are building (in their words) a revolutionary 
 
 They leverage a pretty standard CI/CD setup using GitHub Actions.
 
-![skynet-workflow](pipeline.png#gh-light-mode-only)
-![skynet-workflow](pipeline-dark.png#gh-dark-mode-only)
+<Image img={require("./pipeline.png")} className="light-mode-only" />
+<Image img={require("./pipeline-dark.png")} className="dark-mode-only" />
 
 You open a chat with Sarah, one of their lead developers and it goes like this (pleasantries skipped):
 
