@@ -1,5 +1,5 @@
 ---
-sidebar_position: 8
+sidebar_position: 6
 ---
 
 # Frequently Asked Questions
@@ -10,4 +10,4 @@ Yes, we are committed to making ChainLoop Open source. We are working out the de
 
 ### Does ChainLoop store my Artifacts and Attestation
 
-No. They are stored in [your OCI Registry](/getting-started/setup#add-oci-repository). 
+No. They are stored in [your OCI Registry](/getting-started/setup#add-oci-repository).
