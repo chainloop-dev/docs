@@ -17,6 +17,40 @@ ChainLoop is composed of multiple code bases, this changelog offers a summarized
 - Fully functional [frontend web UI](https://github.com/chainloop-dev/frontend).
 - More components open sourced.
 
+## v0.8.56 - 2023-01-03
+
+- Multiple organization support
+
+```bash title="List organizations associated with your user"
+$ chainloop config organization ls
+┌──────────────────────────────────────┬────────────────────┬─────────┬─────────────────────┐
+│ ID                                   │ ORG NAME           │ CURRENT │ JOINED AT           │
+├──────────────────────────────────────┼────────────────────┼─────────┼─────────────────────┤
+│ 7d487b73-ba94-4d62-99a6-c54fa6ae0e2b │ chainloop core org │ true    │ 03 Jan 23 13:25 UTC │
+├──────────────────────────────────────┼────────────────────┼─────────┼─────────────────────┤
+│ c8daf8b0-e9b1-45e4-b8d6-5850872f1f25 │ chainloop test org │ false   │ 04 Jan 23 00:05 UTC │
+└──────────────────────────────────────┴────────────────────┴─────────┴─────────────────────┘
+```
+
+```bash title="Switch it on-demand"
+$ chainloop config organization set-current --id c8daf8b0-e9b1-45e4-b8d6-5850872f1f25
+INF Organization switched!
+┌──────────────────────────────────────┬────────────────────┬─────────┬─────────────────────┐
+│ ID                                   │ ORG NAME           │ CURRENT │ JOINED AT           │
+├──────────────────────────────────────┼────────────────────┼─────────┼─────────────────────┤
+│ c8daf8b0-e9b1-45e4-b8d6-5850872f1f25 │ chainloop test org │ true    │ 04 Jan 23 00:05 UTC │
+└──────────────────────────────────────┴────────────────────┴─────────┴─────────────────────┘
+
+$ chainloop config current-context
+┌─────────────────────────────────────┐
+│ Current Context                     │
+├──────────────┬──────────────────────┤
+│ Logged in as │ miguel@chainloop.dev │
+├──────────────┼──────────────────────┤
+│ Organization │ chainloop test org   │
+└──────────────┴──────────────────────┘
+```
+
 ## v0.8.48 - 2022-12-19
 
 - [Dependency-Track integration](/guides/dependency-track/) for Software Bill Of Materials (SBOM) handling.
