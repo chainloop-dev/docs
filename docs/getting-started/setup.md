@@ -37,9 +37,25 @@ Examples:
   # https://console.cloud.google.com/iam-admin/serviceaccounts
 
   $ chainloop config set-oci-repo \
-    --repo us-east1-docker.pkg.dev/my-project/chainloop-cas-devel \
+    # i.e us-east1-docker.pkg.dev/my-project/chainloop-cas-devel
+    --repo [region]-docker.pkg.dev/[my-project]/[my-repository] \
     --username _json_key \
     --password "$(cat service-account.json)"
+```
+
+  </TabItem>
+
+  <TabItem value="github" label="GitHub packages" default>
+
+```bash
+  # Using personal access token with write:packages permissions
+  # https://github.com/settings/tokens
+
+  $ chainloop config set-oci-repo \
+    # i.e ghcr.io/chainloop-dev/chainloop-cas
+    --repo ghcr.io/[username or org]/[my-repository] \
+    --username [username] \
+    --password [personal access token]
 ```
 
   </TabItem>
