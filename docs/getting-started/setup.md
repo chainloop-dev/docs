@@ -3,6 +3,10 @@ sidebar_position: 2
 title: Setup
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import CodeBlock from "@theme/CodeBlock";
+
 ## Authentication
 
 Once the ChainLoop CLI is installed, next you'll need to authenticate
@@ -23,19 +27,36 @@ $ chainloop config set-oci-repo --repo [REPO_URI] --username [USERNAME] --passwo
 **AWS Container Registry is not supported yet**.
 :::
 
-```bash title="Example: Google Artifact Registry using a json-based service account"
-$ chainloop config set-oci-repo \
+Examples:
+
+<Tabs>
+  <TabItem value="gar" label="Google Artifact Registry" default>
+
+```bash
+  # Using json-based service account
+  # https://console.cloud.google.com/iam-admin/serviceaccounts
+
+  $ chainloop config set-oci-repo \
     --repo us-east1-docker.pkg.dev/my-project/chainloop-cas-devel \
     --username _json_key \
-    --password "$(cat service-account.json)" # https://console.cloud.google.com/iam-admin/serviceaccounts
+    --password "$(cat service-account.json)"
 ```
 
-```bash title="Example: DockerHub"
+  </TabItem>
+  <TabItem value="dockerhub" label="DockerHub" default>
+
+```bash
+# Create a personal access token at
+# https://hub.docker.com/settings/security
+
 $ chainloop config set-oci-repo \
     --repo index.docker.io/[username] \
     --username [username] \
-    --password [personal access token] # https://hub.docker.com/settings/security
+    --password [personal access token]
 ```
+
+  </TabItem>
+</Tabs>
 
 ### Give it a try
 
