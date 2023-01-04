@@ -1,28 +1,27 @@
 ---
 sidebar_position: 1
-title: CLI Installation
+title: CLI Download
 ---
 
 :::info
 ChainLoop's control plane runs as Software as a Service (SaaS) but we are **committed to making it open source so you can run your own instance**. Stay tuned!
 :::
 
-## CLI
-
-First, you need to have the Chainloop CLI installed on your computer. Use the command below to **install the latest version and verify its signature**.
+First, you need to have the Chainloop CLI installed on your computer. Use the command below to **download the latest version**.
 
 ```bash
+# Download the binary and check integrity checksum
 curl -sfL https://chainloop.dev/install.sh | bash -s
 ```
 
-Checking the file provenance requires `cosign` to be present in your system, you can install it from [here](https://docs.sigstore.dev/cosign/installation/), or alternatively, you can skip the verification via the `--skip-verification` flag (not recommended).
-
-```bash
-curl -sfL https://chainloop.dev/install.sh | bash -s -- --skip-verification
-```
-
-You can also get a specific version
+or a specific version with
 
 ```bash
 curl -sfL https://chainloop.dev/install.sh | bash -s -- --version v0.1.2
+```
+
+if [`cosign`](https://docs.sigstore.dev/cosign) is present in your system, in addition to the checksum check, a signature verification will be performed. This behavior can be enforced via the `--force-verification` flag.
+
+```bash
+curl -sfL https://chainloop.dev/install.sh | bash -s -- --force-verification
 ```
