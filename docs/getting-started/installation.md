@@ -7,10 +7,9 @@ title: CLI Download
 Chainloop's control plane runs as Software as a Service (SaaS) but we are **committed to making it open source so you can run your own instance**. Stay tuned!
 :::
 
-First, you need to have the Chainloop CLI installed on your computer. Use the command below to **download the latest version**.
+First, you need to have the Chainloop CLI installed on your computer. Use the command below to **download the latest version** and check its integrity.
 
 ```bash
-# Download the binary and check integrity checksum
 curl -sfL https://chainloop.dev/install.sh | bash -s
 ```
 

@@ -229,7 +229,10 @@ jobs:
   release:
     env:
       # highlight-start
+      # Version of Chainloop to install
       CL_VERSION: 0.8.49
+      # Export robot-account env variable
+      # Used by the CLI to authenticate with the control plane
       CHAINLOOP_ROBOT_ACCOUNT: ${{ secrets.CHAINLOOP_WF_RELEASE }}
       # highlight-end
     name: "Release CLI and container images"
@@ -238,7 +241,7 @@ jobs:
       id-token: write # required to use OIDC and retrieve AWS credentials
       contents: write # required for goreleaser
     steps:
-      # Cosign is required to verify the Chainloop binary
+      # Cosign is used to verify the Chainloop binary (optional)
       - name: Install Cosign
         uses: sigstore/cosign-installer@v2.5.0
 
@@ -272,11 +275,6 @@ jobs:
 
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
-
-      - name: Write Cosign key
-        run: echo "$COSIGN_KEY" > /tmp/cosign.key
-        env:
-          COSIGN_KEY: ${{ secrets.COSIGN_KEY }}
 
       - name: Run GoReleaser
         id: release
@@ -316,8 +314,10 @@ jobs:
         if: ${{ success() }}
         run: |
           chainloop attestation status --full
-          chainloop attestation push --key /tmp/cosign.key
+          # Note that these commands are using CHAINLOOP_ROBOT_ACCOUNT env variable to authenticate
+          chainloop attestation push --key env://CHAINLOOP_SIGNING_KEY
         env:
+          CHAINLOOP_SIGNING_KEY: ${{ secrets.COSIGN_KEY }}
           CHAINLOOP_SIGNING_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
 
       - name: Mark attestation as failed
