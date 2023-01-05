@@ -5,16 +5,16 @@ sidebar_position: 7
 # Beta Testers
 
 :::caution
-ChainLoop is under active development, please don't use it as part of your critical infrastructure until it reaches the 1.0 release.
+Chainloop is under active development, please don't use it as part of your critical infrastructure until it reaches the 1.0 release.
 :::
 
-First of all, **thank you for trying out ChainLoop**! Although we are in the early stages, we are hungry for feedback so **your contribution as an early user is invaluable**.
+First of all, **thank you for trying out Chainloop**! Although we are in the early stages, we are hungry for feedback so **your contribution as an early user is invaluable**.
 
-If you have chosen to giving ChainLoop a try, this page is for you. It will contain tips, caveats and other pieces of information related to the beta testing process.
+If you have chosen to giving Chainloop a try, this page is for you. It will contain tips, caveats and other pieces of information related to the beta testing process.
 
 ### CLI graceful exit
 
-Although ChainLoop is under active development, we want you to try it out and integrate it into your CI/CD systems safely.
+Although Chainloop is under active development, we want you to try it out and integrate it into your CI/CD systems safely.
 
 That's why the `attestation` subcommand will **by default exit 0** in the case of an error. This option will make sure that your CI/CD pipelines will keep working during potential transient errors.
 

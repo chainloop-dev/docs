@@ -4,10 +4,10 @@ sidebar_position: 6
 
 # Frequently Asked Questions
 
-### Will ChainLoop be Open Source?
+### Will Chainloop be Open Source?
 
-Yes, we are committed to making ChainLoop Open source. We are working out the details. Stay tuned!
+Yes, we are committed to making Chainloop Open source. We are working out the details. Stay tuned!
 
-### Does ChainLoop store my Artifacts and Attestation
+### Does Chainloop store my Artifacts and Attestation
 
 No. They are stored in [your OCI Registry](/getting-started/setup#add-oci-repository).

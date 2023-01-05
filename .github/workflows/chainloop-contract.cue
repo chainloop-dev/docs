@@ -1,4 +1,4 @@
-// ChainLoop workflow associated with .github/workflows/deploy.yml
+// Chainloop workflow associated with .github/workflows/deploy.yml
 // https://docs.chainloop.dev/reference/operator/contract
 schemaVersion: "v1",
 materials: [

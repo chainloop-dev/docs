@@ -10,7 +10,7 @@ import ContractYAML from "!!raw-loader!/examples/contracts/sbom/cyclonedx.yaml";
 > [Dependency-Track](https://github.com/DependencyTrack/dependency-track) is an intelligent Component Analysis platform that allows organizations to identify and reduce risk in the software supply chain.
 > Dependency-Track takes a unique and highly beneficial approach by leveraging the capabilities of Software Bill of Materials (SBOM).
 
-ChainLoop can be configured to **automatically send any [CycloneDX Software Bill Of Materials](https://cyclonedx.org/)** that has been received as part of an attestation **to a Dependency-Track instance**.
+Chainloop can be configured to **automatically send any [CycloneDX Software Bill Of Materials](https://cyclonedx.org/)** that has been received as part of an attestation **to a Dependency-Track instance**.
 
 <Image img={require("./overview.png")} className="light-mode-only" />
 
@@ -26,22 +26,22 @@ If you have defined in your [Workflow Contract](/reference/operator/contract) a 
 
 There are two steps involved to enable this integration:
 
-1. Setup a Dependency-Track integration provider in your ChainLoop account
+1. Setup a Dependency-Track integration provider in your Chainloop account
 2. Attach this integration instance to your workflow
 
 ### Prerequisites
 
 **Dependency-Track API token**
 
-An API token is required for the ChainLoop instance to communicate securely with DependencyTrack. The required permissions are `BOM_UPLOAD` and optionally `PROJECT_CREATION_UPLOAD` if `project-auto-creation` is enabled, more on that later.
+An API token is required for the Chainloop instance to communicate securely with DependencyTrack. The required permissions are `BOM_UPLOAD` and optionally `PROJECT_CREATION_UPLOAD` if `project-auto-creation` is enabled, more on that later.
 
 The API Key can be created by going to Settings -> Access Management -> Teams -> Select (or create) a Team -> Set permissions -> Copy API key
 
 <Image img={require("./api-key.png")} />
 
-### 1 - Setup the integration in your ChainLoop account
+### 1 - Setup the integration in your Chainloop account
 
-Using the [ChainLoop CLI](/getting-started/installation), you can add an instance of Dependency-Track that later on can be attached to any of your workflows. This is done via the `chainloop config integration add dependency-track` command with three inputs.
+Using the [Chainloop CLI](/getting-started/installation), you can add an instance of Dependency-Track that later on can be attached to any of your workflows. This is done via the `chainloop config integration add dependency-track` command with three inputs.
 
 ```bash
 $ chainloop config integration add dependency-track -h
@@ -107,14 +107,14 @@ $ chainloop workflow integration attach dependency-track \
 
 That's all!
 
-Next time ChainLoop receives an attestation, its contained SBOMs will be uploaded to https://dependency-track.chainloop.dev to a project called `example-project`.
+Next time Chainloop receives an attestation, its contained SBOMs will be uploaded to https://dependency-track.chainloop.dev to a project called `example-project`.
 
 ## CI setup example
 
 [Here](https://github.com/chainloop-dev/frontend/blob/main/.github/workflows/release.yaml) you can find a Github Action example where based on [this workflow contract](https://github.com/chainloop-dev/frontend/blob/main/.github/workflows/contracts/release.cue) it
 
-- Initializes the ChainLoop attestation.
+- Initializes the Chainloop attestation.
 - Creates an SBOM using `anchore/sbom-action@v0` syft action.
-- Adds the SBOM material and send the attestation to ChainLoop.
+- Adds the SBOM material and send the attestation to Chainloop.
 
-Then ChainLoop is configured similarly to what was shown above to send the received SBOM to Dependency-Track.
+Then Chainloop is configured similarly to what was shown above to send the received SBOM to Dependency-Track.
