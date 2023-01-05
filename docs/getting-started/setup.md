@@ -9,7 +9,7 @@ import CodeBlock from "@theme/CodeBlock";
 
 ## Authentication
 
-Once the ChainLoop CLI is installed, next you'll need to authenticate
+Once the Chainloop CLI is installed, next you'll need to authenticate
 
 ```bash
 $ chainloop auth login

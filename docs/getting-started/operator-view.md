@@ -3,7 +3,7 @@ sidebar_position: 5
 title: Operator View
 ---
 
-By integrating CI/CD workloads into ChainLoop control plane, the SecOps operator gain visibility on their organization automation.
+By integrating CI/CD workloads into Chainloop control plane, the SecOps operator gain visibility on their organization automation.
 
 ## Workflows overview
 

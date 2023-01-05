@@ -5,12 +5,11 @@ authors: miguel
 image: /img/v2/chainloop-dev-overview.png
 ---
 
-In our previous [blog post](/blog/introducing-chainloop), I alluded to team dynamics being one of the main problems tackling Software Supply Chain Security. Today we are going to dig into that with a role-playing exercise. 
+In our previous [blog post](/blog/introducing-chainloop), I alluded to team dynamics being one of the main problems tackling Software Supply Chain Security. Today we are going to dig into that with a role-playing exercise.
 
 Your name is Dyson, you work on the Security and Operations (SecOps) team at Cyberdyne solutions. You are in charge of making sure that the organization's Software Supply Chain Security is improved end-to-end, from source code to packaging and distribution.
 
 <!--truncate-->
-
 
 You feel pretty good about the current state of things. Your development teams are already signing their commits, scanning their first and third-party components, generating Software Bill of Materials (SBOMs), signing container images and even blocking releases based on vulnerability scanning or signature verification. Life is good!
 
@@ -20,17 +19,17 @@ He seems to be **concerned** about all that **information** being **scattered ar
 
 Got it! It seems that what we need to do is to **implement an attestation and provenance layer in our SSC**, we "just" need to
 
-* figure out the format of this new piece of metadata (attestation/provenance) that can glue artifacts together.
-* put together a place where the provenance information and their associated artifacts (SBOMs, static analysis, vulnerability scanner output) can be stored.
-* ensure authenticity and integrity via some sort of signing process.
+- figure out the format of this new piece of metadata (attestation/provenance) that can glue artifacts together.
+- put together a place where the provenance information and their associated artifacts (SBOMs, static analysis, vulnerability scanner output) can be stored.
+- ensure authenticity and integrity via some sort of signing process.
 
-Choosing solutions for each of those areas was surprisingly straightforward since there are great building blocks for attestation crafting (e.g [in-toto](https://in-toto.io/)), signing/verification ([Sigstore](https://www.sigstore.dev/)), and storing ([CAS/OCI](https://github.com/opencontainers/image-spec/blob/main/spec.md)), but figuring out an end-to-end wasn't easy. 
+Choosing solutions for each of those areas was surprisingly straightforward since there are great building blocks for attestation crafting (e.g [in-toto](https://in-toto.io/)), signing/verification ([Sigstore](https://www.sigstore.dev/)), and storing ([CAS/OCI](https://github.com/opencontainers/image-spec/blob/main/spec.md)), but figuring out an end-to-end wasn't easy.
 
 In any case, your team spends the next couple of months deploying an OCI artifact storage, defining the expected attestation specification, building some tooling to glue it all together, and writing a lot of documentation to share with the development teams for their integration.
 
 Now to the easy part (or what you think), to make developer teams adopt it.
 
-## Day one integration 
+## Day one integration
 
 Let's introduce team Skynet, they are building (in their words) a revolutionary AI.
 
@@ -42,7 +41,7 @@ D - Hi Sarah, I have some security requirements that I'll need you to put in pla
 
 S - Hi Dyson, but we already did a ton of work on that!
 
-D - Yes I know, but this is different. What you did was implement application security. What we need now is for us to understand more about the CI/CD setup and collect all the additional information that you are already creating, the SBOM remember? 
+D - Yes I know, but this is different. What you did was implement application security. What we need now is for us to understand more about the CI/CD setup and collect all the additional information that you are already creating, the SBOM remember?
 
 S - Oh, I see. how much work is that? We are quite constrained already, we have to launch soon.
 
@@ -86,26 +85,26 @@ Although you are receiving attestation and artifacts from different teams, you s
 
 Even worse, if you detect an issue during auditing or because of a new security issue, there aren’t any enforcement mechanisms for even blocking a CI workflow if needed.
 
-## How can ChainLoop help?
+## How can Chainloop help?
 
-ChainLoop is built on the promise of providing a similar **state-of-the-art attestation/provenance compliance but through a mechanism that has lower friction, removes manual steps and makes day-two operations first-class citizens**.
+Chainloop is built on the promise of providing a similar **state-of-the-art attestation/provenance compliance but through a mechanism that has lower friction, removes manual steps and makes day-two operations first-class citizens**.
 
-If instead, you, Dyson, choose ChainLoop 
+If instead, you, Dyson, choose Chainloop
 
-* You will save months implementing a custom end-to-end solution for attestation, artifact storage, specification or documentation. 
-* You can [onboard](/getting-started/workflow-definition#workflow-and-contract-creation) and [keep track](/getting-started/operator-view) of the teams and workloads that are being integrated with the system.
-* You can [declaratively define contracts](/getting-started/workflow-definition#add-materials-to-the-contract) with the attestation requirements and associate them with such workloads.
-* You can rest assured that on the developer side, best practices are followed and the attestation is following the declared contract.
-* You can detect Supply Chain anomalies since your control plane records workflow runs either successfully or not.  
+- You will save months implementing a custom end-to-end solution for attestation, artifact storage, specification or documentation.
+- You can [onboard](/getting-started/workflow-definition#workflow-and-contract-creation) and [keep track](/getting-started/operator-view) of the teams and workloads that are being integrated with the system.
+- You can [declaratively define contracts](/getting-started/workflow-definition#add-materials-to-the-contract) with the attestation requirements and associate them with such workloads.
+- You can rest assured that on the developer side, best practices are followed and the attestation is following the declared contract.
+- You can detect Supply Chain anomalies since your control plane records workflow runs either successfully or not.
 
 Sarah from the Skynet team
 
-* Will just need the ChainLoop attestation tool plus some credentials provided by Dyson to do the integration following some [simple steps](/getting-started/attestation-crafting). No additional security expertise is required.
-* When new requirements are set by Dyson, Sarah will get notified and can follow the same procedure as before. No manual communication channel is required.
+- Will just need the Chainloop attestation tool plus some credentials provided by Dyson to do the integration following some [simple steps](/getting-started/attestation-crafting). No additional security expertise is required.
+- When new requirements are set by Dyson, Sarah will get notified and can follow the same procedure as before. No manual communication channel is required.
 
-In the next blog post, I'll get into details on how this scenario looks like using ChainLoop but for now you can follow our [getting started guide](/category/getting-started) for more details.
+In the next blog post, I'll get into details on how this scenario looks like using Chainloop but for now you can follow our [getting started guide](/category/getting-started) for more details.
 
-And remember, send feedback [our way](https://us21.list-manage.com/contact-form?u=801f42b3abafc40b1a17c5f25&form_id=3f3bbfe15e6fcd4a60be9b966652cfd5)! 
+And remember, send feedback [our way](https://us21.list-manage.com/contact-form?u=801f42b3abafc40b1a17c5f25&form_id=3f3bbfe15e6fcd4a60be9b966652cfd5)!
 
 Thanks!
 

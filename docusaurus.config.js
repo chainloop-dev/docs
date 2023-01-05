@@ -6,7 +6,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "ChainLoop documentation",
+  title: "Chainloop documentation",
   tagline: "The Software Supply Chain Attestation Solution that makes sense",
   url: "https://docs.chainloop.dev",
   baseUrl: "/",
@@ -48,8 +48,8 @@ const config = {
         },
         blog: {
           showReadingTime: true,
-          blogTitle: "ChainLoop blog",
-          blogDescription: "ChainLoop blog",
+          blogTitle: "Chainloop blog",
+          blogDescription: "Chainloop blog",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
@@ -63,7 +63,7 @@ const config = {
     ({
       image: "img/logo.svg",
       navbar: {
-        title: "ChainLoop documentation",
+        title: "Chainloop documentation",
         logo: {
           alt: "Chainloop Logo",
           srcDark: "img/logo-clear.svg",

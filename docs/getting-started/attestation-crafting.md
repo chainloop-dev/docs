@@ -5,9 +5,9 @@ title: Attestation Crafting
 
 ## Introduction
 
-In the previous section, we created a workflow definition, a contract and a robot account in the control plane. Next, we'll perform an attestation crafting example using ChainLoop.
+In the previous section, we created a workflow definition, a contract and a robot account in the control plane. Next, we'll perform an attestation crafting example using Chainloop.
 
-The lifecycle of a crafting process has the following stages: `init`, `add`, `push` or `reset`. As you can see, it mimics the workflow of a commonly used version control tool, and this is not by coincidence. ChainLoop wants to make sure that the tooling feels familiar to developers and that no security jargon leaks into this stage of the process. For a developer, creating an attestation must be as simple as initializing it, adding materials to it and pushing it.
+The lifecycle of a crafting process has the following stages: `init`, `add`, `push` or `reset`. As you can see, it mimics the workflow of a commonly used version control tool, and this is not by coincidence. Chainloop wants to make sure that the tooling feels familiar to developers and that no security jargon leaks into this stage of the process. For a developer, creating an attestation must be as simple as initializing it, adding materials to it and pushing it.
 
 A brief description of the different stages
 
@@ -55,9 +55,9 @@ See the state of the current crafting process.
 
 ## Crafting our first attestation locally
 
-To create an attestation two things are required, the ChainLoop crafting tool and a robot account.
+To create an attestation two things are required, the Chainloop crafting tool and a robot account.
 
-The crafting tool is currently bundled within ChainLoop command line tool. To install it just follow the [installation](installation) instructions.
+The crafting tool is currently bundled within Chainloop command line tool. To install it just follow the [installation](installation) instructions.
 
 The robot account was created during the [previous step](./workflow-definition#robot-account-creation) and it's required during all the stages of the crafting process. It can be provided via the `--token` flag or the `$CHAINLOOP_ROBOT_ACCOUNT` environment variable.
 
@@ -238,12 +238,12 @@ jobs:
       id-token: write # required to use OIDC and retrieve AWS credentials
       contents: write # required for goreleaser
     steps:
-      # Cosign is required to verify the ChainLoop binary
+      # Cosign is required to verify the Chainloop binary
       - name: Install Cosign
         uses: sigstore/cosign-installer@v2.5.0
 
       # highlight-start
-      - name: Install ChainLoop
+      - name: Install Chainloop
         run: |
           curl -sfL https://chainloop.dev/install.sh | bash -s -- --version v${{ env.CL_VERSION }}
           sudo install chainloop /usr/local/bin
