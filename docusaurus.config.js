@@ -77,6 +77,10 @@ const config = {
         style: "dark",
         links: [
           {
+            label: "Main site",
+            href: "https://chainloop.dev",
+          },
+          {
             label: "Contact",
             href: "https://us21.list-manage.com/contact-form?u=801f42b3abafc40b1a17c5f25&form_id=3f3bbfe15e6fcd4a60be9b966652cfd5",
           },
@@ -85,7 +89,7 @@ const config = {
             to: "blog",
           },
           {
-            label: "Github",
+            label: "GitHub",
             href: "https://github.com/chainloop-dev",
           },
         ],
@@ -99,7 +103,7 @@ const config = {
         {
           name: "keywords",
           content:
-            "software supply chain, security, attestation, slsa, sigstore",
+            "software supply chain, security, attestation, slsa, sigstore, in-toto",
         },
       ],
     }),
