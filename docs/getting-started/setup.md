@@ -1,31 +1,27 @@
 ---
 sidebar_position: 2
-title: Setup
+title: Account Setup
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import CodeBlock from "@theme/CodeBlock";
+import Image from "@theme/IdealImage";
 
-## Authentication
+The attestation metadata and artifacts created by your workflows are **not stored in Chainloop but instead pushed to your [OCI registry](https://github.com/opencontainers/distribution-spec)**. That's why to have a fully functional Chainloop account, an OCI repository must be added.
 
-Once the Chainloop CLI is installed, next you'll need to authenticate
-
-```bash
-$ chainloop auth login
-```
+<Image img={require("./chainloop-parts.png")} className="light-mode-only" />
+<Image img={require("./chainloop-parts-dark.png")} className="dark-mode-only" />
 
 ## Add OCI repository
 
-You need to provide OCI registry credentials to store the attestations and associated artifact materials.
+Setup your OCI repository by executing
 
 ```bash
-$ chainloop config set-oci-repo --repo [REPO_URI] --username [USERNAME] --password [PASS]
+$ chainloop config set-oci-repo --repo [REPO_URI] \
+                                --username [USERNAME] \
+                                --password [PASS]
 ```
-
-:::caution
-**AWS Container Registry is not supported yet**.
-:::
 
 Examples:
 
@@ -70,6 +66,13 @@ $ chainloop config set-oci-repo \
     --username [username] \
     --password [personal access token]
 ```
+
+  </TabItem>
+  <TabItem value="ecr" label="AWS Container Registry" default>
+
+:::caution
+**AWS Container Registry is not supported yet**.
+:::
 
   </TabItem>
 </Tabs>
