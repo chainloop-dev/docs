@@ -6,12 +6,8 @@ title: Account Setup
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import CodeBlock from "@theme/CodeBlock";
-import Image from "@theme/IdealImage";
 
 The attestation metadata and artifacts created by your workflows are **not stored in Chainloop but instead pushed to your [OCI registry](https://github.com/opencontainers/distribution-spec)**. That's why to have a fully functional Chainloop account, an OCI repository must be added.
-
-<Image img={require("./chainloop-parts.png")} className="light-mode-only" />
-<Image img={require("./chainloop-parts-dark.png")} className="dark-mode-only" />
 
 ## Add OCI repository
 

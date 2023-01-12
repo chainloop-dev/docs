@@ -3,6 +3,8 @@ sidebar_position: 1
 title: Installation
 ---
 
+import Image from "@theme/IdealImage";
+
 :::info
 Chainloop's control plane runs as Software as a Service (SaaS) but we are **committed to making it open source so you can run your own instance**.
 
@@ -13,6 +15,9 @@ Chainloop is comprised of two main components
 
 - A Control Plane that runs as a **free open beta** Software as a Service (SaaS)
 - A Command Line Interface (CLI) used to both a) operate on the control plane and b) run the attestation process on your CI/CD
+
+<Image img={require("./chainloop-parts.png")} className="light-mode-only" />
+<Image img={require("./chainloop-parts-dark.png")} className="dark-mode-only" />
 
 ## Command Line Interface (CLI) download
 
