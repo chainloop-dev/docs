@@ -33,7 +33,7 @@ There are two steps involved to enable this integration:
 
 **Dependency-Track API token**
 
-An API token is required for the Chainloop instance to communicate securely with DependencyTrack. The required permissions are `BOM_UPLOAD` and optionally `PROJECT_CREATION_UPLOAD` if `project-auto-creation` is enabled, more on that later.
+An API token is required for the Chainloop instance to communicate securely with DependencyTrack. The required permissions are `BOM_UPLOAD`, `VIEW_PORTFOLIO` (to validate that the provided project ID exists) and optionally `PROJECT_CREATION_UPLOAD` if `project-auto-creation` is enabled, more on that later.
 
 The API Key can be created by going to Settings -> Access Management -> Teams -> Select (or create) a Team -> Set permissions -> Copy API key
 
@@ -52,14 +52,13 @@ Usage:
 
 Flags:
       --allow-project-auto-create   Allow auto-creation of projects or require to always specify an existing one
-      --api-key string              API Key
       --instance string             dependency track instance URL
 ```
 
-Let's go ahead and add an integration for an instance hosted at https://dependency-track.chainloop.dev that allows the auto-creation of projects.
+Let's go ahead and add an integration for an instance hosted at https://dependency-track.chainloop.dev that allows the auto-creation of projects. You'll get a prompt to introduce the API key
 
 ```
-$ chainloop config integration add dependency-track add --api-key $API_TOKEN --instance https://dependency-track.chainloop.dev --allow-project-auto-create
+$ chainloop config integration add dependency-track add --instance https://dependency-track.chainloop.dev --allow-project-auto-create
 ┌──────────────────────────────────────┬──────────────────┬──────────────────────────────────────────────┬─────────────────────┐
 │ ID                                   │ KIND             │ CONFIG                                       │ CREATED AT          │
 ├──────────────────────────────────────┼──────────────────┼──────────────────────────────────────────────┼─────────────────────┤
