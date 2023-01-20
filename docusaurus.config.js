@@ -107,6 +107,13 @@ const config = {
         },
       ],
     }),
+  scripts: [
+    /* Tawk to chat widget */
+    {
+      src: "https://embed.tawk.to/63ca6cb9c2f1ac1e202eb31d/1gn7bhd50",
+      async: true,
+    },
+  ],
 };
 
 module.exports = config;
