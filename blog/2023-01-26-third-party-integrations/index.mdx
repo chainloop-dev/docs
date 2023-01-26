@@ -11,23 +11,25 @@ import ContractYAML from "!!raw-loader!/examples/contracts/sbom/cyclonedx.yaml";
 import CodeBlock from "@theme/CodeBlock";
 import MailingListForm from "/docs/partials/_mailing-list-form.mdx";
 
-When you [integrate an existing CI/CD workflow with Chainloop](/how-does-it-work/#integration-overview), the generated artifacts are stored in your OCI registry, and wrapped in a signed, [SLSA 3](https://slsa.dev/) provenance-compliant [in-toto](https://in-toto.io/) attestation envelope. At that point, in practice, you've managed to set up a [**single source of truth**](/how-does-it-work/#compliant-single-source-of-truth) and a **standardized** attestation and artifact storage **process** for your organization.
+When you [integrate an existing CI/CD workflow with Chainloop](/how-does-it-work/#integration-overview), the generated artifacts are stored in your OCI registry and wrapped in a signed, [SLSA 3](https://slsa.dev/) provenance-compliant [in-toto](https://in-toto.io/) attestation envelope.
+
+At that point, in practice, you've managed to set up a [**single source of truth**](/how-does-it-work/#compliant-single-source-of-truth) and a **standardized** attestation and artifact storage **process** for your organization.
 
 This is a good start but [you told us loud and clear](/blog/touching-base-one-month-in#my-attestations-and-artifacts-are-being-ingested-now-what) that **it wasn't enough**. You want a mechanism to forward such data to tools that you already use. i.e logs to Kibana, metrics to Prometheus, or Software Bill Of Materials (SBOM) to Dependency-Track.
 
 <!--truncate-->
 
-We listened, and **we are happy to announce our first integration**. [Dependency-Track for SBOM analysis](/guides/dependency-track/).
+We listened, we started working on the most demanded use-case and today **we are happy to announce our first integration**. [Dependency-Track for SBOM analysis](/guides/dependency-track/).
 
-Chainloop can now [be configured to automatically send](/guides/dependency-track/) any [CycloneDX Software Bill Of Materials](https://cyclonedx.org/) that has been received as part of an attestation to a Dependency-Track instance.
+Chainloop can now be configured to automatically send any [CycloneDX](https://cyclonedx.org/) Software Bill Of Materials that has been received as part of an attestation to a Dependency-Track instance for continuous analysis.
 
 ### Divide and Conquer
 
-Traditionally, these kinds of integrations are encoded directly in the CI workflow. Chainloop, in contrast, enables a different approach by making sure that the [responsibilities between the two main personas](/how-does-it-work/#role-tailored-experience), Security/Operation (SecOps), and Development/Application teams are decoupled.
+Traditionally, these kinds of integrations are encoded directly in the CI workflow. Chainloop, by contrast, enables a different approach by making sure that the [responsibilities between the two main personas](/how-does-it-work/#role-tailored-experience), Security/Operation (SecOps), and Development/Application teams are decoupled.
 
 <Image img={OverViewImage} />
 
-SecOps teams set-up the integrations on the Control Plane while development teams just need to make sure their CI/CD workflow complies with the agreed contract. In other words, **development teams will integrate with Chainloop once, while SecOps teams can mix and match later on** with the different integrations.
+SecOps teams set up the integrations on the Control Plane while development teams just need to make sure their CI/CD workflow complies with the agreed contract. In other words, **development teams will integrate with Chainloop once, while SecOps teams can mix and match later on** with the different integrations.
 
 **There are technical benefits too**! Let's go back to the Dependency-Track example. In a traditional approach, developers will need to write code on their CI workflows to talk to the Dep-Track API, store/rotate API tokens, and make sure that the instance is network-reachable from their CI runner.
 
@@ -35,13 +37,13 @@ With Chainloop, **development teams don't need to know about Dep-Track existence
 
 ### Enforcement and visibility
 
-To glue the two responsibilities areas **there is a crucial interface layer called [Workflow Contracts](/how-does-it-work/#contract-based-attestation)**
+To glue the two responsibilities areas **there is a crucial interface layer, the aforementioned [Workflow Contract](/how-does-it-work/#contract-based-attestation)**.
 
 A contract states three things: a) who owns the workflow, b) what materials must be sent as part of the attestation and c) what environment (i.e GitHub Actions) the attestation must be crafted in.
 
 For example, if you have a workflow associated with the following contract. Any incoming attestation will contain a [CycloneDX](https://cyclonedx.org/) SBOM. Which, **in turn enables integration enforcement**.
 
-<CodeBlock language="yaml" title="skynet.contract.yaml">
+<CodeBlock language="yaml" title="contract.yaml">
   {ContractYAML}
 </CodeBlock>
 
@@ -57,7 +59,7 @@ b) Visibility: In the case of a bug on the CI/CD integration with Chainloop, **O
 
 ### See it in action
 
-If you are up for an adventure, take a look at the following end-to-end demo video or check out [our reference how-to guide](/guides/dependency-track/).
+If you are up for an adventure, take a look at the following end-to-end demo video or check out our reference [how-to guide](/guides/dependency-track/).
 
 <iframe
   width="100%"
@@ -71,11 +73,11 @@ If you are up for an adventure, take a look at the following end-to-end demo vid
 
 ### What's next?
 
-Dependency-Track integration is just the beginning. We are looking into helping you to level up your query/intelligence capabilities by for example, sending the [in-toto](https://in-toto.io/) attestation metadata to [guacsec/guac](https://github.com/guacsec/guac/), CI/CD logs to your [Kibana](https://www.elastic.co/kibana/) instance or feeding your Grafana dashboard with custom Prometheus metrics.
+Dependency-Track integration is just the beginning. We are looking into helping you to level up your query/intelligence capabilities by for example sending the [in-toto](https://in-toto.io/) attestation metadata to [guacsec/guac](https://github.com/guacsec/guac/), CI/CD logs to your Kibana instance or feeding your Grafana dashboard with custom Prometheus metrics.
 
-If you have any suggestions on what integration we should support next [let us know](https://us21.list-manage.com/contact-form?u=801f42b3abafc40b1a17c5f25&form_id=3f3bbfe15e6fcd4a60be9b966652cfd5)!
+If you have comments or suggestions on what integration we should support next [let us know](https://us21.list-manage.com/contact-form?u=801f42b3abafc40b1a17c5f25&form_id=3f3bbfe15e6fcd4a60be9b966652cfd5).
 
-Cheers,
+That's our update, let's now have some fun!
 
 Miguel
 
