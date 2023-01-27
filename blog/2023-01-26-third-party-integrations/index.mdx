@@ -13,9 +13,9 @@ import MailingListForm from "/docs/partials/_mailing-list-form.mdx";
 
 When you [integrate an existing CI/CD workflow with Chainloop](/how-does-it-work/#integration-overview), the generated artifacts are stored in your OCI registry and wrapped in a signed, [SLSA 3](https://slsa.dev/) provenance-compliant [in-toto](https://in-toto.io/) attestation envelope.
 
-At that point, in practice, you've managed to set up a [**single source of truth**](/how-does-it-work/#compliant-single-source-of-truth) and a **standardized** attestation and artifact storage **process** for your organization.
+At that point, in practice, you've managed to set up a [**single source of truth**](/how-does-it-work/#compliant-single-source-of-truth) and a **standardized process** for attestation and artifact storage in your organization.
 
-This is a good start but [you told us loud and clear](/blog/touching-base-one-month-in#my-attestations-and-artifacts-are-being-ingested-now-what) that **it wasn't enough**. You want a mechanism to forward such data to tools that you already use. i.e logs to Kibana, metrics to Prometheus, or Software Bill Of Materials (SBOM) to Dependency-Track.
+This is a good start but [you told us loud and clear](/blog/touching-base-one-month-in#my-attestations-and-artifacts-are-being-ingested-now-what) that **it wasn't enough**. You want to make more of that data, and specifically, you wanted a mechanism to leverage tooling that you already use. i.e Kibana for logging, Prometheus for metrics, or Dependency-Track for Software Bill Of Materials (SBOM).
 
 <!--truncate-->
 
@@ -47,7 +47,7 @@ For example, if you have a workflow associated with the following contract. Any 
   {ContractYAML}
 </CodeBlock>
 
-Expanding the Dep-Track example, before the CI workflow is the one that sends the SBOM to Dep-Track, a bug or the removal of such code will break the integration. What's even worse is that you as an operator **will likely not notice that the integration is broken**.
+Expanding once again the Dep-Track example, before, the CI workflow is the one that sends the SBOM to Dep-Track, a bug or the removal of such code will break the integration. What's even worse is that you as an operator **will likely not notice that the integration is broken**.
 
 With Chainloop, on the other hand, you'll get
 
@@ -57,9 +57,13 @@ b) Visibility: In the case of a bug on the CI/CD integration with Chainloop, **O
 
 **This decoupled but enforced approach is what makes us believe that Chainloop is the best way of introducing third-party integrations into your Software Supply Chain.**
 
-### See it in action
+### What's next?
 
-If you are up for an adventure, take a look at the following end-to-end demo video or check out our reference [how-to guide](/guides/dependency-track/).
+Dependency-Track integration is just the beginning. We are looking into helping you superpower your Software Supply Chain by for example sending [in-toto](https://in-toto.io/), DSSE metadata and [SPDX](https://spdx.dev/) SBOM to [guacsec/guac](https://github.com/guacsec/guac/). CI/CD logs to your Kibana instance or feed your Grafana dashboard with custom Prometheus metrics.
+
+If you have comments or suggestions on what integration we should support next [let us know](https://us21.list-manage.com/contact-form?u=801f42b3abafc40b1a17c5f25&form_id=3f3bbfe15e6fcd4a60be9b966652cfd5).
+
+And if you are up for an adventure, take a look at the following end-to-end demo video or check out our reference [how-to guide](/guides/dependency-track/).
 
 <iframe
   width="100%"
@@ -71,14 +75,9 @@ If you are up for an adventure, take a look at the following end-to-end demo vid
   allowfullscreen
 ></iframe>
 
-### What's next?
+Thanks again and remember, send any thoughts or feedback [our way](https://us21.list-manage.com/contact-form?u=801f42b3abafc40b1a17c5f25&form_id=3f3bbfe15e6fcd4a60be9b966652cfd5)!
 
-Dependency-Track integration is just the beginning. We are looking into helping you to level up your query/intelligence capabilities by for example sending the [in-toto](https://in-toto.io/) attestation metadata to [guacsec/guac](https://github.com/guacsec/guac/), CI/CD logs to your Kibana instance or feeding your Grafana dashboard with custom Prometheus metrics.
-
-If you have comments or suggestions on what integration we should support next [let us know](https://us21.list-manage.com/contact-form?u=801f42b3abafc40b1a17c5f25&form_id=3f3bbfe15e6fcd4a60be9b966652cfd5).
-
-That's our update, let's now have some fun!
-
+Cheers,
 Miguel
 
 <MailingListForm />
