@@ -249,8 +249,6 @@ jobs:
       - name: Install Chainloop
         run: |
           curl -sfL https://chainloop.dev/install.sh | bash -s -- --version v${{ env.CL_VERSION }}
-          sudo install chainloop /usr/local/bin
-          chainloop version
       # highlight-end
       - name: Checkout
         uses: actions/checkout@v3
