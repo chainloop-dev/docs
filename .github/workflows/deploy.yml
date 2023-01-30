@@ -15,8 +15,6 @@ jobs:
       - name: Install Chainloop
         run: |
           curl -sfL https://chainloop.dev/install.sh | bash -s -- --version v${{ env.CL_VERSION }}
-          sudo install chainloop /usr/local/bin
-          chainloop version
       - name: Write Cosign key
         run: echo "$COSIGN_KEY" > /tmp/cosign.key
         env:
@@ -54,7 +52,7 @@ jobs:
           chainloop attestation reset --trigger cancellation
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      CL_VERSION: 0.8.57
+      CL_VERSION: 0.8.70
       CHAINLOOP_ROBOT_ACCOUNT: ${{ secrets.CHAINLOOP_WF_RELEASE }}
       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
