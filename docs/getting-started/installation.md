@@ -13,15 +13,15 @@ If you have any questions, concerns or comments feel free to [reach out](https:/
 
 Chainloop is comprised of two main components
 
-- A Control Plane that runs as a **free open beta** Software as a Service (SaaS)
+- A Control Plane that runs as a **free, open beta** Software as a Service (SaaS)
 - A Command Line Interface (CLI) used to both a) operate on the control plane and b) run the attestation process on your CI/CD
 
 <Image img={require("./chainloop-parts.png")} className="light-mode-only" />
 <Image img={require("./chainloop-parts-dark.png")} className="dark-mode-only" />
 
-## Command Line Interface (CLI) download
+## Command Line Interface (CLI) installation
 
-To **download the latest version** for macOS, Linux or Windows (using [WSL](https://learn.microsoft.com/en-us/windows/wsl/install)) just run
+To **install the latest version** for macOS, Linux or Windows (using [WSL](https://learn.microsoft.com/en-us/windows/wsl/install)) just run
 
 ```bash
 curl -sfL https://chainloop.dev/install.sh | bash -s
@@ -31,6 +31,12 @@ you can retrieve a specific version with
 
 ```bash
 curl -sfL https://chainloop.dev/install.sh | bash -s -- --version v0.1.2
+```
+
+and customize the install path (default to /usr/local/bin)
+
+```bash
+curl -sfL https://chainloop.dev/install.sh | bash -s -- --path /my-path
 ```
 
 if [`cosign`](https://docs.sigstore.dev/cosign) is present in your system, in addition to the checksum check, a signature verification will be performed. This behavior can be enforced via the `--force-verification` flag.
@@ -44,5 +50,5 @@ curl -sfL https://chainloop.dev/install.sh | bash -s -- --force-verification
 Authenticate to the Control Plane with Single Sign-on
 
 ```bash
-$ ./chainloop auth login
+$ chainloop auth login
 ```
