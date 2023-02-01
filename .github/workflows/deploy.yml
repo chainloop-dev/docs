@@ -38,23 +38,24 @@ jobs:
       - name: npm install
         run: npm install
 
-      - name: Build
-        run: netlify build
-
       - name: Generate SBOMs
         run: |
           syft packages . -o cyclonedx-json --file sbom.cyclonedx.json
-          syft packages . -o spdx-json --file sbom.cyclonedx.json
+          syft packages . -o spdx-json --file sbom.spdx.json
 
-      - name: Record Chainloop materials
+      - name: Record sboms materials
+        run: |
+          chainloop att add --name sbom-cdx --value sbom.cyclonedx.json
+          chainloop att add --name sbom-spdx --value sbom.spdx.json
+
+      - name: Build
+        run: netlify build
+
+      - name: Record built-site material
         run: |
           # Built site
           tar -czf ${GITHUB_SHA}-build.tar.gz build
           chainloop att add --name built-site --value ${GITHUB_SHA}-build.tar.gz
-
-          # SBOMs
-          chainloop att add --name sbom-cyclonedx --value sbom.cyclonedx.json
-          chainloop att add --name sbom-spdx --value sbom.spdx.json
 
       - name: Deploy
         run: netlify deploy --prod
