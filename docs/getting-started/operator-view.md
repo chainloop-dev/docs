@@ -207,6 +207,6 @@ INF downloading file name=rootfs.tar.gz to=/tmp/rootfs.tar.gz
 INF file downloaded! path=/tmp/rootfs.tar.gz
 ```
 
-## Metrics (coming soon)
+## Third-Party integrations
 
-Operators will be able to enable a [Prometheus](https://prometheus.io/) endpoint for their organization that will enable downstream integrations with their existing metrics dashboards.
+Operators can now setup third-party integrations starting with Dependency-Track for Software Bill Of Materials (SBOMs) analysis. Read more about this capability in our [blog post](/blog/introducing-third-party-integrations) or dive right in with [your first integration](/guides/dependency-track/) :)
