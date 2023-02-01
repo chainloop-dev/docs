@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      # - main
+      - main
 
 jobs:
   deploy:
@@ -43,7 +43,7 @@ jobs:
           syft packages . -o cyclonedx-json --file sbom.cyclonedx.json
           syft packages . -o spdx-json --file sbom.spdx.json
 
-      - name: Record sboms materials
+      - name: Record SBOMs materials
         run: |
           chainloop att add --name sbom-cdx --value sbom.cyclonedx.json
           chainloop att add --name sbom-spdx --value sbom.spdx.json
