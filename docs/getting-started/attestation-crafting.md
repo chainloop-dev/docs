@@ -215,6 +215,8 @@ Native CI/CD runner integrations are under development but the process stated ab
 
 See below an example of Chainloop integrated with a Github Action release job that leverages [goreleaser](https://goreleaser.com/) for building container images and binaries and AWS ECR for storage.
 
+In that example we enable attestation to meet the requirements of [this contract](https://github.com/chainloop-dev/docs/blob/main/examples/contracts/skynet/contract.yaml)
+
 :::info
 Remember to remove the `--dry-run` flag during intialization
 :::
