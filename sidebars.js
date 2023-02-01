@@ -20,6 +20,11 @@ const sidebars = {
       label: "Workflow Contract examples",
       href: "https://github.com/chainloop-dev/docs/tree/main/examples/contracts",
     },
+    {
+      type: "link",
+      label: "CI Workflow examples",
+      href: "https://github.com/chainloop-dev/docs/tree/main/examples/ci-workflows",
+    },
   ],
 };
 

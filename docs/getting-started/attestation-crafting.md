@@ -211,7 +211,7 @@ INF Attestation pushed!
 
 ## CI integration
 
-Native CI/CD runner integrations are under development but the process stated above can be implemented in any CI pipeline.
+Native CI/CD runner integrations (i.e Jenkins plugin, GitHub action) are under development but the process stated above can be implemented in any CI pipeline by just using the Chainloop CLI.
 
 See below an example of Chainloop integrated with a Github Action release job that leverages [goreleaser](https://goreleaser.com/) for building container images and binaries and AWS ECR for storage.
 
@@ -331,3 +331,5 @@ jobs:
           chainloop attestation reset --trigger cancellation
       # highlight-end
 ```
+
+You can find other CI pipeline examples [here](https://github.com/chainloop-dev/docs/tree/main/examples/ci-workflows).
