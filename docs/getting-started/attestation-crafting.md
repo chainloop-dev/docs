@@ -3,6 +3,11 @@ sidebar_position: 4
 title: Attestation Crafting
 ---
 
+<iframe
+  width="100%"
+  height="500"
+  src="https://www.youtube.com/embed/Q_0dlBqKtIU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 ## Introduction
 
 In the previous section, we created a workflow definition, a contract and a robot account in the control plane. Next, we'll perform an attestation crafting example using Chainloop.
