@@ -1,0 +1,91 @@
+---
+title: "Software Supply Chain Attestation the Easy Way"
+slug: software-supply-chain-attestation-easy-way
+authors: miguel
+# image: ./integration-overview-2.png
+---
+
+import Image from "@theme/IdealImage";
+import LayersImage from "./attestation_layers.png";
+import OverViewImage from "./chainloop-dev-overview.png";
+import MailingListForm from "/docs/partials/_mailing-list-form.mdx";
+
+One of the value propositions of Chainloop is to help organizations to implement Software Supply Chain Attestation that meets the latest standards and compliance levels.
+
+We are aware that when you look under the surface, the specifics of attestation can be overwhelmingly confusing. That's why today I am going to do my best to bring some clarity on what an attestation is, how does it look like, and how Chainloop can help.
+
+<!--truncate-->
+
+## What is a Software Supply Chain Attestation?
+
+From [slsa.dev](https://slsa.dev/attestation-model)
+
+> A software attestation is an **authenticated statement (metadata) about a software artifact** or collection of software artifacts.
+> The primary intended use case is to feed into automated policy engines, such as in-toto and Binary Authorization.
+
+Let's unpack that with an example. Imagine you have a Continuous Integration (CI) pipeline that builds a container image. Traditionally, only that container image will be the output of that automated process. Leaving you in the dark about "how" that image was packaged.
+
+Attestation is the process of creating an additional piece of metadata where you could, for example, record information about “how” that container image was built. You can store references to the source code, build recipes, intermediate artifacts, build environment information, and so on. Think of it as just **additional context that goes alongside the result of any automated process.**
+
+Attestation is not just useful in the context of building an artifact (like in our example) but fits into any automation for which you want to record additional metadata.
+
+This sounds vague, I know! So let's jump in the Attestation Formats Rabbit hole!
+
+The community at [Open Source Software Security](https://openssf.org/) (OpenSSF) in general and the [SLSA](https://slsa.dev) project in particular, have done a great job at defining a [framework](https://slsa.dev/spec/v0.1/levels#detailed-explanation) and [reference implementation](https://slsa.dev/attestation-model#recommended-suite).
+
+<Image img={LayersImage} />
+
+The gist of it is that the main piece of metadata is a statement that gets wrapped in an envelope that then is signed forming the final attestation.
+
+To generate such attestation files there are great Open Source tools such as [Tekton Chains](https://tekton.dev/docs/chains/), [SLSA GitHub generator](https://github.com/slsa-framework/slsa-github-generator) or even [Cosign](https://docs.sigstore.dev/cosign/attestation/).
+
+And although those tools might excel technically and cover your need, to us, **they are not a good fit in a [fragmented scenario](/blog/introducing-chainloop) of a large organization where additional challenges such as [cross-team interactions](/blog/a-tale-of-supply-chain-attestation#day-one-integration) and [day two operations](/blog/a-tale-of-supply-chain-attestation#day-two-challenges) take the central stage**.
+
+## Chainloop approach to SSC Attestation
+
+We work on the premise that in the implementation of Software Supply Chain Attestations **[there are two personas](/how-does-it-work/#role-tailored-experience) with different requirements and priorities involved**. Security/Operators (SecOps) and Development/Application (Devs) teams.
+
+<Image img={OverViewImage} />
+
+SecOps teams
+
+- Care about compliance.
+- Want to rely on the **latest Open Source building blocks** such as [slsa](https://slsa.dev/), [in-toto](https://in-toto.io/), [DSSE](https://github.com/secure-systems-lab/dsse) or [Sigstore](https://www.sigstore.dev/) so they can leverage tooling downstream while **dodging vendor lock-in**.
+- Want to make sure the content of that attestation follows **best practices** such as referencing artifacts by content digest or setting a common retention policy.
+- Want a [declarative mechanism](/reference/operator/contract) to define, **enforce and propagate attestation requirements**.
+- Care about day two operations. Making sure that attestation integrations are enforced and **new requirements can be propagated efficiently**.
+
+Development teams
+
+- Care about shipping their product fast.
+- Are already taking care of application security practices (CVE scanning, SAST, SBOM, …) and don’t want additional overhead.
+- Just want an easy, jargon-free way to comply with the SecOps team requirements.
+
+We acknowledge those requirements and designed the system in such a way that each party gets a [tailored experience](/how-does-it-work/#role-tailored-experience).
+
+SecOps get a transparent, attestation/provenance compliance platform while development teams get jargon-free tooling and guardrails to meet compliance with minimum friction.
+
+And don't forget that by using Chainloop, **attestation can be just the beginning, a means to an end**. On top of it, you can leverage [third-party integrations](/how-does-it-work/#third-party-integration-fan-out) to make the most of your data and regain control and visibility.
+
+## See it in action
+
+I know that a ~~picture~~ 20 min video (sorry :) is worth more than a thousand words so see below an end-to-end demo of how the different pieces come together.
+
+Note that it assumes some familiarity with Chainloop already, if that's not the case I recommend taking a look at this [quick overview](/how-does-it-work/) first :)
+
+<iframe
+  width="100%"
+  height="500"
+  src="https://www.youtube.com/embed/Q_0dlBqKtIU"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+></iframe>
+
+Thanks again for your time and remember, send any thoughts or feedback [our way](https://us21.list-manage.com/contact-form?u=801f42b3abafc40b1a17c5f25&form_id=3f3bbfe15e6fcd4a60be9b966652cfd5)!
+
+Cheers,
+Miguel
+
+<MailingListForm />
