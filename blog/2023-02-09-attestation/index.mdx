@@ -10,9 +10,9 @@ import LayersImage from "./attestation_layers.png";
 import OverViewImage from "./chainloop-dev-overview.png";
 import MailingListForm from "/docs/partials/_mailing-list-form.mdx";
 
-One of the value propositions of Chainloop is to help organizations to implement Software Supply Chain Attestation that meets the latest standards and compliance levels.
+One of Chainloop's value propositions is to help organizations to implement Software Supply Chain Attestation that meets the latest standards and compliance levels.
 
-We are aware that when you look under the surface, the specifics of attestation can be overwhelmingly confusing. That's why today I am going to do my best to bring some clarity on what an attestation is, how does it look like, and how Chainloop can help.
+We are aware that when you look under the surface, the specifics of attestation can be overwhelmingly confusing. That's why today we are going to do our best to bring some clarity on what an attestation is, how does it look like, and how Chainloop can help.
 
 <!--truncate-->
 
@@ -35,6 +35,8 @@ The community at [Open Source Software Security](https://openssf.org/) (OpenSSF)
 
 <Image img={LayersImage} />
 
+<br />
+
 The gist of it is that the main piece of metadata is a statement that gets wrapped in an envelope that then is signed forming the final attestation.
 
 To generate such attestation files there are great Open Source tools such as [Tekton Chains](https://tekton.dev/docs/chains/), [SLSA GitHub generator](https://github.com/slsa-framework/slsa-github-generator) or even [Cosign](https://docs.sigstore.dev/cosign/attestation/).
@@ -47,19 +49,23 @@ We work on the premise that in the implementation of Software Supply Chain Attes
 
 <Image img={OverViewImage} />
 
+<br />
+
 SecOps teams
 
 - Care about compliance.
 - Want to rely on the **latest Open Source building blocks** such as [slsa](https://slsa.dev/), [in-toto](https://in-toto.io/), [DSSE](https://github.com/secure-systems-lab/dsse) or [Sigstore](https://www.sigstore.dev/) so they can leverage tooling downstream while **dodging vendor lock-in**.
 - Want to make sure the content of that attestation follows **best practices** such as referencing artifacts by content digest or setting a common retention policy.
+- Want to have control not only over the attestation metadata but also over its associated artifacts in a [single source of truth](/how-does-it-work/#compliant-single-source-of-truth).
 - Want a [declarative mechanism](/reference/operator/contract) to define, **enforce and propagate attestation requirements**.
 - Care about day two operations. Making sure that attestation integrations are enforced and **new requirements can be propagated efficiently**.
 
 Development teams
 
-- Care about shipping their product fast.
-- Are already taking care of application security practices (CVE scanning, SAST, SBOM, …) and don’t want additional overhead.
-- Just want an easy, jargon-free way to comply with the SecOps team requirements.
+- Care about shipping their products fast.
+- Want to keep using the CI/CD practices and tools they are familiar with.
+- Are already taking care of application security practices (CVE scanning, SAST, SBOM, …) and don't want additional overhead.
+- Just want an easy way to comply with the SecOps team requirements.
 
 We acknowledge those requirements and designed the system in such a way that each party gets a [tailored experience](/how-does-it-work/#role-tailored-experience).
 
@@ -69,9 +75,9 @@ And don't forget that by using Chainloop, **attestation can be just the beginnin
 
 ## See it in action
 
-I know that a ~~picture~~ 20 min video (sorry :) is worth more than a thousand words so see below an end-to-end demo of how the different pieces come together.
+We know that a ~~picture~~ 20 min video (sorry :) is worth more than a thousand words so see below an end-to-end demo of how the different pieces come together.
 
-Note that it assumes some familiarity with Chainloop already, if that's not the case I recommend taking a look at this [quick overview](/how-does-it-work/) first :)
+Note that it assumes some familiarity with Chainloop already, if that's not the case we recommend taking a look at this [quick overview](/how-does-it-work/) first :)
 
 <iframe
   width="100%"
