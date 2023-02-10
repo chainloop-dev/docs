@@ -99,7 +99,7 @@ In short, the integration process of a new pipeline in Chainloop consists of
 
 3. [Start the crafting process](/getting-started/attestation-crafting#initialization) by authenticating with the service account and **retrieving the contract**.
 
-4. [Add the **materials required by the contract**](/getting-started/attestation-crafting#adding-materials), i.e artifact, OCI image ref, SBOM. If needed, the artifact will be uploaded to the built-in CAS and referenced by its content digest
+4. [Add the **materials required by the contract**](/getting-started/attestation-crafting#adding-materials), i.e artifact, OCI image ref, SBOM. If needed, the artifact will be uploaded to your artifacft storage (OCI registry) and referenced by its content digest
 
 5. [Generate and push](/getting-started/attestation-crafting#encode-sign-and-push-attestation) a signed in-toto statement once all the required materials have been added.
 
