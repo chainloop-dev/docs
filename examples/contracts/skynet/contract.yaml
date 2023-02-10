@@ -7,7 +7,7 @@ materials:
       skynet-control-plane
       # The output flag indicates that the material will be part of the attestation subject
     output: true
-  # ARTIFACT kinds will first get uploaded to the built-in Content Addressable Storage (CAS)
+  # ARTIFACT kinds will first get uploaded to your artifact registry via the built-in Content Addressable Storage (CAS)
   - type: ARTIFACT
     name: rootfs
   # Optional dockerfile
@@ -17,7 +17,7 @@ materials:
   # STRING kind materials will be injected as simple keypairs
   - type: STRING
     name: build-ref
-  # SBOMs will be uploaded to the CAS and referenced in the attestation
+  # SBOMs will be uploaded to the artifact registry and referenced in the attestation
   # Both SBOM_CYCLONEDX_JSON and SBOM_SPDX_JSON are supported
   - type: SBOM_CYCLONEDX_JSON
     name: skynet-sbom

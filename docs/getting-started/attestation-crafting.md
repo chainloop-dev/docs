@@ -36,7 +36,7 @@ Add the **materials required by the contract**, i.e artifact, OCI image ref, SBO
 The `add` command knows how to handle each kind of material transparently to the user.
 
 - STRING kinds will be injected as is.
-- ARTIFACT kinds will be uploaded to the built-in CAS and referenced by their content digest.
+- ARTIFACT kinds will be uploaded to your artifact registry and referenced by their content digest.
 - CONTAINER_IMAGE kinds will be resolved to obtain their repository digests using the local authentication keychain.
 
 #### attestation push
