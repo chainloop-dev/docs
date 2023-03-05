@@ -93,14 +93,14 @@ INF file downloaded! path=/tmp/myfile
 You can check your current context at any time by running
 
 ```bash
-$ chainloop config current-context
+$ chainloop org describe
 ┌──────────────────────────────────────────────────────────────────────────────────────┐
 │ Current Context                                                                      │
 ├───────────────────┬──────────────────────────────────────────────────────────────────┤
 │ Logged in as      │ miguel@chainloop.dev                                             │
 ├───────────────────┼──────────────────────────────────────────────────────────────────┤
 │ Organization ID   │ fe1c7a81-089a-4473-8084-4f963395be0d                             │
-│ Organization name │ Miguels main org                                     │
+│ Organization name │ Miguel's main org                                                │
 ├───────────────────┼──────────────────────────────────────────────────────────────────┤
 │ OCI repository    │ europe-west1-docker.pkg.dev/redacted**********6622/chainloop-cas │
 └───────────────────┴──────────────────────────────────────────────────────────────────┘

@@ -53,14 +53,14 @@ The API Key can be created by going to Settings -> Access Management -> Teams ->
 
 ### 1 - Setup the integration in your Chainloop account
 
-Using the [Chainloop CLI](/getting-started/installation), you can add an instance of Dependency-Track that later on can be attached to any of your workflows. This is done via the `chainloop config integration add dependency-track` command with three inputs.
+Using the [Chainloop CLI](/getting-started/installation), you can add an instance of Dependency-Track that later on can be attached to any of your workflows. This is done via the `chainloop integration add dependency-track` command with three inputs.
 
 ```bash
-$ chainloop config integration add dependency-track -h
+$ chainloop integration add dependency-track -h
 Add Dependency-Track integration
 
 Usage:
-  chainloop config integration add dependency-track [flags]
+  chainloop integration add dependency-track [flags]
 
 Flags:
       --allow-project-auto-create   Allow auto-creation of projects or require to always specify an existing one
@@ -70,7 +70,7 @@ Flags:
 Let's go ahead and add an integration for an instance hosted at https://dependency-track.chainloop.dev that allows the auto-creation of projects. You'll get a prompt to introduce the API key
 
 ```
-$ chainloop config integration add dependency-track add --instance https://dependency-track.chainloop.dev --allow-project-auto-create
+$ chainloop integration add dependency-track add --instance https://dependency-track.chainloop.dev --allow-project-auto-create
 ┌──────────────────────────────────────┬──────────────────┬──────────────────────────────────────────────┬─────────────────────┐
 │ ID                                   │ KIND             │ CONFIG                                       │ CREATED AT          │
 ├──────────────────────────────────────┼──────────────────┼──────────────────────────────────────────────┼─────────────────────┤
