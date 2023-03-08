@@ -4,16 +4,12 @@ title: Installation
 ---
 
 import Image from "@theme/IdealImage";
-
-:::info
-Chainloop's control plane runs as Software as a Service (SaaS) but we are **committed to making it open source so you can run your own instance**.
-
-If you have any questions, concerns or comments feel free to [reach out](https://us21.list-manage.com/contact-form?u=801f42b3abafc40b1a17c5f25&form_id=3f3bbfe15e6fcd4a60be9b966652cfd5)
-:::
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 Chainloop is comprised of two main components
 
-- A Control Plane that runs as a **free, open beta** Software as a Service (SaaS)
+- A Control Plane that acts as single source of truth and management console.
 - A Command Line Interface (CLI) used to both a) operate on the control plane and b) run the attestation process on your CI/CD
 
 <Image img={require("./chainloop-parts.png")} className="light-mode-only" />
@@ -21,7 +17,10 @@ Chainloop is comprised of two main components
 
 ## Command Line Interface (CLI) installation
 
-To **install the latest version** for macOS, Linux or Windows (using [WSL](https://learn.microsoft.com/en-us/windows/wsl/install)) just run
+To **install the latest version** for macOS, Linux or Windows (using [WSL](https://learn.microsoft.com/en-us/windows/wsl/install)) just choose one of the following installation method.
+
+<Tabs>
+  <TabItem value="script" label="Installation Script" default>
 
 ```bash
 curl -sfL https://docs.chainloop.dev/install.sh | bash -s
@@ -45,10 +44,45 @@ if [`cosign`](https://docs.sigstore.dev/cosign) is present in your system, in ad
 curl -sfL https://docs.chainloop.dev/install.sh | bash -s -- --force-verification
 ```
 
+</TabItem>
+<TabItem value="github" label="GitHub Release">
+
+Refer to GitHub [releases page](https://github.com/chainloop-dev/chainloop/releases) and download the binary of your choice.
+
+</TabItem>
+<TabItem value="source" label="From Source">
+
+```sh
+git clone git@github.com:chainloop-dev/chainloop
+cd chainloop && make -C app/cli build
+
+./app/cli/bin/chainloop version
+=> chainloop version v0.8.93-3-ged05b96
+```
+
+</TabItem>
+</Tabs>
+
+## Configure CLI (optional)
+
+By default, Chainloop CLI points to a [running Software as a Service (SaaS) instance of Chainloop](../chainloop-cloud).
+
+If you are running your [own instance](https://github.com/chainloop-dev/chainloop) of Chainloop Control Plane. You can make the CLI point to your instance by using the `chainloop config save` command.
+
+```sh
+chainloop config save \
+  --control-plane my-controlplane.acme.com \
+  --artifact-cas cas.acme.com
+```
+
 ## Authentication
 
-Authenticate to the Control Plane with Single Sign-on
+Authenticate to the Control Plane by running
 
 ```bash
 $ chainloop auth login
 ```
+
+That's all!
+
+Welcome to Chainloop!
