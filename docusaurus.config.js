@@ -61,6 +61,14 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      algolia: {
+        appId: "80E4FPODSO",
+        // Public API key: it is safe to commit it
+        apiKey: "6c2cc71890c81d28ceaf493fbd462f35",
+        indexName: "chainloop",
+        // Optional: see doc section below
+        contextualSearch: true,
+      },
       image: "img/logo.svg",
       navbar: {
         title: "Chainloop documentation",
@@ -70,7 +78,17 @@ const config = {
           src: "img/logo.svg",
         },
         items: [
-          { to: "blog", label: "Blog", position: "right" }, // or position: 'right'
+          {
+            to: "blog",
+            label: "Blog",
+            position: "right",
+          },
+          {
+            href: "https://github.com/chainloop-dev/chainloop",
+            position: "right",
+            className: "header-github-link",
+            "aria-label": "GitHub repository",
+          },
         ],
       },
       footer: {
