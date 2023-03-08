@@ -237,7 +237,7 @@ jobs:
     env:
       # highlight-start
       # Version of Chainloop to install
-      CHAINLOOP_VERSION: 0.8.86
+      CHAINLOOP_VERSION: 0.8.93
       # Export robot-account env variable
       # Used by the CLI to authenticate with the control plane
       CHAINLOOP_ROBOT_ACCOUNT: ${{ secrets.CHAINLOOP_WF_RELEASE }}
@@ -255,7 +255,7 @@ jobs:
       # highlight-start
       - name: Install Chainloop
         run: |
-          curl -sfL https://chainloop.dev/install.sh | bash -s -- --version v${{ env.CHAINLOOP_VERSION }}
+          curl -sfL https://docs.chainloop.dev/install.sh | bash -s -- --version v${{ env.CHAINLOOP_VERSION }}
       # highlight-end
       - name: Checkout
         uses: actions/checkout@v3
