@@ -64,7 +64,7 @@ const config = {
       algolia: {
         appId: "80E4FPODSO",
         // Public API key: it is safe to commit it
-        apiKey: "6c2cc71890c81d28ceaf493fbd462f35",
+        apiKey: "2757faaa5b66256f54f2f84fe4005a4a",
         indexName: "chainloop",
         // Optional: see doc section below
         contextualSearch: true,
