@@ -25,44 +25,6 @@ fancy_print() {
     fi
 }
 
-downloadAndVerify() {
-    BASE_URL=$1
-    URL="${BASE_URL}/${FILENAME}"
-    # Download file, exit if not found - e.g. version does not exist
-    fancy_print 0 "Step 1: Downloading: ${FILENAME}"
-    curl -fsL $URL -o $FILE || (fancy_print 1 "The requested file does not exist: ${URL}"; return 1)
-    fancy_print 0 "Done...\n"
-
-    # Get checksum file and check it
-    fancy_print 0 "Step 1.2: Verifying checksum"
-    CHECKSUM_FILENAME=checksums.txt
-    CHECKSUM_FILE="${TMP_DIR}/${CHECKSUM_FILENAME}"
-    URL="${BASE_URL}/${CHECKSUM_FILENAME}"
-    curl -fsL $URL -o ${CHECKSUM_FILE} || (fancy_print 1 "The requested file does not exist: ${URL}"; return 1)
-    (cd ${TMP_DIR} && sha256sum --ignore-missing --quiet --check checksums.txt)
-    fancy_print 2 "Checksum OK\n"
-
-    # Verify checksum file signature
-    if hash "cosign" &>/dev/null; then
-        # Constructing download FILE and URL
-        SIGNATURE_FILE="${CHECKSUM_FILENAME}.sig"
-        URL="${BASE_URL}/${SIGNATURE_FILE}"
-        # Download file, exit if not found - e.g. version does not exist
-        fancy_print 0 "Step 1.3: Verifying signature"
-        curl -fsOL $URL || (fancy_print 1 "The requested file does not exist: ${URL}"; return 1)
-        cosign verify-blob \
-            --key ${PUBLIC_KEY_URL} \
-            --signature ${SIGNATURE_FILE} \
-            ${CHECKSUM_FILE}
-
-        rm $SIGNATURE_FILE
-    else
-        fancy_print 2 "\nSignature verification skipped, cosign is not installed\n"
-    fi
-
-    return
-}
-
 
 # Function to print the help message
 print_help() {
@@ -173,11 +135,39 @@ FILENAME="chainloop-cli-${VERSION}-${OS}-${ARC}.tar.gz"
 FILE="${TMP_DIR}/${FILENAME}"
 
 BASE_URL="https://github.com/chainloop-dev/chainloop/releases/download/v${VERSION}"
-# Releases prior to Chainloop Open source are stored in a different location, we fallback if needed
-# TODO: remove this fallback once we reach stable
-FALLBACK_BASE_URL="https://storage.googleapis.com/chainloop-releases-public/cli/${VERSION}"
 
-downloadAndVerify $BASE_URL || downloadAndVerify $FALLBACK_BASE_URL
+URL="${BASE_URL}/${FILENAME}"
+# Download file, exit if not found - e.g. version does not exist
+fancy_print 0 "Step 1: Downloading: ${FILENAME}"
+curl -fsL $URL -o $FILE || (fancy_print 1 "The requested file does not exist: ${URL}"; exit 1)
+fancy_print 0 "Done...\n"
+
+# Get checksum file and check it
+fancy_print 0 "Step 1.2: Verifying checksum"
+CHECKSUM_FILENAME=checksums.txt
+CHECKSUM_FILE="${TMP_DIR}/${CHECKSUM_FILENAME}"
+URL="${BASE_URL}/${CHECKSUM_FILENAME}"
+curl -fsL $URL -o ${CHECKSUM_FILE} || (fancy_print 1 "The requested file does not exist: ${URL}"; exit 1)
+(cd ${TMP_DIR} && sha256sum --ignore-missing --quiet --check checksums.txt)
+fancy_print 2 "Checksum OK\n"
+
+# Verify checksum file signature
+if hash "cosign" &>/dev/null; then
+    # Constructing download FILE and URL
+    SIGNATURE_FILE="${CHECKSUM_FILENAME}.sig"
+    URL="${BASE_URL}/${SIGNATURE_FILE}"
+    # Download file, exit if not found - e.g. version does not exist
+    fancy_print 0 "Step 1.3: Verifying signature"
+    curl -fsOL $URL || (fancy_print 1 "The requested file does not exist: ${SIGNATURE_FILE}"; exit 1)
+    cosign verify-blob \
+        --key ${PUBLIC_KEY_URL} \
+        --signature ${SIGNATURE_FILE} \
+        ${CHECKSUM_FILE}
+
+    rm $SIGNATURE_FILE
+else
+    fancy_print 2 "\nSignature verification skipped, cosign is not installed\n"
+fi
 
 # Decompress the file
 fancy_print 0 "Step 2: Decompressing: ${FILE}"
