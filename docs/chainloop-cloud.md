@@ -4,7 +4,7 @@
 Chainloop is under active development, please don't use it as part of your critical infrastructure until it reaches the 1.0 release.
 :::
 
-Chainloop Cloud is a **free, public beta, Software as a Service instance of [Chainloop Core](https://github.com/chainloop-dev/chainloop)**. It's available to whoever wants to give Chainloop a try without the effort of [deploying their own instance](https://github.com/chainloop-dev/chainloop).
+Chainloop Cloud is a **free, public beta, Software as a Service instance of [Chainloop](https://github.com/chainloop-dev/chainloop)**. It's available to whoever wants to give Chainloop a try without the effort of [deploying their own instance](https://github.com/chainloop-dev/chainloop).
 
 The Chainloop **Command Line Interface (CLI) comes pre-configured to use the Chainloop cloud control plane**.
 
