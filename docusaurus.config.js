@@ -89,6 +89,12 @@ const config = {
             className: "header-github-link",
             "aria-label": "GitHub repository",
           },
+          {
+            href: "https://discord.gg/Sfw3HnRt",
+            position: "right",
+            className: "header-discord-link",
+            "aria-label": "Discord Server",
+          },
         ],
       },
       footer: {
