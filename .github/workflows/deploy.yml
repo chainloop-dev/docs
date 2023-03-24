@@ -77,7 +77,7 @@ jobs:
           chainloop attestation reset --trigger cancellation
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      CHAINLOOP_VERSION: 0.8.93
+      CHAINLOOP_VERSION: 0.8.95
       CHAINLOOP_ROBOT_ACCOUNT: ${{ secrets.CHAINLOOP_WF_RELEASE }}
       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
