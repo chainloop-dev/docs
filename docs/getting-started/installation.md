@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 Chainloop is comprised of two main components
 
-- A Control Plane that acts as single source of truth and management console.
+- A Server Side Component (Control Plane + Artifact Storage Proxy) that acts as single source of truth and management console.
 - A Command Line Interface (CLI) used to both a) operate on the control plane and b) run the attestation process on your CI/CD
 
 <Image img={require("./chainloop-parts.png")} className="light-mode-only" />
@@ -63,11 +63,15 @@ cd chainloop && make -C app/cli build
 </TabItem>
 </Tabs>
 
+## Deploy Chainloop (optional)
+
+Downloading the CLI is everything you need to give Chainloop a try since, by default, it points to a [running instance of Chainloop](https://docs.chainloop.dev/chainloop-cloud).
+
+You can also **run your own Chainloop instance** on your Kubernetes cluster by leveraging [this Helm Chart](https://github.com/chainloop-dev/chainloop/tree/main/deployment/chainloop).
+
 ## Configure CLI (optional)
 
-By default, Chainloop CLI points to a [running Software as a Service (SaaS) instance of Chainloop](../chainloop-cloud).
-
-If you are running your [own instance](https://github.com/chainloop-dev/chainloop) of Chainloop Control Plane. You can make the CLI point to your instance by using the `chainloop config save` command.
+If you are running your [own instance](https://github.com/chainloop-dev/chainloop/tree/main/deployment/chainloop) of Chainloop Control Plane. You can make the CLI point to your instance by using the `chainloop config save` command.
 
 ```sh
 chainloop config save \
