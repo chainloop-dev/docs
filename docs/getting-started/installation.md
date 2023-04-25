@@ -67,11 +67,11 @@ cd chainloop && make -C app/cli build
 
 Downloading the CLI is everything you need to give Chainloop a try since, by default, it points to a [running instance of Chainloop](https://docs.chainloop.dev/chainloop-cloud).
 
-You can also **run your own Chainloop instance** on your Kubernetes cluster by leveraging [this Helm Chart](https://github.com/chainloop-dev/chainloop/tree/main/deployment/chainloop).
+**To run a Chainloop instance** on your Kubernetes cluster follow [these instructions](/guides/deployment).
 
 ## Configure CLI (optional)
 
-If you are running your [own instance](https://github.com/chainloop-dev/chainloop/tree/main/deployment/chainloop) of Chainloop Control Plane. You can make the CLI point to your instance by using the `chainloop config save` command.
+If you [are running your own instance](/guides/deployment) of Chainloop Control Plane. You can make the CLI point to your instance by using the `chainloop config save` command.
 
 ```sh
 chainloop config save \
