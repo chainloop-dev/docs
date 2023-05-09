@@ -79,6 +79,8 @@ chainloop config save \
   --artifact-cas cas.acme.com
 ```
 
+Another option would be to build a custom version of CLI with default endpoints' values pointing at your Chainloop instance. Please learn more about this method in [the following doc](https://github.com/chainloop-dev/chainloop/tree/main/app/cli#updating-default-values).
+
 ## Authentication
 
 Authenticate to the Control Plane by running
