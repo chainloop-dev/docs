@@ -1,5 +1,10 @@
 miguel:
   name: Miguel Martinez Trivino
-  title: Founder at Chainloop, prev Bitnami/VMware, YC W11 alumnus
+  title: Co-founder at Chainloop, prev Bitnami/VMware, YC W11 alumnus
   url: https://twitter.com/migmartri
   image_url: https://github.com/migmartri.png
+daniel:
+  name: Daniel Liszka
+  title: Co-founder at Chainloop, prev Bitnami/VMware
+  url: https://twitter.com/danlishka
+  image_url: https://github.com/danlishka.png
