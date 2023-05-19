@@ -11,7 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install Cosign
-        uses: sigstore/cosign-installer@v2.5.0
+        uses: sigstore/cosign-installer@main
+        with:
+          cosign-release: 'v2.0.2'
+
       - name: Install Chainloop
         run: |
           curl -sfL https://docs.chainloop.dev/install.sh | bash -s -- --version v${{ env.CHAINLOOP_VERSION }}
@@ -77,7 +80,7 @@ jobs:
           chainloop attestation reset --trigger cancellation
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      CHAINLOOP_VERSION: 0.9.0
+      CHAINLOOP_VERSION: 0.9.1
       CHAINLOOP_ROBOT_ACCOUNT: ${{ secrets.CHAINLOOP_WF_RELEASE }}
       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
