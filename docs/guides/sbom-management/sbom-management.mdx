@@ -48,6 +48,7 @@ The last column shows your contract id for your workflow. Set the `CONTRACT_ID` 
 export CONTRACT_ID=<your_contract_id>
 # export CONTRACT_ID=02eccacf-ad1d-4c31-844c-e515484293f7 
 ```
+
 Please check your contract to confirm that it is currently empty.
 ```
 chainloop wf contract describe --id $CONTRACT_ID
@@ -56,17 +57,20 @@ chainloop wf contract describe --id $CONTRACT_ID
   "schemaVersion": "v1"
 }
 ```
+
 In Chainloop, [contracts](/getting-started/workflow-definition#workflow-and-contract-creation) play an essential role in separating teams and helping SecOps teams communicate their requirements to developers. This eliminates the need for extra meetings or calls, and tracking the status and spread of these requirements throughout the organization is easy. SecOps get a system that facilitates the ongoing adaptation of their security and compliance requirements, while developers are able to easily integrate their build and release pipelines once. With a one-time implementation on the left, it becomes a plug-and-play solution on the right.
 We will add one requirement to our contract to ensure Developers provide a CycloneDX SBOM during each workflow run.
 <CodeBlock language="yaml" title="contract.yaml">
   {ContractYAML}
 </CodeBlock>
+
 ```bash
 chainloop workflow contract update \
  --id $CONTRACT_ID \
  --name my-contract \
  -f https://github.com/chainloop-dev/docs/blob/main/examples/contracts/sbom/cyclonedx.yaml
 ```
+
 In the future, the Security team may update this contract with new requirements. Those changes will be automatically propagated across the organization to developers. More on Workflows and Contracts in [this document](/getting-started/workflow-definition).
 
 ## Storing and attesting SBOMs
