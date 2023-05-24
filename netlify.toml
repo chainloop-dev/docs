@@ -1,3 +1,14 @@
 [build]
 publish = "build"
 command = "npm run build"
+
+[[redirects]]
+  from = "/blog/*"
+  to = "https://chainloop.dev/blog/:splat"
+  status = 300
+
+
+[[redirects]]
+  from = "/blog"
+  to = "https://chainloop.dev/blog"
+  status = 300
