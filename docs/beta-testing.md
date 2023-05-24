@@ -40,4 +40,4 @@ Flags:
 
 We would love to hear from you, any thoughts, requests, issues your encountered, or even compliments :)
 
-Please send those our way through [this contact form](https://us21.list-manage.com/contact-form?u=801f42b3abafc40b1a17c5f25&form_id=3f3bbfe15e6fcd4a60be9b966652cfd5) or [email](mailto:feedback@chainloop.dev).
+Please send those our way through [this contact form](https://chainloop.dev/contact) or [email](mailto:feedback@chainloop.dev).

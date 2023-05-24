@@ -69,6 +69,11 @@ const config = {
         // Optional: see doc section below
         contextualSearch: true,
       },
+      colorMode: {
+        defaultMode: 'dark',
+        disableSwitch: false,
+        respectPrefersColorScheme: false,
+      },
       image: "img/logo.svg",
       navbar: {
         title: "Chainloop documentation",
@@ -106,7 +111,7 @@ const config = {
           },
           {
             label: "Contact",
-            href: "https://us21.list-manage.com/contact-form?u=801f42b3abafc40b1a17c5f25&form_id=3f3bbfe15e6fcd4a60be9b966652cfd5",
+            href: "https://chainloop.dev/contact",
           },
           {
             label: "Blog",
