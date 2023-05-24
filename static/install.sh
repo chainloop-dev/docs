@@ -47,6 +47,26 @@ require() {
     fi
 }
 
+# check if a command exist
+is_command() {
+  command -v "$1" >/dev/null
+}
+
+# checksums.txt file validation
+# example: check_sha256 "${TMP_DIR}" checksums.txt
+validate_checksums_file() {
+  cd "$1"
+  if is_command sha256sum; then
+    sha256sum --ignore-missing --quiet --check "$2"
+  elif is_command shasum; then
+    shasum -a 256 --ignore-missing --quiet --check checksums.txt
+  else
+    fancy_print 1 "We were not able to verify checksums. Commands sha256sum, shasum are not found."
+    return 1
+  fi
+  fancy_print 2 "Checksum OK\n"
+}
+
 # Parse input arguments
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -148,8 +168,7 @@ CHECKSUM_FILENAME=checksums.txt
 CHECKSUM_FILE="${TMP_DIR}/${CHECKSUM_FILENAME}"
 URL="${BASE_URL}/${CHECKSUM_FILENAME}"
 curl -fsL $URL -o ${CHECKSUM_FILE} || (fancy_print 1 "The requested file does not exist: ${URL}"; exit 1)
-(cd ${TMP_DIR} && sha256sum --ignore-missing --quiet --check checksums.txt)
-fancy_print 2 "Checksum OK\n"
+validate_checksums_file "${TMP_DIR}" checksums.txt
 
 # Verify checksum file signature
 if hash "cosign" &>/dev/null; then
