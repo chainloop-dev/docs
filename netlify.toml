@@ -5,10 +5,12 @@ command = "npm run build"
 [[redirects]]
   from = "/blog/*"
   to = "https://chainloop.dev/blog/:splat"
-  status = 300
+  status = 302
+  force = true
 
 
 [[redirects]]
   from = "/blog"
   to = "https://chainloop.dev/blog"
-  status = 300
+  status = 302
+  force = true
