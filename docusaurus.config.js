@@ -70,7 +70,7 @@ const config = {
         contextualSearch: true,
       },
       colorMode: {
-        defaultMode: 'light',
+        defaultMode: 'dark',
         disableSwitch: false,
         respectPrefersColorScheme: false,
       },
