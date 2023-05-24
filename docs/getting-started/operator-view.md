@@ -209,4 +209,4 @@ INF file downloaded! path=/tmp/rootfs.tar.gz
 
 ## Third-Party integrations
 
-Operators can now setup third-party integrations starting with Dependency-Track for Software Bill Of Materials (SBOMs) analysis. Read more about this capability in our [blog post](/blog/introducing-third-party-integrations) or dive right in with [your first integration](/guides/dependency-track/) :)
+Operators can now setup third-party integrations starting with Dependency-Track for Software Bill Of Materials (SBOMs) analysis. Read more about this capability in our [blog post](https://chainloop.dev/blog/introducing-third-party-integrations) or dive right in with [your first integration](/guides/dependency-track/) :)

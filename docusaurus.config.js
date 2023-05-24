@@ -79,7 +79,7 @@ const config = {
         },
         items: [
           {
-            to: "blog",
+            href: "https://chainloop.dev/blog",
             label: "Blog",
             position: "right",
           },
@@ -110,7 +110,7 @@ const config = {
           },
           {
             label: "Blog",
-            to: "blog",
+            href: "https://chainloop.dev/blog",
           },
           {
             label: "GitHub",
