@@ -53,24 +53,37 @@ The API Key can be created by going to Settings -> Access Management -> Teams ->
 
 ### 1 - Setup the integration in your Chainloop account
 
-Using the [Chainloop CLI](/getting-started/installation), you can add an instance of Dependency-Track that later on can be attached to any of your workflows. This is done via the `chainloop integration add dependency-track` command with three inputs.
+Using the [Chainloop CLI](/getting-started/installation), you can register an instance of Dependency-Track that later on can be attached to any of your workflows. 
+
+This is done via the `chainloop integration registered add` command but first let's find out what are the required inputs using the `available describe` command.
 
 ```bash
-$ chainloop integration add dependency-track -h
-Add Dependency-Track integration
+$ chainloop integration available describe --id dependencytrack
 
-Usage:
-  chainloop integration add dependency-track [flags]
-
-Flags:
-      --allow-project-auto-create   Allow auto-creation of projects or require to always specify an existing one
-      --instance string             dependency track instance URL
+┌─────────────────┬─────────┬────────────────────────────────────────────────────────┐
+│ ID              │ VERSION │ DESCRIPTION                                            │
+├─────────────────┼─────────┼────────────────────────────────────────────────────────┤
+│ dependencytrack │ 0.2     │ Send CycloneDX SBOMs to your Dependency-Track instance │
+└─────────────────┴─────────┴────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────────────┐
+│ Registration inputs                                                                  │
+├─────────────────┬──────────────┬──────────┬──────────────────────────────────────────┤
+│ FIELD           │ TYPE         │ REQUIRED │ DESCRIPTION                              │
+├─────────────────┼──────────────┼──────────┼──────────────────────────────────────────┤
+│ allowAutoCreate │ boolean      │ no       │ Support of creating projects on demand   │
+│ apiKey          │ string       │ yes      │ The API key to use for authentication    │
+│ instanceURI     │ string (uri) │ yes      │ The URL of the Dependency-Track instance │
+└─────────────────┴──────────────┴──────────┴──────────────────────────────────────────┘
+...
 ```
+
+We can see that there are two required inputs: `apiKey` and `instanceURI`.
+
 
 Let's go ahead and add an integration for an instance hosted at https://dependency-track.chainloop.dev that allows the auto-creation of projects. You'll get a prompt to introduce the API key
 
 ```
-$ chainloop integration add dependency-track add --instance https://dependency-track.chainloop.dev --allow-project-auto-create
+$ chainloop integration registered add dependencytrack --opt instanceURI=https://dependency-track.chainloop.dev --opt apiKey=[REDACTED] --opt=allowAutoCreate=true
 ┌──────────────────────────────────────┬──────────────────┬──────────────────────────────────────────────┬─────────────────────┐
 │ ID                                   │ KIND             │ CONFIG                                       │ CREATED AT          │
 ├──────────────────────────────────────┼──────────────────┼──────────────────────────────────────────────┼─────────────────────┤
@@ -87,33 +100,41 @@ Once the integration is live, it can be attached to any workflow. In practice, t
 The same integration can be attached to multiple workflows
 :::
 
-The attachment is done via `chainloop workflow integration attach dependency-track` command.
+The attachment is done via `chainloop integration attached add` command. But as we did before, let's first find out what are the required inputs using the `available describe` command.
 
-During the attachment process, you can decide whether to send the SBOMs to a specific project (`--project-id`) or create a new one defined by the provided `--project-name`. For the latter to work, you need to make sure that the integration was setup with `--allow-project-auto-create` option.
 
 ```bash
-$ chainloop workflow integration attach dependency-track -h
-Attach a Dependency-Track integration to this workflow
+$ chainloop integration available describe --id dependencytrack
 
-Usage:
-  chainloop workflow integration attach dependency-track [flags]
+┌─────────────────┬─────────┬────────────────────────────────────────────────────────┐
+│ ID              │ VERSION │ DESCRIPTION                                            │                                      
+├─────────────────┼─────────┼────────────────────────────────────────────────────────┤                         
+│ dependencytrack │ 0.2     │ Send CycloneDX SBOMs to your Dependency-Track instance │           
+└─────────────────┴─────────┴────────────────────────────────────────────────────────┘
+...
+┌───────────────────────────────────────────────────────────────────────────────────────────┐
+│ Attachment inputs                                                                         │
+├─────────────┬────────┬──────────┬─────────────────────────────────────────────────────────┤
+│ FIELD       │ TYPE   │ REQUIRED │ DESCRIPTION                                             │
+├─────────────┼────────┼──────────┼─────────────────────────────────────────────────────────┤
+│ projectID   │ string │ no       │ The ID of the existing project to send the SBOMs to     │
+│ projectName │ string │ no       │ The name of the project to create and send the SBOMs to │
+└─────────────┴────────┴──────────┴─────────────────────────────────────────────────────────┘
 
-Flags:
-      --integration string    ID of the integration already registered in this organization
-      --project-id string     Identifier of the Dependency-Track you want this integration to talk to
-      --project-name string   Create a project with the provided name instead of using an existing one
-      --workflow string       ID of the workflow to attach this integration
 ```
+
+During the attachment process, you can decide whether to send the SBOMs to a specific project `projectID` or create a new one defined by the provided `projectName`. For the latter to work, you need to make sure that the integration was setup with `--allow-project-auto-create` option.
 
 :::note
 The workflowID can be found by running `chainloop workflow list`
 :::
 
 ```bash
-$ chainloop workflow integration attach dependency-track \
-    --project-name example-project \
+# Attach integration to a specific workflow
+$ chainloop integration attached add \
     --integration c48f3041-5745-4773-aed9-ccf2f288b2e4 \
-    --workflow b0c0c6a8-b98c-4acf-97f6-480a08a79ae7
+    --workflow b0c0c6a8-b98c-4acf-97f6-480a08a79ae7 \
+    --opt projectName=example-project 
 ```
 
 That's all!
