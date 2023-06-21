@@ -77,6 +77,8 @@ ${content}`,
         requestConfig: { responseType: "arraybuffer" },
       },
     ],
+    // Integrations index remote content
+    // yarn run docusaurus download-remote-integrations-index
     [
       "docusaurus-plugin-remote-content",
       {
