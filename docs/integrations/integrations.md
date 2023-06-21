@@ -1,14 +1,13 @@
 ---
 title: Integrations
-image: /docs/img/fanout-sdk.png
-sidebar_position: 1
+image: /img/fanout.png
 ---
 
 # Chainloop Integrations
 
 Operators can extend Chainloop functionality by setting up third-party integrations that operate on your attestation metadata. Integrations can range from sending a Slack message, uploading the attestation to a storage backend or sending a Software Bill Of Materials (SBOMs) to a third-party service for analysis, for example.
 
-![FanOut Plugin](../img/fanout.png)
+![FanOut Plugin](/img/fanout.png)
 
 Below you can find the list of currently available integrations. If you can't find the integration you are looking for, feel free [to reach out](https://github.com/chainloop-dev/chainloop/issues) or [contribute your own](https://github.com/chainloop-dev/chainloop/blob/main/app/controlplane/plugins/README.md)!
 
