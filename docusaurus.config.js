@@ -30,13 +30,16 @@ const config = {
       },
     ],
     // Automatically download remote content
-    // Plugin overview guide
+    // Plugin overview guide, to update it run
+    // yarn run docusaurus download-remote-plugins-overview
     [
       "docusaurus-plugin-remote-content",
       {
         name: "plugins-overview",
         // DO NOT automatically download the file
         noRuntimeDownloads: true,
+        // Keep the downloaded files
+        performCleanup: false,
         sourceBaseUrl:
           "https://raw.githubusercontent.com/chainloop-dev/chainloop/main/app/controlplane/plugins/",
         outDir: "docs/integrations/development", // the base directory to output to.
@@ -58,12 +61,14 @@ ${content}`,
         },
       },
     ],
-    // Download the associated images
+    // Download the associated images, to update it
+    // yarn run docusaurus download-remote-plugins-overview-img
     [
       "docusaurus-plugin-remote-content",
       {
         name: "plugins-overview-img",
         noRuntimeDownloads: true,
+        performCleanup: false,
         sourceBaseUrl:
           "https://raw.githubusercontent.com/chainloop-dev/chainloop/main/docs/img",
         outDir: "docs/img",
