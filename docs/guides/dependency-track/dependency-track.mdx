@@ -58,7 +58,7 @@ Using the [Chainloop CLI](/getting-started/installation), you can register an in
 This is done via the `chainloop integration registered add` command but first let's find out what are the required inputs using the `available describe` command.
 
 ```bash
-$ chainloop integration available describe --id dependencytrack
+$ chainloop integration available describe --id dependency-track
 
 ┌─────────────────┬─────────┬────────────────────────────────────────────────────────┐
 │ ID              │ VERSION │ DESCRIPTION                                            │
@@ -83,7 +83,7 @@ We can see that there are two required inputs: `apiKey` and `instanceURI`.
 Let's go ahead and add an integration for an instance hosted at https://dependency-track.chainloop.dev that allows the auto-creation of projects. You'll get a prompt to introduce the API key
 
 ```
-$ chainloop integration registered add dependencytrack --opt instanceURI=https://dependency-track.chainloop.dev --opt apiKey=[REDACTED] --opt=allowAutoCreate=true
+$ chainloop integration registered add dependency-track --opt instanceURI=https://dependency-track.chainloop.dev --opt apiKey=[REDACTED] --opt=allowAutoCreate=true
 ┌──────────────────────────────────────┬──────────────────┬──────────────────────────────────────────────┬─────────────────────┐
 │ ID                                   │ KIND             │ CONFIG                                       │ CREATED AT          │
 ├──────────────────────────────────────┼──────────────────┼──────────────────────────────────────────────┼─────────────────────┤
@@ -104,7 +104,7 @@ The attachment is done via `chainloop integration attached add` command. But as 
 
 
 ```bash
-$ chainloop integration available describe --id dependencytrack
+$ chainloop integration available describe --id dependency-track
 
 ┌─────────────────┬─────────┬────────────────────────────────────────────────────────┐
 │ ID              │ VERSION │ DESCRIPTION                                            │                                      
