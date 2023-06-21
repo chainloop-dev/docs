@@ -29,6 +29,48 @@ const config = {
         disableInDev: false,
       },
     ],
+    // Automatically download remote content
+    // Plugin overview guide
+    [
+      "docusaurus-plugin-remote-content",
+      {
+        name: "plugins-overview",
+        // DO NOT automatically download the file
+        noRuntimeDownloads: true,
+        sourceBaseUrl:
+          "https://raw.githubusercontent.com/chainloop-dev/chainloop/main/app/controlplane/plugins/",
+        outDir: "docs/integrations/development", // the base directory to output to.
+        documents: ["README.md"], // the file names to download
+        modifyContent: (filename, content) => {
+          if (filename.includes("README")) {
+            return {
+              content: `---
+title: Plugins Overview
+image: /docs/img/fanout-sdk.png
+---
+
+${content}`,
+              filename: "overview.md"
+            };
+          }
+
+          return undefined;
+        },
+      },
+    ],
+    // Download the associated images
+    [
+      "docusaurus-plugin-remote-content",
+      {
+        name: "plugins-overview-img",
+        noRuntimeDownloads: true,
+        sourceBaseUrl:
+          "https://raw.githubusercontent.com/chainloop-dev/chainloop/main/docs/img",
+        outDir: "docs/img",
+        documents: ["fanout.png", "fanout-sdk.png"],
+        requestConfig: { responseType: "arraybuffer" },
+      },
+    ],
   ],
 
   presets: [
@@ -70,7 +112,7 @@ const config = {
         contextualSearch: true,
       },
       colorMode: {
-        defaultMode: 'dark',
+        defaultMode: "dark",
         disableSwitch: false,
         respectPrefersColorScheme: false,
       },
