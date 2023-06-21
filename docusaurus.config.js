@@ -29,7 +29,7 @@ const config = {
         disableInDev: false,
       },
     ],
-    // Automatically download remote content
+    // Download remote content
     // Plugin overview guide, to update it run
     // yarn run docusaurus download-remote-plugins-overview
     [
@@ -75,6 +75,32 @@ ${content}`,
         outDir: "docs/img",
         documents: ["fanout.png", "fanout-sdk.png"],
         requestConfig: { responseType: "arraybuffer" },
+      },
+    ],
+    [
+      "docusaurus-plugin-remote-content",
+      {
+        name: "integrations-index",
+        noRuntimeDownloads: true,
+        performCleanup: false,
+        sourceBaseUrl: "https://raw.githubusercontent.com/chainloop-dev/chainloop/main/docs",
+        outDir: "docs/integrations",
+        documents: ["integrations.md"],
+        modifyContent: (filename, content) => {
+          if (filename.includes("integrations.md")) {
+            return {
+              content: `---
+title: Integrations
+image: /docs/img/fanout-sdk.png
+sidebar_position: 1
+---
+
+${content.replace("./img/fanout.png", "../img/fanout.png")}`,
+            };
+          }
+
+          return undefined;
+        },
       },
     ],
   ],
