@@ -94,7 +94,6 @@ ${content}`,
               content: `---
 title: Integrations
 image: /docs/img/fanout-sdk.png
-sidebar_position: 1
 ---
 
 ${content.replace("./img/fanout.png", "../img/fanout.png")}`,
