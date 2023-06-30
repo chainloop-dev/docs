@@ -24,7 +24,7 @@ In addition to that, any material of type `SBOM_CYCLONEDX_JSON` or `SBOM_SPDX_JS
   {ContractYAML}
 </CodeBlock>
 
-So the first step is to make sure you have a workflow that describes and attest Software Bill Of Materials. Learn more on how to to set it up [here](/guides/sbom-management/).
+So the first step is to make sure you have a workflow that describes and attest Software Bill Of Materials. Learn more on how to set it up [here](/guides/sbom-management/).
 
 Proceed to the next step once you have a workflow.
 
@@ -37,7 +37,7 @@ There are two steps involved to enable this integration:
 
 ### Registration
 
-Currently, this integration only supports [Google Cloud Storage](https://cloud.google.com/storage) (GCS) as storage provider with more to come in the future. If you are interested in a specific provider, please [let us know](https://github.com/chainloop-dev/chainloop/issues/new)
+Currently, this integration only supports [Google Cloud Storage](https://cloud.google.com/storage) (GCS) as a storage provider, with more to come in the future. If you are interested in a specific provider, please [let us know](https://github.com/chainloop-dev/chainloop/issues/new)
 
 #### Using Google Cloud Storage (GCS)
 
@@ -46,7 +46,7 @@ Currently, this integration only supports [Google Cloud Storage](https://cloud.g
 - A Google Cloud Platform (GCP) account
 - A GCP project with a GCS bucket
 - A GCP service account with write access to the bucket. See [Creating and managing service accounts](https://cloud.google.com/iam/docs/creating-managing-service-accounts) for more information. 
-- Once create, download the service account [JSON credentials file](https://developers.google.com/workspace/guides/create-credentials#create_credentials_for_a_service_account)
+- Once created, download the service account [JSON credentials file](https://developers.google.com/workspace/guides/create-credentials#create_credentials_for_a_service_account)
 
 To get started, you need to register the integration in your Chainloop organization. To know what parameters are accepted, you can use the `chainloop integration available describe` command.
 
@@ -86,7 +86,7 @@ $ chainloop integration registered add guac --opt bucket=test-guac --opt credent
 
 ### Attachment
 
-Then, in order to use the integration, you need to attach it to a workflow. That way, its attestation metadata and  any associated SBOMs are routed to the configured storage backend. 
+Then, in order to use the integration, you need to attach it to a workflow. That way, its attestation metadata and any associated SBOMs are routed to the configured storage backend. 
 
 To do so, just run the `integration attached add` and provide the IDs of the workflow and integration you just registered.
 
