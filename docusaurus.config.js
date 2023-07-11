@@ -103,6 +103,37 @@ ${content.replaceAll("./img/fanout.png", "/img/fanout.png")}`,
         },
       },
     ],
+    // Helm Chart readme
+    // yarn run docusaurus download-remote-deployment-readme
+    [
+      "docusaurus-plugin-remote-content",
+      {
+        name: "deployment-readme",
+        noRuntimeDownloads: true,
+        performCleanup: false,
+        sourceBaseUrl:
+          "https://raw.githubusercontent.com/chainloop-dev/chainloop/main/deployment/chainloop",
+        outDir: "docs/guides/deployment/", // the base directory to output to.
+        documents: ["README.md"], // the file names to download
+        modifyContent: (filename, content) => {
+          if (filename.includes("README")) {
+            return {
+              content: `---
+title: Deploy on Kubernetes
+image: ./deployment.png
+---
+import Image from "@theme/IdealImage";
+
+${content.replaceAll("![Deployment](../../docs/img/deployment.png)", "<Image img={require(\"./deployment.png\")} className=\"light-mode-only\" /> <Image img={require(\"./deployment-dark.png\")} className=\"dark-mode-only\" />") 
+.replaceAll("![Deployment](../../docs/img/deployment-dev.png)", "<Image img={require(\"./deployment-dev.png\")} className=\"light-mode-only\" /> <Image img={require(\"./deployment-dev-dark.png\")} className=\"dark-mode-only\" />")} `,
+              filename: "deployment.mdx"
+            };
+          }
+
+          return undefined;
+        },
+      },
+    ],
   ],
 
   presets: [
