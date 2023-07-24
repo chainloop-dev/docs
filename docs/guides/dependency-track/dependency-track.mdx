@@ -16,7 +16,7 @@ Chainloop can be configured to **automatically send any [CycloneDX Software Bill
 
 <Image img={require("./overview-dark.png")} className="dark-mode-only" />
 
-If you have defined in your [Workflow Contract](/reference/operator/contract) a material of type `SBOM_CYCLONEDX_JSON`. This SBOM file, **in addition to being stored in your OCI registry, will be sent to Dependency-Track**.
+If you have defined in your [Workflow Contract](/reference/operator/contract) a material of type `SBOM_CYCLONEDX_JSON`. This SBOM file, **in addition to being stored in your [CAS Backend](/reference/operator/cas-backend), will be sent to Dependency-Track**.
 
 <CodeBlock language="yaml" title="skynet.contract.yaml">
   {ContractYAML}
