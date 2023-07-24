@@ -24,4 +24,4 @@ That said, there are [benefits](/reference/operator/contract#runner-context) for
 
 #### Does Chainloop store my Artifacts and Attestation metadata?
 
-No. They are stored in [your CAS backend](/reference/operator/cas-backend).
+No. They are stored in [your Content-Addressable Storage (CAS)](/reference/operator/cas-backend).

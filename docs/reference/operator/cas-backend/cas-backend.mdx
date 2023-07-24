@@ -10,9 +10,9 @@ import CodeBlock from "@theme/CodeBlock";
 
 As part of an attestation process, you might want to collect different pieces of evidence such as Software Bill Of Materials (SBOMs), test results, runner logs, etc and then attach them to the final in-toto attestation. 
 
-Chainloop helps with this process by providing a Content Addressable Storage API proxy that 
+Chainloop helps with this process by providing a Content Addressable Storage API proxy that:
 
-- **Abstracts away the underlying storage backend**. Currently, we support OCI registries as storage backend but you can expect blob storage, Artifactory and other storage backends to be supported in the future.  
+- **Abstracts away the underlying storage backend**. Currently, we support OCI registries as storage backends but you can expect blob storage, Artifactory and other storage backends to be supported in the future.  
 - Makes sure that the pieces of evidence are stored **in a tamper-proof manner**. This is achieved by storing the evidences named after their SHA256 content digest, which is calculated by the client, verified by the CAS server.
 - **Enables support of large pieces of evidence** since the content digest reference is what will be stored in the attestation. 
 
@@ -27,7 +27,7 @@ You can setup as many CAS backends as you want, but you can only have **one enab
 In Chainloop, CAS backends can be managed with the `chainloop cas-backend` command.
 
 
-```bash title="List backends"
+```bash
 $ chainloop cas-backend ls                                              
 ┌─────────────────────────────────┬──────────┬─────────────────────────────────────┬───────────────┬─────────┐
 │ LOCATION                        │ PROVIDER │ DESCRIPTION                         │ LIMITS        │ DEFAULT │
@@ -49,7 +49,7 @@ New CAS Backends will be added over time. If yours is not implemented yet, pleas
 
 Chainloop comes pre-configured with what we call an `inline` backend.
 
-The inline backend **embeds** the pieces of evidence in the resulting attestations. This is useful to get started quickly but since the pieces of evidences are embedded in the attestation, their size is limited.
+The inline backend **embeds** the pieces of evidence in the resulting attestations. This is useful to get started quickly but since the metadata is embedded in the attestation, its max size is limited.
 
 We recommend that once you get closer to a production-ready setup, you switch to a more robust backend such as an OCI registry.
 
