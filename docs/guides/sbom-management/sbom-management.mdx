@@ -92,7 +92,7 @@ And shortly after, add it to the previously initialized attestation process.
 chainloop att add --name sbom-cdx --value sbom.cyclonedx.json
 ```
 
-When you execute this command, it will perform two actions. Firstly, it will upload the SBOMS to a Content Addressable Storage in OCI repository that you added during the account setup. Secondly, it will verify that the content is indeed a CycloneDX.
+When you execute this command, it will perform two actions. Firstly, it will upload the SBOMS to a [Content Addressable Storage backend](../../reference/operator/cas-backend) that you added during the account setup. Secondly, it will verify that the content is indeed a CycloneDX.
 
 ### Attest and send the SBOM to Chainloop
 We send SBOMs to Chainloop for storage and additional analysis whenever we release a new version of our docs. 
