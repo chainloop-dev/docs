@@ -75,6 +75,23 @@ We recommend that once you get closer to a production-ready setup, you switch to
 
   </TabItem>
 
+  <TabItem value="acr" label="Azure Container Registry">
+
+```bash
+  # Using token-auth with push (content/read + content/write) permissions
+  # https://learn.microsoft.com/en-us/azure/container-registry/container-registry-repository-scoped-permissions
+
+  $ chainloop cas-backend add oci \
+    # i.e chainloopcas.azurecr.io/cas
+    --repo [registry-name].azurecr.io/[my-repository] \
+    --username [token-name] \
+    --password [token-password] \
+    --default
+```
+
+  </TabItem>
+
+
   <TabItem value="github" label="GitHub packages" default>
 
 ```bash
