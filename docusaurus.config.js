@@ -113,7 +113,7 @@ ${content.replaceAll("./img/fanout.png", "/img/fanout.png")}`,
         performCleanup: false,
         sourceBaseUrl:
           "https://raw.githubusercontent.com/chainloop-dev/chainloop/main/deployment/chainloop",
-        outDir: "docs/guides/deployment/", // the base directory to output to.
+        outDir: "docs/guides/deployment/k8s/", // the base directory to output to.
         documents: ["README.md"], // the file names to download
         modifyContent: (filename, content) => {
           if (filename.includes("README")) {

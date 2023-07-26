@@ -10,7 +10,7 @@ Yes, Chainloop source code has been Open Sourced and can be found [here](https:/
 
 #### Can I run my own instance of Chainloop end to end?
 
-Yes, please refer to this [guide](./guides/deployment/)
+Yes, please refer to this [guide](./guides/deployment/k8s)
 
 #### In this documentation site there are references to Chainloop Cloud, what is it?
 
