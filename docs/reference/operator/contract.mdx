@@ -112,6 +112,24 @@ The following environment variables will be automatically added to the attestati
 
 A link to the Gitlab CI job will be recorded in the control plane too during initialization.
 
+### `AZURE_DEVOPS_PIPELINE`
+
+The following environment variables will be automatically added to the attestation. For more information on what they mean refer to [this link](https://learn.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml).
+
+- `BUILD_REQUESTEDFOREMAIL`
+- `BUILD_REQUESTEDFOR`
+- `BUILD_REPOSITORY_URI`
+- `BUILD_REPOSITORY_NAME`
+- `BUILD_BUILDID`
+- `BUILD_BUILDNUMBER`
+- `BUILD_BUILDURI`
+- `BUILD_REASON`
+- `AGENT_VERSION`
+- `TF_BUILD`
+
+A link to the Azure Pipeline build will be recorded in the control plane too during initialization.
+
+
 :::tip
 Remember, if all the **env variables** that you need are not defined in the context, you can extend such list via the `envAllowList` option.
 :::
