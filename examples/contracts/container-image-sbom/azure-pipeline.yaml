@@ -10,4 +10,4 @@ materials:
     name: sbom
 
 runner:
-  type: "AZURE_DEVOPS_PIPELINE"
+  type: "AZURE_PIPELINE"
