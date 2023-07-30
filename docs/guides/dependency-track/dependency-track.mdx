@@ -150,3 +150,32 @@ Next time Chainloop receives an attestation, its contained SBOMs will be uploade
 - Adds the SBOM materials and send the attestation to Chainloop.
 
 Then Chainloop is configured similarly to what was shown above to send the received SBOM to Dependency-Track.
+
+## Dynamically set the project name
+
+You can also use interpolation to calculate the project name dynamically based on the annotations set in the materials. For example, let's say that you have the following material in the contract
+
+```json
+"materials":  [
+    {
+      "type":  "SBOM_CYCLONEDX_JSON",
+      "name":  "controlplane-sbom",
+      "annotations":  [
+        {
+          "name":  "component",
+          "value":  "controlplane"
+        }
+      ]
+...
+```
+
+You can then use the `{{ .Material.Annotations.component }}` template during attachment, for example
+
+```bash
+$ chainloop integration attached add \
+    ...
+    --opt projectName="project-{{ .Material.Annotations.component }}"
+```
+
+
+this will send the SBOM to a project called `project-controlplane`

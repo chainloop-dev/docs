@@ -7,6 +7,12 @@ materials:
       skynet-control-plane
       # The output flag indicates that the material will be part of the attestation subject
     output: true
+    # Arbitrary annotations can be added to the material
+    annotations:
+      - name: component
+        value: control-plane
+      # The value can be left empty so it can be provided at attestation time
+      - name: asset
   # ARTIFACT kinds will first get uploaded to your artifact registry via the built-in Content Addressable Storage (CAS)
   - type: ARTIFACT
     name: rootfs
