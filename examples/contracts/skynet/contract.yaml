@@ -1,4 +1,8 @@
 schemaVersion: v1
+# Arbitrary set of annotations can be added to the contract and will be part of the attestation
+annotations:
+  - name: version
+    value: oss # if the value is left empty, it will be required and resolved at attestation time
 # Three required and one optional materials of three different kinds
 materials:
   # CONTAINER_IMAGE kinds will get resolved to retrieve their repository digest
@@ -7,6 +11,12 @@ materials:
       skynet-control-plane
       # The output flag indicates that the material will be part of the attestation subject
     output: true
+    # Arbitrary annotations can be added to the material
+    annotations:
+      - name: component
+        value: control-plane
+      # The value can be left empty so it can be provided at attestation time
+      - name: asset
   # ARTIFACT kinds will first get uploaded to your artifact registry via the built-in Content Addressable Storage (CAS)
   - type: ARTIFACT
     name: rootfs

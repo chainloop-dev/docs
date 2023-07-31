@@ -1,9 +1,31 @@
 schemaVersion: "v1"
+// Arbitrary set of annotations can be added to the contract and will be part of the attestation
+annotations: [
+	{
+		name:  "version"
+		value: "oss" // if the value is left empty, it will be required and resolved at attestation time
+	}
+]
 // Three required and one optional materials of three different kinds
 // The output flag indicates that the material will be part of the attestation subject
 materials: [
 	// CONTAINER_IMAGE kinds will get resolved to retrieve their repository digest
-	{type: "CONTAINER_IMAGE", name: "skynet-control-plane", output: true},
+	{
+		type:   "CONTAINER_IMAGE"
+		name:   "skynet-control-plane"
+		output: true
+		// Arbitrary annotations can be added to the material
+		annotations: [
+			{
+				name:  "component"
+				value: "control-plane"
+			},
+			{
+				// The value can be left empty so it can be provided at attestation time
+				name: "asset"
+			},
+		]
+	},
 	// ARTIFACT kinds will first get uploaded to the built-in Content Addressable Storage (CAS)
 	{type: "ARTIFACT", name: "rootfs"},
 	{type: "ARTIFACT", name: "dockerfile", optional: true},
