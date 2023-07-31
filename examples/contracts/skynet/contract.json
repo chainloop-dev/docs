@@ -1,5 +1,11 @@
 {
   "schemaVersion": "v1",
+  "annotations": [
+    {
+      "name": "version",
+      "value": "oss"
+    }
+  ],
   "materials": [
     {
       "type": "CONTAINER_IMAGE",
