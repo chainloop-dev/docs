@@ -34,6 +34,10 @@ materials: [
 	// SBOMs will be uploaded to the CAS and referenced in the attestation
 	// Both SBOM_CYCLONEDX_JSON and SBOM_SPDX_JSON are supported
 	{type: "SBOM_CYCLONEDX_JSON", name: "skynet-sbom"},
+  	// CSAF_VEX and OPENVEX are supported
+	{type: "OPENVEX", name: "disclosure"},
+	// And static analysis reports in SARIF format
+	{type: "SARIF", name: "static-out"},
 ]
 
 // Env vars we want the system to resolve and inject during attestation initialization

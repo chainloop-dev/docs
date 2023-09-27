@@ -24,13 +24,19 @@ materials:
   - type: ARTIFACT
     name: dockerfile
     optional: true
-  # STRING kind materials will be injected as simple keypairs
-  - type: STRING
-    name: build-ref
   # SBOMs will be uploaded to the artifact registry and referenced in the attestation
   # Both SBOM_CYCLONEDX_JSON and SBOM_SPDX_JSON are supported
   - type: SBOM_CYCLONEDX_JSON
     name: skynet-sbom
+  # CSAF_VEX and OPENVEX are supported
+  - type: OPENVEX
+    name: disclosure
+  # And static analysis reports in SARIF format
+  - type: SARIF
+    name: static-out
+  # STRING kind materials will be injected as simple keypairs
+  - type: STRING
+    name: build-ref
 
 # Env vars we want the system to resolve and inject during attestation initialization
 # Additional ones can be inherited from the specified runner context below
