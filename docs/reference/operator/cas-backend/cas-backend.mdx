@@ -8,27 +8,25 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import CodeBlock from "@theme/CodeBlock";
 
-As part of an attestation process, you might want to collect different pieces of evidence such as Software Bill Of Materials (SBOMs), test results, runner logs, etc and then attach them to the final in-toto attestation. 
+As part of an attestation process, you might want to collect different pieces of evidence such as Software Bill Of Materials (SBOMs), test results, runner logs, etc and then attach them to the final in-toto attestation.
 
 Chainloop helps with this process by providing a Content Addressable Storage API proxy that:
 
-- **Abstracts away the underlying storage backend**. Currently, we support OCI registries as storage backends but you can expect blob storage, Artifactory and other storage backends to be supported in the future.  
+- **Abstracts away the underlying storage backend**. Currently, we support OCI registries as storage backends but you can expect blob storage, Artifactory and other storage backends to be supported in the future.
 - Makes sure that the pieces of evidence are stored **in a tamper-proof manner**. This is achieved by storing the evidences named after their SHA256 content digest, which is calculated by the client, verified by the CAS server.
-- **Enables support of large pieces of evidence** since the content digest reference is what will be stored in the attestation. 
+- **Enables support of large pieces of evidence** since the content digest reference is what will be stored in the attestation.
 
 <Image img={require("./cas-backend.png")} className="light-mode-only" />
 <Image img={require("./cas-backend-dark.png")} className="dark-mode-only" />
 
-
 ## Manage backends
 
-You can setup as many CAS backends as you want, but you can only have **one enabled as default at the time**.  This **default backend will be used** during the attestation process **to store the pieces of evidence**.
+You can setup as many CAS backends as you want, but you can only have **one enabled as default at the time**. This **default backend will be used** during the attestation process **to store the pieces of evidence**.
 
 In Chainloop, CAS backends can be managed with the `chainloop cas-backend` command.
 
-
 ```bash
-$ chainloop cas-backend ls                                              
+$ chainloop cas-backend ls
 ┌─────────────────────────────────┬──────────┬─────────────────────────────────────┬───────────────┬─────────┐
 │ LOCATION                        │ PROVIDER │ DESCRIPTION                         │ LIMITS        │ DEFAULT │
 ├─────────────────────────────────┼──────────┼─────────────────────────────────────┼───────────────┼─────────┤
@@ -52,7 +50,6 @@ Chainloop comes pre-configured with what we call an `inline` backend.
 The inline backend **embeds** the pieces of evidence in the resulting attestations. This is useful to get started quickly but since the metadata is embedded in the attestation, its max size is limited.
 
 We recommend that once you get closer to a production-ready setup, you switch to a more robust backend such as an OCI registry.
-
 
 ### OCI registry
 
@@ -90,7 +87,6 @@ We recommend that once you get closer to a production-ready setup, you switch to
 ```
 
   </TabItem>
-
 
   <TabItem value="github" label="GitHub packages" default>
 
@@ -139,7 +135,67 @@ chainloop cas-backend update oci --id [BACKEND_ID] --username [NEW_USERNAME] --p
 #### Set as default
 
 ```bash
-chainloop cas-backend update oci --id [BACKEND_ID] --default=true 
+chainloop cas-backend update oci --id [BACKEND_ID] --default=true
+```
+
+### Azure Blob Storage
+
+Chainloop also supports storing artifacts in [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs).
+
+#### Pre-requisites
+
+To connect your Azure storage account you'll need the following information
+
+- **Active Directory Tenant ID**
+- **Service Principal ID**
+- **Service Principal Secret**
+- **Storage account name**
+
+We'll walk you through the process of how to find this information
+
+**Register an application to create the service principal**
+
+First, you'll need to register an application in your Azure Active Directory tenant. You can do this using the Azure CLI or from the Azure portal
+
+![](./azure-1.png)
+
+Once done, in the application overview you should be able to find the tenantID, and Service principal ID
+
+![](./azure-3.png)
+
+Next, let's create a secret for the service principal
+
+![](./azure-2.png)
+
+**Create a storage account and give permissions to the service principal**
+
+Next, we'll create a storage account (or you can use an existing one), take a note on the storage account name.
+
+![](./azure-4.png)
+
+And once created, we'll give permissions to the service principal, go to IAM assign-roles.
+
+![](./azure-5.png)
+
+Search for the application we just registered and assign the Storage Blob Data Contributor role
+
+![](./azure-6.png)
+
+At thi point we have all the information we need to connect our Azure storage account to Chainloop
+
+```bash
+ $ chainloop cas-backend add azure-blob \
+    --client-id [servicePrincipalID] \
+    --client-secret [servicePrincipalSecret] \
+    --tenant [Active directory tenant] \
+    --storage-account [Storage Account name] \
+    --container [optional Storage account container]
+```
+
+#### Rotate credentials
+
+```bash
+chainloop cas-backend update azure-blob --id [BACKEND_ID] --client-id [new-clientID] --client-secret [new secret] --tenant [updated tenant]
 ```
 
 ## Give it a try
