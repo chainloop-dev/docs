@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+# Limit to a single workflow
+concurrency: "deploy-to-prod"
+
 jobs:
   deploy:
     name: Deploy
