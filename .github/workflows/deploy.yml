@@ -55,6 +55,6 @@ jobs:
     uses: chainloop-dev/labs/.github/workflows/chainloop.yml@main
     needs: deploy
     secrets:
-      token: ${{ secrets.CHAINLOOP_WF_RELEASE }}
+      api_token: ${{ secrets.CHAINLOOP_WF_RELEASE }}
       signing_key: ${{ secrets.COSIGN_KEY }}
       signing_key_password: ${{ secrets.COSIGN_PASSWORD }}
