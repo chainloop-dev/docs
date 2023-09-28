@@ -1,0 +1,7 @@
+attestation:
+  - name: sbom-cdx
+    path: reports/sbom.cyclonedx.json
+  - name: sbom-spdx
+    path: reports/sbom.spdx.json
+  - name: built-site
+    path: reports/build.tar.gz
