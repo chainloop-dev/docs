@@ -13,24 +13,7 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Install Cosign
-        uses: sigstore/cosign-installer@main
-        with:
-          cosign-release: 'v2.0.2'
-
-      - name: Install Chainloop
-        run: |
-          curl -sfL https://raw.githubusercontent.com/chainloop-dev/docs/main/static/install.sh | bash -s -- --version v${{ env.CHAINLOOP_VERSION }}
-
-      - name: Write Cosign key
-        run: echo "$COSIGN_KEY" > /tmp/cosign.key
-        env:
-          COSIGN_KEY: ${{ secrets.COSIGN_KEY }}
-
       - uses: actions/checkout@v3
-      - name: Initialize Attestation
-        run: |
-          chainloop attestation init
 
       - name: Install Syft
         run: |
@@ -44,46 +27,34 @@ jobs:
       - name: yarn install
         run: yarn install
 
-      - name: Generate SBOMs
-        run: |
-          syft packages . -o cyclonedx-json --file sbom.cyclonedx.json
-          syft packages . -o spdx-json --file sbom.spdx.json
-
-      - name: Record SBOMs materials
-        run: |
-          chainloop att add --name sbom-cdx --value sbom.cyclonedx.json
-          chainloop att add --name sbom-spdx --value sbom.spdx.json
-
       - name: Build
         run: netlify build
 
-      - name: Record built-site material
-        run: |
-          # Built site
-          tar -czf ${GITHUB_SHA}-build.tar.gz build
-          chainloop att add --name built-site --value ${GITHUB_SHA}-build.tar.gz
-
       - name: Deploy
-        run: netlify deploy --prod
+        run: |
+          netlify deploy --prod
 
-      - name: Finish and Record Attestation
-        if: ${{ success() }}
+      - name: Generate reports
         run: |
-          chainloop attestation push --key /tmp/cosign.key --graceful-exit=false
-        env:
-          CHAINLOOP_SIGNING_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+          mkdir -p reports
+          syft packages . -o cyclonedx-json --file reports/sbom.cyclonedx.json
+          syft packages . -o spdx-json --file reports/sbom.spdx.json
+          tar -czf reports/build.tar.gz build
+  
+      - uses: actions/upload-artifact@v3
+        with:
+          name: reports
+          path: reports/*
 
-      - name: Mark attestation as failed
-        if: ${{ failure() }}
-        run: |
-          chainloop attestation reset
-      - name: Mark attestation as cancelled
-        if: ${{ cancelled() }}
-        run: |
-          chainloop attestation reset --trigger cancellation
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      CHAINLOOP_VERSION: 0.19.1
-      CHAINLOOP_ROBOT_ACCOUNT: ${{ secrets.CHAINLOOP_WF_RELEASE }}
       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+  chainloop:
+    uses: chainloop-dev/labs/.github/workflows/chainloop.yml@main
+    needs: deploy
+    secrets:
+      token: ${{ secrets.CHAINLOOP_WF_RELEASE }}
+      signing_key: ${{ secrets.COSIGN_KEY }}
+      signing_key_password: ${{ secrets.COSIGN_PASSWORD }}
