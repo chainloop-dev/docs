@@ -54,7 +54,7 @@ jobs:
 
   # Attest the uploaded artifacts listed in .chainloop.yaml
   chainloop:
-    uses: chainloop-dev/labs/.github/workflows/chainloop.yml@22771db0eec9be335d9dd5f1f9741f6dd65a5239
+    uses: chainloop-dev/labs/.github/workflows/chainloop.yml@a75dff2ef342a1e5c5e1ec5c42fb99f3d1bc03cb
     needs: deploy
     secrets:
       api_token: ${{ secrets.CHAINLOOP_WF_RELEASE }}
