@@ -41,6 +41,7 @@ jobs:
           syft packages . -o spdx-json --file reports/sbom.spdx.json
           tar -czf reports/build.tar.gz build
   
+      # Upload artifacts so they are shared with the chainloop job
       - uses: actions/upload-artifact@v3
         with:
           name: reports
@@ -51,6 +52,7 @@ jobs:
       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 
+  # Attest the uploaded artifacts listed in //.chainloop.yaml
   chainloop:
     uses: chainloop-dev/labs/.github/workflows/chainloop.yml@main
     needs: deploy
