@@ -138,6 +138,77 @@ chainloop cas-backend update oci --id [BACKEND_ID] --username [NEW_USERNAME] --p
 chainloop cas-backend update oci --id [BACKEND_ID] --default=true
 ```
 
+### AWS S3
+
+Chainloop also supports storing artifacts in [AWS S3 Blob Storage](https://aws.amazon.com/s3/).
+
+#### Pre-requisites
+
+To connect your AWS account to Chainloop you'll need:
+
+- **S3 Bucket Name**
+- **Bucket Region**
+- **AccessKeyID**
+- **SecretAccessKey**
+
+**Create an S3 bucket**
+
+Create an S3 bucket and take note of the bucket name and region
+
+![](./aws-1.png)
+
+**Create an IAM user with access to that bucket**
+
+Next we are going to create a policy that has write/read permissions to the bucket. 
+
+You can use the snippet below by just replacing `[bucketName]` with the actual name of the bucket you created in the step before.
+
+```json
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": [
+				"s3:ListBucket",
+				"s3:GetBucketLocation"
+			],
+			"Resource": "arn:aws:s3:::[bucketName]"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"s3:GetObject",
+				"s3:PutObject"
+			],
+			"Resource": "arn:aws:s3:::[bucketName]/*"
+		}
+	]
+}
+```
+
+Then create an user, attach the policy to it and click on "create access Key"
+
+![](./aws-2.png)
+
+Then select third-party service and copy the access key ID and secret access key
+
+We are now ready to connect our AWS account to Chainloop
+
+```bash
+ $ chainloop cas-backend add aws-s3 \
+    --access-key-id [accessKeyID] \
+    --secret-access-key [secretAccessKey] \
+    --region [region] \
+    --bucket [bucketName]
+```
+
+#### Rotate credentials
+
+```bash
+chainloop cas-backend update aws-s3 --id [BACKEND_ID] --access-key-id [new-accessKeyID] --secret-access-key [new-secretAccessKey] --region [new-region]
+```
+
 ### Azure Blob Storage
 
 Chainloop also supports storing artifacts in [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs).
