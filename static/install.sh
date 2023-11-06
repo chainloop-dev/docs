@@ -119,7 +119,7 @@ case $UNAME_ARC in
 "x86_64")
     ARC="amd64"
     ;;
-"arm64")
+"arm64"|"aarch64")
     ARC="arm64"
     ;;
 *)
