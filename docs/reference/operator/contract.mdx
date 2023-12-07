@@ -95,6 +95,12 @@ It has the following effect on the attestation process.
 - **A link to the workload** (i.e Github Action Run link) **will be recorded** both in the attestation and in the control plane during initialization.
 - An additional set of environment variables will be resolved in addition to the ones defined in the contract [`envAllowList`](/getting-started/workflow-definition#add-materials-to-the-contract).
 
+Check the demo below to discover how to extend a contract to use a supported runner.
+
+<div style="text-align: center;">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/dAMV6y18mj0?si=JDMeN4JknQwDv8tE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+
 Currently, we support the following runner types
 
 ### `GITHUB_ACTION`
@@ -126,11 +132,11 @@ The following environment variables will be automatically added to the attestati
 - `CI_RUNNER_DESCRIPTION`
 - `CI_COMMIT_REF_NAME`
 
-A link to the Gitlab CI job will be recorded in the control plane too during initialization.
+A link to the Gitlab CI job will be recorded in the control plane too, during initialization.
 
 ### `AZURE_PIPELINE`
 
-The following environment variables will be automatically added to the attestation. For more information on what they mean refer to [this link](https://learn.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml).
+The following environment variables will be automatically added to the attestation. For more information on what they mean, refer to [this link](https://learn.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml).
 
 - `BUILD_REQUESTEDFOREMAIL`
 - `BUILD_REQUESTEDFOR`
@@ -144,6 +150,31 @@ The following environment variables will be automatically added to the attestati
 - `TF_BUILD`
 
 A link to the Azure Pipeline build will be recorded in the control plane too during initialization.
+
+### `JENKINS_JOB`
+
+The following environment variables will be automatically added to the attestation. For more information on how to use Jenkins environment variables, refer to [the official Jenkins documentation](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/#using-environment-variables).
+
+- `JOB_NAME`
+- `BUILD_URL`
+- `GIT_BRANCH` (optional)
+- `GIT_COMMIT` (optional)
+- `AGENT_WORKDIR`
+- `NODE_NAME`
+
+A link to the build will be recorded in the control plane too, during initialization.
+
+### `CIRCLECI_BUILD`
+
+The following environment variables will be automatically added to the attestation. For more information on their meaning, refer to [the official CircleCI documentation](https://circleci.com/docs/variables/).
+
+- `CIRCLE_BUILD_URL`
+- `CIRCLE_JOB`
+- `CIRCLE_BRANCH` (optional)
+- `CIRCLE_NODE_TOTAL`
+- `CIRCLE_NODE_INDEX`
+
+A link to the CircleCI build will be recorded in the control plane too, during initialization.
 
 :::tip
 Remember, if all the **env variables** that you need are not defined in the context, you can extend such list via the `envAllowList` option.
