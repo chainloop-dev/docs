@@ -126,11 +126,11 @@ The following environment variables will be automatically added to the attestati
 - `CI_RUNNER_DESCRIPTION`
 - `CI_COMMIT_REF_NAME`
 
-A link to the Gitlab CI job will be recorded in the control plane too during initialization.
+A link to the Gitlab CI job will be recorded in the control plane too, during initialization.
 
 ### `AZURE_PIPELINE`
 
-The following environment variables will be automatically added to the attestation. For more information on what they mean refer to [this link](https://learn.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml).
+The following environment variables will be automatically added to the attestation. For more information on what they mean, refer to [this link](https://learn.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml).
 
 - `BUILD_REQUESTEDFOREMAIL`
 - `BUILD_REQUESTEDFOR`
@@ -144,6 +144,31 @@ The following environment variables will be automatically added to the attestati
 - `TF_BUILD`
 
 A link to the Azure Pipeline build will be recorded in the control plane too during initialization.
+
+### `JENKINS_JOB`
+
+The following environment variables will be automatically added to the attestation. For more information on how to use Jenkins environment variables, refer to [the official Jenkins documentation](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/#using-environment-variables).
+
+- `JOB_NAME`
+- `BUILD_URL`
+- `GIT_BRANCH` (optional)
+- `GIT_COMMIT` (optional)
+- `AGENT_WORKDIR`
+- `NODE_NAME`
+
+A link to the build will be recorded in the control plane too, during initialization.
+
+### `CIRCLECI_BUILD`
+
+The following environment variables will be automatically added to the attestation. For more information on their meaning, refer to [the official CircleCI documentation](https://circleci.com/docs/variables/).
+
+- `CIRCLE_BUILD_URL`
+- `CIRCLE_JOB`
+- `CIRCLE_BRANCH` (optional)
+- `CIRCLE_NODE_TOTAL`
+- `CIRCLE_NODE_INDEX`
+
+A link to the CircleCI build will be recorded in the control plane too, during initialization.
 
 :::tip
 Remember, if all the **env variables** that you need are not defined in the context, you can extend such list via the `envAllowList` option.
